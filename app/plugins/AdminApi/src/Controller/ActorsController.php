@@ -3,7 +3,9 @@ declare(strict_types=1);
 
 namespace AdminApi\Controller;
 
-use AdminApi\Controller\AppController;
+use Cake\ORM\TableRegistry;
+use SwaggerBake\Lib\Annotation as Swag;
+use SwaggerBake\Lib\Extension\CakeSearch\Annotation\SwagSearch;
 
 /**
  * Actors Controller
@@ -12,28 +14,42 @@ use AdminApi\Controller\AppController;
  */
 class ActorsController extends AppController
 {
+    public function initialize(): void
+    {
+        parent::initialize();
+        $this->loadComponent('Search.Search', [
+            'actions' => ['index'],
+        ]);
+        $this->loadComponent('Authentication.Authentication');
+        $this->Actors = TableRegistry::getTableLocator()->get('Actors');
+    }
+
     /**
      * Index method
      *
      * @return \Cake\Http\Response|null|void Renders view
      * @throws \Cake\Datasource\Exception\MethodNotAllowedException When invalid method
+     * @Swag\SwagPaginator()
+     * @SwagSearch(tableClass="\App\Model\Table\ActorsTable", collection="default")
      */
     public function index()
     {
         $this->request->allowMethod('get');
-        $actors = $this->paginate($this->Actors);
+        $query = $this->Actors->search($this->request);
+        $actors = $this->paginate($query);
 
         $this->set(compact('actors'));
         $this->viewBuilder()->setOption('serialize', 'actors');
     }
+
 
     /**
      * View method
      *
      * @param string|null $id Actor id.
      * @return \Cake\Http\Response|null|void Renders view
-     * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
-     * @throws \Cake\Datasource\Exception\MethodNotAllowedException When invalid method
+     * @throws \Cake\Datasource\Exception\RecordNotFoundException Actor Not Found
+     * @throws \Cake\Http\Exception\MethodNotAllowedException
      */
     public function view($id = null)
     {
@@ -51,7 +67,8 @@ class ActorsController extends AppController
      * Add method
      *
      * @return \Cake\Http\Response|null|void HTTP 200 on successful add
-     * @throws \Cake\Datasource\Exception\MethodNotAllowedException When invalid method
+     * @throws \Cake\Http\Exception\MethodNotAllowedException
+     * @throws \MixerApi\ExceptionRender\ValidationException
      * @throws \Exception
      */
     public function add()
@@ -73,8 +90,9 @@ class ActorsController extends AppController
      *
      * @param string|null $id Actor id.
      * @return \Cake\Http\Response|null|void HTTP 200 on successful edit
-     * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
-     * @throws \Cake\Datasource\Exception\MethodNotAllowedException When invalid method
+     * @throws \Cake\Datasource\Exception\RecordNotFoundException
+     * @throws \Cake\Http\Exception\MethodNotAllowedException
+     * @throws \MixerApi\ExceptionRender\ValidationException
      * @throws \Exception
      */
     public function edit($id = null)
@@ -98,8 +116,8 @@ class ActorsController extends AppController
      *
      * @param string|null $id Actor id.
      * @return \Cake\Http\Response|null|void HTTP 204 on success
-     * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
-     * @throws \Cake\Datasource\Exception\MethodNotAllowedException When invalid method
+     * @throws \Cake\Datasource\Exception\RecordNotFoundException
+     * @throws \Cake\Http\Exception\MethodNotAllowedException
      * @throws \Exception
      */
     public function delete($id = null)

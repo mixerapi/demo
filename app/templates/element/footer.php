@@ -5,7 +5,7 @@
         <p>
             Streamline development of modern RESTful APIs for your teams CakePHP project. Designed around a
             component-based architecture, MixerAPI enables developers to pick and choose the functionality
-            they need for developing REST/HATEOAS APIs.
+            they need for developing REST APIs.
         </p>
         <ul class="actions">
             <li>
@@ -20,12 +20,14 @@
         <dl class="alt">
             <dt>Main</dt>
             <dd><a href="https://github.com/mixerapi/mixerapi">mixerapi</a></dd>
+            <dt>App</dt>
+            <dd><a href="https://github.com/mixerapi/app">app template</a></dd>
             <dt>Dev</dt>
             <dd><a href="https://github.com/mixerapi/mixerapi-dev">mixerapi-dev</a></dd>
         </dl>
         <ul class="icons">
             <li>
-                <a href="https://github.com/mixerapi-dev" class="icon brands fa-github alt">
+                <a href="https://github.com/mixerapi" class="icon brands fa-github alt">
                     <span class="label">GitHub</span>
                 </a>
             </li>

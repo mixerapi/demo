@@ -12,8 +12,8 @@ use MixerApi\JsonLdView\JsonLdSchema;
  * Category Entity
  *
  * @property int $id
- * @property string $name
- * @property \Cake\I18n\FrozenTime $modified
+ * @property string $name Category name
+ * @property \Cake\I18n\FrozenTime $modified Last modified date/time
  *
  * @property \App\Model\Entity\FilmCategory[] $film_categories
  */

@@ -13,17 +13,17 @@ use MixerApi\JsonLdView\JsonLdSchema;
  * Film Entity
  *
  * @property int $id
- * @property string $title
- * @property string|null $description
- * @property int|null $release_year
- * @property int $language_id
+ * @property string $title Film Title
+ * @property string|null $description Film description
+ * @property int|null $release_year Release Year
+ * @property int $language_id Language ID
  * @property int $rental_duration
  * @property string $rental_rate
- * @property int|null $length
+ * @property int|null $length Film duration in hours
  * @property string $replacement_cost
- * @property string|null $rating
- * @property string|null $special_features
- * @property \Cake\I18n\FrozenTime|null $modified
+ * @property string|null $rating Film Rating (e.g. PG, R, etc..)
+ * @property string|null $special_features Film special features
+ * @property \Cake\I18n\FrozenTime|null $modified Last modified date/time
  *
  * @property \App\Model\Entity\Language $language
  * @property \App\Model\Entity\FilmActor[] $film_actors

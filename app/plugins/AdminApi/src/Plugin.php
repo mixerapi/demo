@@ -3,17 +3,22 @@ declare(strict_types=1);
 
 namespace AdminApi;
 
+use Authentication\AuthenticationService;
+use Authentication\AuthenticationServiceInterface;
+use Authentication\AuthenticationServiceProviderInterface;
+use Authentication\Middleware\AuthenticationMiddleware;
 use Cake\Core\BasePlugin;
 use Cake\Core\Configure;
 use Cake\Core\PluginApplicationInterface;
 use Cake\Http\MiddlewareQueue;
 use Cake\Routing\RouteBuilder;
 use MixerApi\Rest\Lib\AutoRouter;
+use Psr\Http\Message\ServerRequestInterface;
 
 /**
  * Plugin for AdminApi
  */
-class Plugin extends BasePlugin
+class Plugin extends BasePlugin implements AuthenticationServiceProviderInterface
 {
     /**
      * Load all the plugin configuration and bootstrap logic.
@@ -59,8 +64,29 @@ class Plugin extends BasePlugin
      */
     public function middleware(MiddlewareQueue $middlewareQueue): MiddlewareQueue
     {
-        // Add your middlewares here
+        $middlewareQueue->add(new AuthenticationMiddleware($this));
 
         return $middlewareQueue;
+    }
+
+    /**
+     * Returns a service provider instance.
+     *
+     * @param \Psr\Http\Message\ServerRequestInterface $request Request
+     * @return \Authentication\AuthenticationServiceInterface
+     */
+    public function getAuthenticationService(ServerRequestInterface $request): AuthenticationServiceInterface
+    {
+        $service = new AuthenticationService();
+        $service->loadAuthenticator('Authentication.Token', [
+            'header' => 'API-KEY',
+        ]);
+
+        // Load identifiers
+        $service->loadIdentifier('Authentication.Token',[
+            'resolver' => 'AdminApi\Identifier\Resolver\CustomResolver'
+        ]);
+
+        return $service;
     }
 }

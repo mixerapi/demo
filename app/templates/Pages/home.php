@@ -32,10 +32,11 @@
                 <span class="icon solid major style1 fa-search"></span></a>
                 <h3>Public API</h3>
                 <p>
-                    Read-only API for viewing films and actors.<br/>
+                    Read-only API for viewing films, actors, and other cinematography meta-data<br/>
                 </p>
                 <a href="/public" class="button">Browse</a>
             </li>
+            <!--
             <li>
                 <span class="icon solid major style2 fa-shopping-cart"></span>
                 <h3>Partner API</h3>
@@ -44,11 +45,12 @@
                 </p>
                 <a href="/partner" class="button">Shop</a>
             </li>
+            -->
             <li>
                 <span class="icon solid major style3 fa-lock"></span>
                 <h3>Admin API</h3>
                 <p>
-                    An administrative API for managing movies etc.<br/>
+                    An administrative API for managing actors, movies, etc.<br/>
                 </p>
                 <a href="/admin" class="button">Manage</a>
             </li>

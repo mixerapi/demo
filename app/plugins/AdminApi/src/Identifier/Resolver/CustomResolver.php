@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Identifier\Resolver;
+namespace AdminApi\Identifier\Resolver;
 
 use Authentication\Identifier\Resolver\ResolverInterface;
 use Authentication\Authenticator\UnauthenticatedException;

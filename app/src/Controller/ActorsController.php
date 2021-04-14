@@ -20,18 +20,13 @@ class ActorsController extends AppController
         $this->loadComponent('Search.Search', [
             'actions' => ['index'],
         ]);
-        $this->loadComponent('Authentication.Authentication');
-        $this->Authentication->allowUnauthenticated([
-            'index',
-            'view'
-        ]);
     }
 
     /**
      * Actor Collection
      *
      * @return \Cake\Http\Response|null|void Renders view
-     * @throws \Cake\Datasource\Exception\MethodNotAllowedException When invalid method
+     * @throws \Cake\Http\Exception\MethodNotAllowedException
      * @Swag\SwagPaginator()
      * @SwagSearch(tableClass="\App\Model\Table\ActorsTable", collection="default")
      */
@@ -50,8 +45,8 @@ class ActorsController extends AppController
      *
      * @param string|null $id Actor id.
      * @return \Cake\Http\Response|null|void Renders view
-     * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
-     * @throws \Cake\Datasource\Exception\MethodNotAllowedException When invalid method
+     * @throws \Cake\Datasource\Exception\RecordNotFoundException Actor Not Found
+     * @throws \Cake\Http\Exception\MethodNotAllowedException
      */
     public function view($id = null)
     {

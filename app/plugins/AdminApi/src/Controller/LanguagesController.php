@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace AdminApi\Controller;
 
-use AdminApi\Controller\AppController;
+use Cake\ORM\TableRegistry;
 use SwaggerBake\Lib\Annotation as Swag;
 use SwaggerBake\Lib\Extension\CakeSearch\Annotation\SwagSearch;
 
@@ -18,19 +18,18 @@ class LanguagesController extends AppController
     public function initialize() : void
     {
         parent::initialize();
-
-        $this->loadComponent('Authentication.Authentication');
-        $this->Authentication->allowUnauthenticated([
-            'index',
-            'view'
+        $this->loadComponent('Search.Search', [
+            'actions' => ['index'],
         ]);
+        $this->loadComponent('Authentication.Authentication');
+        $this->Languages = TableRegistry::getTableLocator()->get('Languages');
     }
 
     /**
      * Index method
      *
      * @return \Cake\Http\Response|null|void Renders view
-     * @throws \Cake\Datasource\Exception\MethodNotAllowedException When invalid method
+     * @throws \Cake\Http\Exception\MethodNotAllowedException
      * @Swag\SwagPaginator()
      * @SwagSearch(tableClass="\App\Model\Table\LanguagesTable", collection="default")
      */
@@ -53,8 +52,8 @@ class LanguagesController extends AppController
      *
      * @param string|null $id Language id.
      * @return \Cake\Http\Response|null|void Renders view
-     * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
-     * @throws \Cake\Datasource\Exception\MethodNotAllowedException When invalid method
+     * @throws \Cake\Datasource\Exception\RecordNotFoundException
+     * @throws \Cake\Http\Exception\MethodNotAllowedException
      */
     public function view($id = null)
     {
@@ -72,7 +71,7 @@ class LanguagesController extends AppController
      * Add method
      *
      * @return \Cake\Http\Response|null|void
-     * @throws \Cake\Datasource\Exception\MethodNotAllowedException
+     * @throws \Cake\Http\Exception\MethodNotAllowedException
      * @throws \MixerApi\ExceptionRender\ValidationException
      * @throws \Exception
      */
@@ -95,8 +94,8 @@ class LanguagesController extends AppController
      *
      * @param string|null $id Language id.
      * @return \Cake\Http\Response|null|void
-     * @throws \Cake\Datasource\Exception\RecordNotFoundException
-     * @throws \Cake\Datasource\Exception\MethodNotAllowedException
+     * @throws \Cake\Datasource\Exception\RecordNotFoundException Language Not Found
+     * @throws \Cake\Http\Exception\MethodNotAllowedException
      * @throws \MixerApi\ExceptionRender\ValidationException
      * @throws \Exception
      */
@@ -121,8 +120,8 @@ class LanguagesController extends AppController
      *
      * @param string|null $id Language id.
      * @return \Cake\Http\Response|null|void HTTP 204 on success
-     * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
-     * @throws \Cake\Datasource\Exception\MethodNotAllowedException When invalid method
+     * @throws \Cake\Datasource\Exception\RecordNotFoundException Language Not Found
+     * @throws \Cake\Http\Exception\MethodNotAllowedException
      * @throws \Exception
      */
     public function delete($id = null)

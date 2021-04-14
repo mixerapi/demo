@@ -12,9 +12,9 @@ use MixerApi\JsonLdView\JsonLdSchema;
  * Actor Entity
  *
  * @property int $id
- * @property string $first_name
- * @property string $last_name
- * @property \Cake\I18n\FrozenTime $modified
+ * @property string $first_name Actor First Name
+ * @property string $last_name Actor Last Name
+ * @property \Cake\I18n\FrozenTime $modified Last modified date/time
  *
  * @property \App\Model\Entity\FilmActor[] $film_actors
  */

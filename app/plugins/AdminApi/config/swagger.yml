@@ -1,6 +1,5 @@
 openapi: "3.0.0"
 info:
-  version: 0.2.5
   title: MixerAPI Demo (Admin API)
   description: |
     Check out [MixerAPI.com](https://mixerapi.com) to streamline your API development.
@@ -52,15 +51,48 @@ components:
           type: boolean
       xml:
         name: response
-x-mixerapi-demo:
+x-swagger-bake:
   components:
     schemas:
-      FilmByRating:
-        type: object
-        properties:
-          rating:
-            type: string
-            example: PG
-          total:
-            type: integer
-            example: 100
+      app-exceptions:
+        ValidationException:
+          x-exception-fqn: '\MixerApi\ExceptionRender\ValidationException'
+          type: object
+          properties:
+            exception:
+              type: string
+              example: ValidationException
+            message:
+              type: string
+              example: Error saving resource `Schema`
+            url:
+              type: string
+              example: /url/path
+            code:
+              type: integer
+              example: 422
+            violations:
+              type: array
+              items:
+                $ref: '#/x-swagger-bake/components/schemas/app-exceptions/Violation'
+        Violation:
+          x-exception-fqn: ''
+          type: object
+          properties:
+            propertyPath:
+              type: string
+              example: property_name
+            messages:
+              type: array
+              items:
+                $ref: '#/x-swagger-bake/components/schemas/app-exceptions/ViolationMessage'
+        ViolationMessage:
+          x-exception-fqn: ''
+          type: object
+          properties:
+            rule:
+              type: string
+              example: "rule_name"
+            message:
+              type: string
+              example: "Error message here"

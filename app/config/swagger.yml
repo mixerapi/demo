@@ -23,12 +23,6 @@ paths:
 definitions:
 
 components:
-  securitySchemes:
-    ApiKey:
-      description: Use `123` as the API Key for all PUT/POST/PATCH/DELETE operations.
-      type: apiKey
-      in: header
-      name: API-KEY
   schemas:
     Exception:
       type: object
@@ -42,13 +36,6 @@ components:
         message:
           type: string
           example: Internal Error
-      xml:
-        name: response
-    OperationResult:
-      type: object
-      properties:
-        result:
-          type: boolean
       xml:
         name: response
 x-mixerapi-demo:

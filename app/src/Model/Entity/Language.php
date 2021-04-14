@@ -12,7 +12,7 @@ use MixerApi\JsonLdView\JsonLdSchema;
  * Language Entity
  *
  * @property int $id
- * @property string $name
+ * @property string $name Language
  * @property int $is_active
  *
  * @property \App\Model\Entity\Film[] $films
