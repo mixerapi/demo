@@ -1,0 +1,66 @@
+openapi: "3.0.0"
+info:
+  version: 0.2.5
+  title: MixerAPI Demo (Admin API)
+  description: |
+    Check out [MixerAPI.com](https://mixerapi.com) to streamline your API development.
+
+    You can view the source code for this [demo here](https://github.com/mixerapi/demo).
+
+    If you are viewing this on demo.mixerapi.com then the database resets every 24 hours.
+
+    Browse the [JSON-LD vocabulary](/partner/vocab) for this API.
+
+    Go back to the [homepage](/).
+
+  license:
+    name: MIT
+  externalDocs:
+    description: MixerAPI.com
+    url: https://mixerapi.com
+
+paths:
+
+definitions:
+
+components:
+  securitySchemes:
+    ApiKey:
+      description: Use `123` as the API Key for all PUT/POST/PATCH/DELETE operations.
+      type: apiKey
+      in: header
+      name: API-KEY
+  schemas:
+    Exception:
+      type: object
+      properties:
+        code:
+          type: integer
+          example: 500
+        url:
+          type: string
+          example: /url/path
+        message:
+          type: string
+          example: Internal Error
+      xml:
+        name: response
+    OperationResult:
+      type: object
+      properties:
+        result:
+          type: boolean
+      xml:
+        name: response
+x-mixerapi-demo:
+  components:
+    schemas:
+      FilmByRating:
+        type: object
+        properties:
+          rating:
+            type: string
+            example: PG
+          total:
+            type: integer
+            example: 100

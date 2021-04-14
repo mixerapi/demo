@@ -1,0 +1,3089 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "version": "0.2.5",
+        "title": "MixerAPI Demo (Admin API)",
+        "description": "Check out [MixerAPI.com](https:\/\/mixerapi.com) to streamline your API development.\n\nYou can view the source code for this [demo here](https:\/\/github.com\/mixerapi\/demo).\n\nIf you are viewing this on demo.mixerapi.com then the database resets every 24 hours.\n\nBrowse the [JSON-LD vocabulary](\/partner\/vocab) for this API.\n\nGo back to the [homepage](\/).\n",
+        "license": {
+            "name": "MIT"
+        },
+        "externalDocs": {
+            "description": "MixerAPI.com",
+            "url": "https:\/\/mixerapi.com"
+        }
+    },
+    "paths": {
+        "\/admin\/actors": {
+            "post": {
+                "summary": "Add method",
+                "description": "",
+                "tags": [
+                    "Actors"
+                ],
+                "operationId": "adminapi.actors:add:post",
+                "parameters": [],
+                "requestBody": {
+                    "content": {
+                        "application\/x-www-form-urlencoded": {
+                            "schema": {
+                                "$ref": "#\/x-swagger-bake\/components\/schemas\/Actor-Add"
+                            }
+                        },
+                        "application\/json": {
+                            "schema": {
+                                "$ref": "#\/x-swagger-bake\/components\/schemas\/Actor-Add"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "500": {
+                        "description": "When invalid method",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$ref": "#\/components\/schemas\/Exception"
+                                }
+                            },
+                            "application\/xml": {
+                                "schema": {
+                                    "$ref": "#\/components\/schemas\/Exception"
+                                }
+                            },
+                            "application\/ld+json": {
+                                "schema": {
+                                    "$ref": "#\/components\/schemas\/Exception"
+                                }
+                            },
+                            "application\/hal+json": {
+                                "schema": {
+                                    "$ref": "#\/components\/schemas\/Exception"
+                                }
+                            }
+                        }
+                    },
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$ref": "#\/x-swagger-bake\/components\/schemas\/Actor-Read"
+                                }
+                            },
+                            "application\/xml": {
+                                "schema": {
+                                    "allOf": [
+                                        {
+                                            "$ref": "#\/x-swagger-bake\/components\/schemas\/Actor-Read"
+                                        }
+                                    ],
+                                    "xml": {
+                                        "name": "response"
+                                    }
+                                }
+                            },
+                            "application\/ld+json": {
+                                "schema": {
+                                    "allOf": [
+                                        {
+                                            "$ref": "#\/x-swagger-bake\/components\/schemas\/JsonLd-Item"
+                                        },
+                                        {
+                                            "$ref": "#\/x-swagger-bake\/components\/schemas\/Actor-Read"
+                                        }
+                                    ]
+                                }
+                            },
+                            "application\/hal+json": {
+                                "schema": {
+                                    "allOf": [
+                                        {
+                                            "$ref": "#\/x-swagger-bake\/components\/schemas\/HalJson-Item"
+                                        },
+                                        {
+                                            "$ref": "#\/x-swagger-bake\/components\/schemas\/Actor-Read"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                },
+                "deprecated": false
+            },
+            "get": {
+                "summary": "Index method",
+                "description": "",
+                "tags": [
+                    "Actors"
+                ],
+                "operationId": "adminapi.actors:index:get",
+                "parameters": [],
+                "responses": {
+                    "500": {
+                        "description": "When invalid method",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$ref": "#\/components\/schemas\/Exception"
+                                }
+                            },
+                            "application\/xml": {
+                                "schema": {
+                                    "$ref": "#\/components\/schemas\/Exception"
+                                }
+                            },
+                            "application\/ld+json": {
+                                "schema": {
+                                    "$ref": "#\/components\/schemas\/Exception"
+                                }
+                            },
+                            "application\/hal+json": {
+                                "schema": {
+                                    "$ref": "#\/components\/schemas\/Exception"
+                                }
+                            }
+                        }
+                    },
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "object",
+                                                "allOf": [
+                                                    {
+                                                        "$ref": "#\/x-swagger-bake\/components\/schemas\/Actor-Read"
+                                                    }
+                                                ]
+                                            }
+                                        }
+                                    },
+                                    "allOf": [
+                                        {
+                                            "$ref": "#\/x-swagger-bake\/components\/schemas\/Generic-Collection"
+                                        }
+                                    ]
+                                }
+                            },
+                            "application\/xml": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "object",
+                                                "allOf": [
+                                                    {
+                                                        "$ref": "#\/x-swagger-bake\/components\/schemas\/Actor-Read"
+                                                    }
+                                                ]
+                                            }
+                                        }
+                                    },
+                                    "allOf": [
+                                        {
+                                            "$ref": "#\/x-swagger-bake\/components\/schemas\/Generic-Collection"
+                                        }
+                                    ],
+                                    "xml": {
+                                        "name": "response"
+                                    }
+                                }
+                            },
+                            "application\/ld+json": {
+                                "schema": {
+                                    "properties": {
+                                        "member": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "object",
+                                                "allOf": [
+                                                    {
+                                                        "$ref": "#\/x-swagger-bake\/components\/schemas\/JsonLd-Item"
+                                                    },
+                                                    {
+                                                        "$ref": "#\/x-swagger-bake\/components\/schemas\/Actor-Read"
+                                                    }
+                                                ]
+                                            }
+                                        }
+                                    },
+                                    "allOf": [
+                                        {
+                                            "$ref": "#\/x-swagger-bake\/components\/schemas\/JsonLd-Collection"
+                                        }
+                                    ]
+                                }
+                            },
+                            "application\/hal+json": {
+                                "schema": {
+                                    "properties": {
+                                        "_embedded": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "object",
+                                                "allOf": [
+                                                    {
+                                                        "$ref": "#\/x-swagger-bake\/components\/schemas\/HalJson-Item"
+                                                    },
+                                                    {
+                                                        "$ref": "#\/x-swagger-bake\/components\/schemas\/Actor-Read"
+                                                    }
+                                                ]
+                                            }
+                                        }
+                                    },
+                                    "allOf": [
+                                        {
+                                            "$ref": "#\/x-swagger-bake\/components\/schemas\/HalJson-Collection"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                },
+                "deprecated": false
+            }
+        },
+        "\/admin\/actors\/{id}": {
+            "delete": {
+                "summary": "Delete method",
+                "description": "",
+                "tags": [
+                    "Actors"
+                ],
+                "operationId": "adminapi.actors:delete:delete",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "500": {
+                        "description": "When record not found.",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$ref": "#\/components\/schemas\/Exception"
+                                }
+                            },
+                            "application\/xml": {
+                                "schema": {
+                                    "$ref": "#\/components\/schemas\/Exception"
+                                }
+                            },
+                            "application\/ld+json": {
+                                "schema": {
+                                    "$ref": "#\/components\/schemas\/Exception"
+                                }
+                            },
+                            "application\/hal+json": {
+                                "schema": {
+                                    "$ref": "#\/components\/schemas\/Exception"
+                                }
+                            }
+                        }
+                    },
+                    "204": {
+                        "description": "Resource deleted"
+                    }
+                },
+                "deprecated": false
+            },
+            "patch": {
+                "summary": "Edit method",
+                "description": "",
+                "tags": [
+                    "Actors"
+                ],
+                "operationId": "adminapi.actors:edit:patch",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application\/x-www-form-urlencoded": {
+                            "schema": {
+                                "$ref": "#\/x-swagger-bake\/components\/schemas\/Actor-Edit"
+                            }
+                        },
+                        "application\/json": {
+                            "schema": {
+                                "$ref": "#\/x-swagger-bake\/components\/schemas\/Actor-Edit"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "500": {
+                        "description": "When record not found.",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$ref": "#\/components\/schemas\/Exception"
+                                }
+                            },
+                            "application\/xml": {
+                                "schema": {
+                                    "$ref": "#\/components\/schemas\/Exception"
+                                }
+                            },
+                            "application\/ld+json": {
+                                "schema": {
+                                    "$ref": "#\/components\/schemas\/Exception"
+                                }
+                            },
+                            "application\/hal+json": {
+                                "schema": {
+                                    "$ref": "#\/components\/schemas\/Exception"
+                                }
+                            }
+                        }
+                    },
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$ref": "#\/x-swagger-bake\/components\/schemas\/Actor-Read"
+                                }
+                            },
+                            "application\/xml": {
+                                "schema": {
+                                    "allOf": [
+                                        {
+                                            "$ref": "#\/x-swagger-bake\/components\/schemas\/Actor-Read"
+                                        }
+                                    ],
+                                    "xml": {
+                                        "name": "response"
+                                    }
+                                }
+                            },
+                            "application\/ld+json": {
+                                "schema": {
+                                    "allOf": [
+                                        {
+                                            "$ref": "#\/x-swagger-bake\/components\/schemas\/JsonLd-Item"
+                                        },
+                                        {
+                                            "$ref": "#\/x-swagger-bake\/components\/schemas\/Actor-Read"
+                                        }
+                                    ]
+                                }
+                            },
+                            "application\/hal+json": {
+                                "schema": {
+                                    "allOf": [
+                                        {
+                                            "$ref": "#\/x-swagger-bake\/components\/schemas\/HalJson-Item"
+                                        },
+                                        {
+                                            "$ref": "#\/x-swagger-bake\/components\/schemas\/Actor-Read"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                },
+                "deprecated": false
+            },
+            "get": {
+                "summary": "View method",
+                "description": "",
+                "tags": [
+                    "Actors"
+                ],
+                "operationId": "adminapi.actors:view:get",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "500": {
+                        "description": "When record not found.",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$ref": "#\/components\/schemas\/Exception"
+                                }
+                            },
+                            "application\/xml": {
+                                "schema": {
+                                    "$ref": "#\/components\/schemas\/Exception"
+                                }
+                            },
+                            "application\/ld+json": {
+                                "schema": {
+                                    "$ref": "#\/components\/schemas\/Exception"
+                                }
+                            },
+                            "application\/hal+json": {
+                                "schema": {
+                                    "$ref": "#\/components\/schemas\/Exception"
+                                }
+                            }
+                        }
+                    },
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$ref": "#\/x-swagger-bake\/components\/schemas\/Actor-Read"
+                                }
+                            },
+                            "application\/xml": {
+                                "schema": {
+                                    "allOf": [
+                                        {
+                                            "$ref": "#\/x-swagger-bake\/components\/schemas\/Actor-Read"
+                                        }
+                                    ],
+                                    "xml": {
+                                        "name": "response"
+                                    }
+                                }
+                            },
+                            "application\/ld+json": {
+                                "schema": {
+                                    "allOf": [
+                                        {
+                                            "$ref": "#\/x-swagger-bake\/components\/schemas\/JsonLd-Item"
+                                        },
+                                        {
+                                            "$ref": "#\/x-swagger-bake\/components\/schemas\/Actor-Read"
+                                        }
+                                    ]
+                                }
+                            },
+                            "application\/hal+json": {
+                                "schema": {
+                                    "allOf": [
+                                        {
+                                            "$ref": "#\/x-swagger-bake\/components\/schemas\/HalJson-Item"
+                                        },
+                                        {
+                                            "$ref": "#\/x-swagger-bake\/components\/schemas\/Actor-Read"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                },
+                "deprecated": false
+            }
+        },
+        "\/admin\/categories": {
+            "post": {
+                "summary": "Add method",
+                "description": "",
+                "tags": [
+                    "Categories"
+                ],
+                "operationId": "adminapi.categories:add:post",
+                "parameters": [],
+                "requestBody": {
+                    "content": {
+                        "application\/x-www-form-urlencoded": {
+                            "schema": {
+                                "$ref": "#\/x-swagger-bake\/components\/schemas\/Category-Add"
+                            }
+                        },
+                        "application\/json": {
+                            "schema": {
+                                "$ref": "#\/x-swagger-bake\/components\/schemas\/Category-Add"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "500": {
+                        "description": "Unknown Error",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$ref": "#\/components\/schemas\/Exception"
+                                }
+                            },
+                            "application\/xml": {
+                                "schema": {
+                                    "$ref": "#\/components\/schemas\/Exception"
+                                }
+                            },
+                            "application\/ld+json": {
+                                "schema": {
+                                    "$ref": "#\/components\/schemas\/Exception"
+                                }
+                            },
+                            "application\/hal+json": {
+                                "schema": {
+                                    "$ref": "#\/components\/schemas\/Exception"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Error saving resource",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$ref": "#\/components\/schemas\/Exception"
+                                }
+                            },
+                            "application\/xml": {
+                                "schema": {
+                                    "$ref": "#\/components\/schemas\/Exception"
+                                }
+                            },
+                            "application\/ld+json": {
+                                "schema": {
+                                    "$ref": "#\/components\/schemas\/Exception"
+                                }
+                            },
+                            "application\/hal+json": {
+                                "schema": {
+                                    "$ref": "#\/components\/schemas\/Exception"
+                                }
+                            }
+                        }
+                    },
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$ref": "#\/x-swagger-bake\/components\/schemas\/Category-Read"
+                                }
+                            },
+                            "application\/xml": {
+                                "schema": {
+                                    "allOf": [
+                                        {
+                                            "$ref": "#\/x-swagger-bake\/components\/schemas\/Category-Read"
+                                        }
+                                    ],
+                                    "xml": {
+                                        "name": "response"
+                                    }
+                                }
+                            },
+                            "application\/ld+json": {
+                                "schema": {
+                                    "allOf": [
+                                        {
+                                            "$ref": "#\/x-swagger-bake\/components\/schemas\/JsonLd-Item"
+                                        },
+                                        {
+                                            "$ref": "#\/x-swagger-bake\/components\/schemas\/Category-Read"
+                                        }
+                                    ]
+                                }
+                            },
+                            "application\/hal+json": {
+                                "schema": {
+                                    "allOf": [
+                                        {
+                                            "$ref": "#\/x-swagger-bake\/components\/schemas\/HalJson-Item"
+                                        },
+                                        {
+                                            "$ref": "#\/x-swagger-bake\/components\/schemas\/Category-Read"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "ApiKey": []
+                    }
+                ],
+                "deprecated": false
+            },
+            "get": {
+                "summary": "Index method",
+                "description": "",
+                "tags": [
+                    "Categories"
+                ],
+                "operationId": "adminapi.categories:index:get",
+                "parameters": [
+                    {
+                        "$ref": "#\/x-swagger-bake\/components\/parameters\/paginatorPage"
+                    },
+                    {
+                        "$ref": "#\/x-swagger-bake\/components\/parameters\/paginatorLimit"
+                    },
+                    {
+                        "name": "sort",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "enum": [
+                                "id",
+                                "name",
+                                "modified"
+                            ]
+                        }
+                    },
+                    {
+                        "$ref": "#\/x-swagger-bake\/components\/parameters\/paginatorDirection"
+                    },
+                    {
+                        "name": "name",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "500": {
+                        "description": "Unknown Error",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$ref": "#\/components\/schemas\/Exception"
+                                }
+                            },
+                            "application\/xml": {
+                                "schema": {
+                                    "$ref": "#\/components\/schemas\/Exception"
+                                }
+                            },
+                            "application\/ld+json": {
+                                "schema": {
+                                    "$ref": "#\/components\/schemas\/Exception"
+                                }
+                            },
+                            "application\/hal+json": {
+                                "schema": {
+                                    "$ref": "#\/components\/schemas\/Exception"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Error saving resource",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$ref": "#\/components\/schemas\/Exception"
+                                }
+                            },
+                            "application\/xml": {
+                                "schema": {
+                                    "$ref": "#\/components\/schemas\/Exception"
+                                }
+                            },
+                            "application\/ld+json": {
+                                "schema": {
+                                    "$ref": "#\/components\/schemas\/Exception"
+                                }
+                            },
+                            "application\/hal+json": {
+                                "schema": {
+                                    "$ref": "#\/components\/schemas\/Exception"
+                                }
+                            }
+                        }
+                    },
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "object",
+                                                "allOf": [
+                                                    {
+                                                        "$ref": "#\/x-swagger-bake\/components\/schemas\/Category-Read"
+                                                    }
+                                                ]
+                                            }
+                                        }
+                                    },
+                                    "allOf": [
+                                        {
+                                            "$ref": "#\/x-swagger-bake\/components\/schemas\/Generic-Collection"
+                                        }
+                                    ]
+                                }
+                            },
+                            "application\/xml": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "object",
+                                                "allOf": [
+                                                    {
+                                                        "$ref": "#\/x-swagger-bake\/components\/schemas\/Category-Read"
+                                                    }
+                                                ]
+                                            }
+                                        }
+                                    },
+                                    "allOf": [
+                                        {
+                                            "$ref": "#\/x-swagger-bake\/components\/schemas\/Generic-Collection"
+                                        }
+                                    ],
+                                    "xml": {
+                                        "name": "response"
+                                    }
+                                }
+                            },
+                            "application\/ld+json": {
+                                "schema": {
+                                    "properties": {
+                                        "member": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "object",
+                                                "allOf": [
+                                                    {
+                                                        "$ref": "#\/x-swagger-bake\/components\/schemas\/JsonLd-Item"
+                                                    },
+                                                    {
+                                                        "$ref": "#\/x-swagger-bake\/components\/schemas\/Category-Read"
+                                                    }
+                                                ]
+                                            }
+                                        }
+                                    },
+                                    "allOf": [
+                                        {
+                                            "$ref": "#\/x-swagger-bake\/components\/schemas\/JsonLd-Collection"
+                                        }
+                                    ]
+                                }
+                            },
+                            "application\/hal+json": {
+                                "schema": {
+                                    "properties": {
+                                        "_embedded": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "object",
+                                                "allOf": [
+                                                    {
+                                                        "$ref": "#\/x-swagger-bake\/components\/schemas\/HalJson-Item"
+                                                    },
+                                                    {
+                                                        "$ref": "#\/x-swagger-bake\/components\/schemas\/Category-Read"
+                                                    }
+                                                ]
+                                            }
+                                        }
+                                    },
+                                    "allOf": [
+                                        {
+                                            "$ref": "#\/x-swagger-bake\/components\/schemas\/HalJson-Collection"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                },
+                "deprecated": false
+            }
+        },
+        "\/admin\/categories\/{id}": {
+            "delete": {
+                "summary": "Delete method",
+                "description": "",
+                "tags": [
+                    "Categories"
+                ],
+                "operationId": "adminapi.categories:delete:delete",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "500": {
+                        "description": "When record not found.",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$ref": "#\/components\/schemas\/Exception"
+                                }
+                            },
+                            "application\/xml": {
+                                "schema": {
+                                    "$ref": "#\/components\/schemas\/Exception"
+                                }
+                            },
+                            "application\/ld+json": {
+                                "schema": {
+                                    "$ref": "#\/components\/schemas\/Exception"
+                                }
+                            },
+                            "application\/hal+json": {
+                                "schema": {
+                                    "$ref": "#\/components\/schemas\/Exception"
+                                }
+                            }
+                        }
+                    },
+                    "204": {
+                        "description": "Resource deleted"
+                    }
+                },
+                "security": [
+                    {
+                        "ApiKey": []
+                    }
+                ],
+                "deprecated": false
+            },
+            "patch": {
+                "summary": "Edit method",
+                "description": "",
+                "tags": [
+                    "Categories"
+                ],
+                "operationId": "adminapi.categories:edit:patch",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application\/x-www-form-urlencoded": {
+                            "schema": {
+                                "$ref": "#\/x-swagger-bake\/components\/schemas\/Category-Edit"
+                            }
+                        },
+                        "application\/json": {
+                            "schema": {
+                                "$ref": "#\/x-swagger-bake\/components\/schemas\/Category-Edit"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "500": {
+                        "description": "When record not found.",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$ref": "#\/components\/schemas\/Exception"
+                                }
+                            },
+                            "application\/xml": {
+                                "schema": {
+                                    "$ref": "#\/components\/schemas\/Exception"
+                                }
+                            },
+                            "application\/ld+json": {
+                                "schema": {
+                                    "$ref": "#\/components\/schemas\/Exception"
+                                }
+                            },
+                            "application\/hal+json": {
+                                "schema": {
+                                    "$ref": "#\/components\/schemas\/Exception"
+                                }
+                            }
+                        }
+                    },
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$ref": "#\/x-swagger-bake\/components\/schemas\/Category-Read"
+                                }
+                            },
+                            "application\/xml": {
+                                "schema": {
+                                    "allOf": [
+                                        {
+                                            "$ref": "#\/x-swagger-bake\/components\/schemas\/Category-Read"
+                                        }
+                                    ],
+                                    "xml": {
+                                        "name": "response"
+                                    }
+                                }
+                            },
+                            "application\/ld+json": {
+                                "schema": {
+                                    "allOf": [
+                                        {
+                                            "$ref": "#\/x-swagger-bake\/components\/schemas\/JsonLd-Item"
+                                        },
+                                        {
+                                            "$ref": "#\/x-swagger-bake\/components\/schemas\/Category-Read"
+                                        }
+                                    ]
+                                }
+                            },
+                            "application\/hal+json": {
+                                "schema": {
+                                    "allOf": [
+                                        {
+                                            "$ref": "#\/x-swagger-bake\/components\/schemas\/HalJson-Item"
+                                        },
+                                        {
+                                            "$ref": "#\/x-swagger-bake\/components\/schemas\/Category-Read"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "ApiKey": []
+                    }
+                ],
+                "deprecated": false
+            },
+            "get": {
+                "summary": "View method",
+                "description": "",
+                "tags": [
+                    "Categories"
+                ],
+                "operationId": "adminapi.categories:view:get",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "500": {
+                        "description": "When record not found.",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$ref": "#\/components\/schemas\/Exception"
+                                }
+                            },
+                            "application\/xml": {
+                                "schema": {
+                                    "$ref": "#\/components\/schemas\/Exception"
+                                }
+                            },
+                            "application\/ld+json": {
+                                "schema": {
+                                    "$ref": "#\/components\/schemas\/Exception"
+                                }
+                            },
+                            "application\/hal+json": {
+                                "schema": {
+                                    "$ref": "#\/components\/schemas\/Exception"
+                                }
+                            }
+                        }
+                    },
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$ref": "#\/x-swagger-bake\/components\/schemas\/Category-Read"
+                                }
+                            },
+                            "application\/xml": {
+                                "schema": {
+                                    "allOf": [
+                                        {
+                                            "$ref": "#\/x-swagger-bake\/components\/schemas\/Category-Read"
+                                        }
+                                    ],
+                                    "xml": {
+                                        "name": "response"
+                                    }
+                                }
+                            },
+                            "application\/ld+json": {
+                                "schema": {
+                                    "allOf": [
+                                        {
+                                            "$ref": "#\/x-swagger-bake\/components\/schemas\/JsonLd-Item"
+                                        },
+                                        {
+                                            "$ref": "#\/x-swagger-bake\/components\/schemas\/Category-Read"
+                                        }
+                                    ]
+                                }
+                            },
+                            "application\/hal+json": {
+                                "schema": {
+                                    "allOf": [
+                                        {
+                                            "$ref": "#\/x-swagger-bake\/components\/schemas\/HalJson-Item"
+                                        },
+                                        {
+                                            "$ref": "#\/x-swagger-bake\/components\/schemas\/Category-Read"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                },
+                "deprecated": false
+            }
+        },
+        "\/admin\/films": {
+            "post": {
+                "summary": "Add method",
+                "description": "",
+                "tags": [
+                    "Films"
+                ],
+                "operationId": "adminapi.films:add:post",
+                "parameters": [],
+                "requestBody": {
+                    "content": {
+                        "application\/x-www-form-urlencoded": {
+                            "schema": {
+                                "$ref": "#\/x-swagger-bake\/components\/schemas\/Film-Add"
+                            }
+                        },
+                        "application\/json": {
+                            "schema": {
+                                "$ref": "#\/x-swagger-bake\/components\/schemas\/Film-Add"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "500": {
+                        "description": "When invalid method",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$ref": "#\/components\/schemas\/Exception"
+                                }
+                            },
+                            "application\/xml": {
+                                "schema": {
+                                    "$ref": "#\/components\/schemas\/Exception"
+                                }
+                            },
+                            "application\/ld+json": {
+                                "schema": {
+                                    "$ref": "#\/components\/schemas\/Exception"
+                                }
+                            },
+                            "application\/hal+json": {
+                                "schema": {
+                                    "$ref": "#\/components\/schemas\/Exception"
+                                }
+                            }
+                        }
+                    },
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$ref": "#\/x-swagger-bake\/components\/schemas\/Film-Read"
+                                }
+                            },
+                            "application\/xml": {
+                                "schema": {
+                                    "allOf": [
+                                        {
+                                            "$ref": "#\/x-swagger-bake\/components\/schemas\/Film-Read"
+                                        }
+                                    ],
+                                    "xml": {
+                                        "name": "response"
+                                    }
+                                }
+                            },
+                            "application\/ld+json": {
+                                "schema": {
+                                    "allOf": [
+                                        {
+                                            "$ref": "#\/x-swagger-bake\/components\/schemas\/JsonLd-Item"
+                                        },
+                                        {
+                                            "$ref": "#\/x-swagger-bake\/components\/schemas\/Film-Read"
+                                        }
+                                    ]
+                                }
+                            },
+                            "application\/hal+json": {
+                                "schema": {
+                                    "allOf": [
+                                        {
+                                            "$ref": "#\/x-swagger-bake\/components\/schemas\/HalJson-Item"
+                                        },
+                                        {
+                                            "$ref": "#\/x-swagger-bake\/components\/schemas\/Film-Read"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                },
+                "deprecated": false
+            },
+            "get": {
+                "summary": "Index method",
+                "description": "",
+                "tags": [
+                    "Films"
+                ],
+                "operationId": "adminapi.films:index:get",
+                "parameters": [],
+                "responses": {
+                    "500": {
+                        "description": "When invalid method",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$ref": "#\/components\/schemas\/Exception"
+                                }
+                            },
+                            "application\/xml": {
+                                "schema": {
+                                    "$ref": "#\/components\/schemas\/Exception"
+                                }
+                            },
+                            "application\/ld+json": {
+                                "schema": {
+                                    "$ref": "#\/components\/schemas\/Exception"
+                                }
+                            },
+                            "application\/hal+json": {
+                                "schema": {
+                                    "$ref": "#\/components\/schemas\/Exception"
+                                }
+                            }
+                        }
+                    },
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "object",
+                                                "allOf": [
+                                                    {
+                                                        "$ref": "#\/x-swagger-bake\/components\/schemas\/Film-Read"
+                                                    }
+                                                ]
+                                            }
+                                        }
+                                    },
+                                    "allOf": [
+                                        {
+                                            "$ref": "#\/x-swagger-bake\/components\/schemas\/Generic-Collection"
+                                        }
+                                    ]
+                                }
+                            },
+                            "application\/xml": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "object",
+                                                "allOf": [
+                                                    {
+                                                        "$ref": "#\/x-swagger-bake\/components\/schemas\/Film-Read"
+                                                    }
+                                                ]
+                                            }
+                                        }
+                                    },
+                                    "allOf": [
+                                        {
+                                            "$ref": "#\/x-swagger-bake\/components\/schemas\/Generic-Collection"
+                                        }
+                                    ],
+                                    "xml": {
+                                        "name": "response"
+                                    }
+                                }
+                            },
+                            "application\/ld+json": {
+                                "schema": {
+                                    "properties": {
+                                        "member": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "object",
+                                                "allOf": [
+                                                    {
+                                                        "$ref": "#\/x-swagger-bake\/components\/schemas\/JsonLd-Item"
+                                                    },
+                                                    {
+                                                        "$ref": "#\/x-swagger-bake\/components\/schemas\/Film-Read"
+                                                    }
+                                                ]
+                                            }
+                                        }
+                                    },
+                                    "allOf": [
+                                        {
+                                            "$ref": "#\/x-swagger-bake\/components\/schemas\/JsonLd-Collection"
+                                        }
+                                    ]
+                                }
+                            },
+                            "application\/hal+json": {
+                                "schema": {
+                                    "properties": {
+                                        "_embedded": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "object",
+                                                "allOf": [
+                                                    {
+                                                        "$ref": "#\/x-swagger-bake\/components\/schemas\/HalJson-Item"
+                                                    },
+                                                    {
+                                                        "$ref": "#\/x-swagger-bake\/components\/schemas\/Film-Read"
+                                                    }
+                                                ]
+                                            }
+                                        }
+                                    },
+                                    "allOf": [
+                                        {
+                                            "$ref": "#\/x-swagger-bake\/components\/schemas\/HalJson-Collection"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                },
+                "deprecated": false
+            }
+        },
+        "\/admin\/films\/{id}": {
+            "delete": {
+                "summary": "Delete method",
+                "description": "",
+                "tags": [
+                    "Films"
+                ],
+                "operationId": "adminapi.films:delete:delete",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "500": {
+                        "description": "When record not found.",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$ref": "#\/components\/schemas\/Exception"
+                                }
+                            },
+                            "application\/xml": {
+                                "schema": {
+                                    "$ref": "#\/components\/schemas\/Exception"
+                                }
+                            },
+                            "application\/ld+json": {
+                                "schema": {
+                                    "$ref": "#\/components\/schemas\/Exception"
+                                }
+                            },
+                            "application\/hal+json": {
+                                "schema": {
+                                    "$ref": "#\/components\/schemas\/Exception"
+                                }
+                            }
+                        }
+                    },
+                    "204": {
+                        "description": "Resource deleted"
+                    }
+                },
+                "deprecated": false
+            },
+            "patch": {
+                "summary": "Edit method",
+                "description": "",
+                "tags": [
+                    "Films"
+                ],
+                "operationId": "adminapi.films:edit:patch",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application\/x-www-form-urlencoded": {
+                            "schema": {
+                                "$ref": "#\/x-swagger-bake\/components\/schemas\/Film-Edit"
+                            }
+                        },
+                        "application\/json": {
+                            "schema": {
+                                "$ref": "#\/x-swagger-bake\/components\/schemas\/Film-Edit"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "500": {
+                        "description": "When record not found.",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$ref": "#\/components\/schemas\/Exception"
+                                }
+                            },
+                            "application\/xml": {
+                                "schema": {
+                                    "$ref": "#\/components\/schemas\/Exception"
+                                }
+                            },
+                            "application\/ld+json": {
+                                "schema": {
+                                    "$ref": "#\/components\/schemas\/Exception"
+                                }
+                            },
+                            "application\/hal+json": {
+                                "schema": {
+                                    "$ref": "#\/components\/schemas\/Exception"
+                                }
+                            }
+                        }
+                    },
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$ref": "#\/x-swagger-bake\/components\/schemas\/Film-Read"
+                                }
+                            },
+                            "application\/xml": {
+                                "schema": {
+                                    "allOf": [
+                                        {
+                                            "$ref": "#\/x-swagger-bake\/components\/schemas\/Film-Read"
+                                        }
+                                    ],
+                                    "xml": {
+                                        "name": "response"
+                                    }
+                                }
+                            },
+                            "application\/ld+json": {
+                                "schema": {
+                                    "allOf": [
+                                        {
+                                            "$ref": "#\/x-swagger-bake\/components\/schemas\/JsonLd-Item"
+                                        },
+                                        {
+                                            "$ref": "#\/x-swagger-bake\/components\/schemas\/Film-Read"
+                                        }
+                                    ]
+                                }
+                            },
+                            "application\/hal+json": {
+                                "schema": {
+                                    "allOf": [
+                                        {
+                                            "$ref": "#\/x-swagger-bake\/components\/schemas\/HalJson-Item"
+                                        },
+                                        {
+                                            "$ref": "#\/x-swagger-bake\/components\/schemas\/Film-Read"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                },
+                "deprecated": false
+            },
+            "get": {
+                "summary": "View method",
+                "description": "",
+                "tags": [
+                    "Films"
+                ],
+                "operationId": "adminapi.films:view:get",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "500": {
+                        "description": "When record not found.",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$ref": "#\/components\/schemas\/Exception"
+                                }
+                            },
+                            "application\/xml": {
+                                "schema": {
+                                    "$ref": "#\/components\/schemas\/Exception"
+                                }
+                            },
+                            "application\/ld+json": {
+                                "schema": {
+                                    "$ref": "#\/components\/schemas\/Exception"
+                                }
+                            },
+                            "application\/hal+json": {
+                                "schema": {
+                                    "$ref": "#\/components\/schemas\/Exception"
+                                }
+                            }
+                        }
+                    },
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$ref": "#\/x-swagger-bake\/components\/schemas\/Film-Read"
+                                }
+                            },
+                            "application\/xml": {
+                                "schema": {
+                                    "allOf": [
+                                        {
+                                            "$ref": "#\/x-swagger-bake\/components\/schemas\/Film-Read"
+                                        }
+                                    ],
+                                    "xml": {
+                                        "name": "response"
+                                    }
+                                }
+                            },
+                            "application\/ld+json": {
+                                "schema": {
+                                    "allOf": [
+                                        {
+                                            "$ref": "#\/x-swagger-bake\/components\/schemas\/JsonLd-Item"
+                                        },
+                                        {
+                                            "$ref": "#\/x-swagger-bake\/components\/schemas\/Film-Read"
+                                        }
+                                    ]
+                                }
+                            },
+                            "application\/hal+json": {
+                                "schema": {
+                                    "allOf": [
+                                        {
+                                            "$ref": "#\/x-swagger-bake\/components\/schemas\/HalJson-Item"
+                                        },
+                                        {
+                                            "$ref": "#\/x-swagger-bake\/components\/schemas\/Film-Read"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                },
+                "deprecated": false
+            }
+        },
+        "\/admin\/languages": {
+            "post": {
+                "summary": "Add method",
+                "description": "",
+                "tags": [
+                    "Languages"
+                ],
+                "operationId": "adminapi.languages:add:post",
+                "parameters": [],
+                "requestBody": {
+                    "content": {
+                        "application\/x-www-form-urlencoded": {
+                            "schema": {
+                                "$ref": "#\/x-swagger-bake\/components\/schemas\/Language-Add"
+                            }
+                        },
+                        "application\/json": {
+                            "schema": {
+                                "$ref": "#\/x-swagger-bake\/components\/schemas\/Language-Add"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "500": {
+                        "description": "Unknown Error",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$ref": "#\/components\/schemas\/Exception"
+                                }
+                            },
+                            "application\/xml": {
+                                "schema": {
+                                    "$ref": "#\/components\/schemas\/Exception"
+                                }
+                            },
+                            "application\/ld+json": {
+                                "schema": {
+                                    "$ref": "#\/components\/schemas\/Exception"
+                                }
+                            },
+                            "application\/hal+json": {
+                                "schema": {
+                                    "$ref": "#\/components\/schemas\/Exception"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Error saving resource",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$ref": "#\/components\/schemas\/Exception"
+                                }
+                            },
+                            "application\/xml": {
+                                "schema": {
+                                    "$ref": "#\/components\/schemas\/Exception"
+                                }
+                            },
+                            "application\/ld+json": {
+                                "schema": {
+                                    "$ref": "#\/components\/schemas\/Exception"
+                                }
+                            },
+                            "application\/hal+json": {
+                                "schema": {
+                                    "$ref": "#\/components\/schemas\/Exception"
+                                }
+                            }
+                        }
+                    },
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$ref": "#\/x-swagger-bake\/components\/schemas\/Language-Read"
+                                }
+                            },
+                            "application\/xml": {
+                                "schema": {
+                                    "allOf": [
+                                        {
+                                            "$ref": "#\/x-swagger-bake\/components\/schemas\/Language-Read"
+                                        }
+                                    ],
+                                    "xml": {
+                                        "name": "response"
+                                    }
+                                }
+                            },
+                            "application\/ld+json": {
+                                "schema": {
+                                    "allOf": [
+                                        {
+                                            "$ref": "#\/x-swagger-bake\/components\/schemas\/JsonLd-Item"
+                                        },
+                                        {
+                                            "$ref": "#\/x-swagger-bake\/components\/schemas\/Language-Read"
+                                        }
+                                    ]
+                                }
+                            },
+                            "application\/hal+json": {
+                                "schema": {
+                                    "allOf": [
+                                        {
+                                            "$ref": "#\/x-swagger-bake\/components\/schemas\/HalJson-Item"
+                                        },
+                                        {
+                                            "$ref": "#\/x-swagger-bake\/components\/schemas\/Language-Read"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "ApiKey": []
+                    }
+                ],
+                "deprecated": false
+            },
+            "get": {
+                "summary": "Index method",
+                "description": "",
+                "tags": [
+                    "Languages"
+                ],
+                "operationId": "adminapi.languages:index:get",
+                "parameters": [
+                    {
+                        "$ref": "#\/x-swagger-bake\/components\/parameters\/paginatorPage"
+                    },
+                    {
+                        "$ref": "#\/x-swagger-bake\/components\/parameters\/paginatorLimit"
+                    },
+                    {
+                        "name": "sort",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "enum": [
+                                "id",
+                                "name",
+                                "is_active"
+                            ]
+                        }
+                    },
+                    {
+                        "$ref": "#\/x-swagger-bake\/components\/parameters\/paginatorDirection"
+                    },
+                    {
+                        "name": "name",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "500": {
+                        "description": "When invalid method",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$ref": "#\/components\/schemas\/Exception"
+                                }
+                            },
+                            "application\/xml": {
+                                "schema": {
+                                    "$ref": "#\/components\/schemas\/Exception"
+                                }
+                            },
+                            "application\/ld+json": {
+                                "schema": {
+                                    "$ref": "#\/components\/schemas\/Exception"
+                                }
+                            },
+                            "application\/hal+json": {
+                                "schema": {
+                                    "$ref": "#\/components\/schemas\/Exception"
+                                }
+                            }
+                        }
+                    },
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "object",
+                                                "allOf": [
+                                                    {
+                                                        "$ref": "#\/x-swagger-bake\/components\/schemas\/Language-Read"
+                                                    }
+                                                ]
+                                            }
+                                        }
+                                    },
+                                    "allOf": [
+                                        {
+                                            "$ref": "#\/x-swagger-bake\/components\/schemas\/Generic-Collection"
+                                        }
+                                    ]
+                                }
+                            },
+                            "application\/xml": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "object",
+                                                "allOf": [
+                                                    {
+                                                        "$ref": "#\/x-swagger-bake\/components\/schemas\/Language-Read"
+                                                    }
+                                                ]
+                                            }
+                                        }
+                                    },
+                                    "allOf": [
+                                        {
+                                            "$ref": "#\/x-swagger-bake\/components\/schemas\/Generic-Collection"
+                                        }
+                                    ],
+                                    "xml": {
+                                        "name": "response"
+                                    }
+                                }
+                            },
+                            "application\/ld+json": {
+                                "schema": {
+                                    "properties": {
+                                        "member": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "object",
+                                                "allOf": [
+                                                    {
+                                                        "$ref": "#\/x-swagger-bake\/components\/schemas\/JsonLd-Item"
+                                                    },
+                                                    {
+                                                        "$ref": "#\/x-swagger-bake\/components\/schemas\/Language-Read"
+                                                    }
+                                                ]
+                                            }
+                                        }
+                                    },
+                                    "allOf": [
+                                        {
+                                            "$ref": "#\/x-swagger-bake\/components\/schemas\/JsonLd-Collection"
+                                        }
+                                    ]
+                                }
+                            },
+                            "application\/hal+json": {
+                                "schema": {
+                                    "properties": {
+                                        "_embedded": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "object",
+                                                "allOf": [
+                                                    {
+                                                        "$ref": "#\/x-swagger-bake\/components\/schemas\/HalJson-Item"
+                                                    },
+                                                    {
+                                                        "$ref": "#\/x-swagger-bake\/components\/schemas\/Language-Read"
+                                                    }
+                                                ]
+                                            }
+                                        }
+                                    },
+                                    "allOf": [
+                                        {
+                                            "$ref": "#\/x-swagger-bake\/components\/schemas\/HalJson-Collection"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                },
+                "deprecated": false
+            }
+        },
+        "\/admin\/languages\/{id}": {
+            "delete": {
+                "summary": "Delete method",
+                "description": "",
+                "tags": [
+                    "Languages"
+                ],
+                "operationId": "adminapi.languages:delete:delete",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "500": {
+                        "description": "When record not found.",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$ref": "#\/components\/schemas\/Exception"
+                                }
+                            },
+                            "application\/xml": {
+                                "schema": {
+                                    "$ref": "#\/components\/schemas\/Exception"
+                                }
+                            },
+                            "application\/ld+json": {
+                                "schema": {
+                                    "$ref": "#\/components\/schemas\/Exception"
+                                }
+                            },
+                            "application\/hal+json": {
+                                "schema": {
+                                    "$ref": "#\/components\/schemas\/Exception"
+                                }
+                            }
+                        }
+                    },
+                    "204": {
+                        "description": "Resource deleted"
+                    }
+                },
+                "security": [
+                    {
+                        "ApiKey": []
+                    }
+                ],
+                "deprecated": false
+            },
+            "patch": {
+                "summary": "Edit method",
+                "description": "",
+                "tags": [
+                    "Languages"
+                ],
+                "operationId": "adminapi.languages:edit:patch",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application\/x-www-form-urlencoded": {
+                            "schema": {
+                                "$ref": "#\/x-swagger-bake\/components\/schemas\/Language-Edit"
+                            }
+                        },
+                        "application\/json": {
+                            "schema": {
+                                "$ref": "#\/x-swagger-bake\/components\/schemas\/Language-Edit"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "500": {
+                        "description": "RecordNotFoundException",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$ref": "#\/components\/schemas\/Exception"
+                                }
+                            },
+                            "application\/xml": {
+                                "schema": {
+                                    "$ref": "#\/components\/schemas\/Exception"
+                                }
+                            },
+                            "application\/ld+json": {
+                                "schema": {
+                                    "$ref": "#\/components\/schemas\/Exception"
+                                }
+                            },
+                            "application\/hal+json": {
+                                "schema": {
+                                    "$ref": "#\/components\/schemas\/Exception"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Error saving resource",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$ref": "#\/components\/schemas\/Exception"
+                                }
+                            },
+                            "application\/xml": {
+                                "schema": {
+                                    "$ref": "#\/components\/schemas\/Exception"
+                                }
+                            },
+                            "application\/ld+json": {
+                                "schema": {
+                                    "$ref": "#\/components\/schemas\/Exception"
+                                }
+                            },
+                            "application\/hal+json": {
+                                "schema": {
+                                    "$ref": "#\/components\/schemas\/Exception"
+                                }
+                            }
+                        }
+                    },
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$ref": "#\/x-swagger-bake\/components\/schemas\/Language-Read"
+                                }
+                            },
+                            "application\/xml": {
+                                "schema": {
+                                    "allOf": [
+                                        {
+                                            "$ref": "#\/x-swagger-bake\/components\/schemas\/Language-Read"
+                                        }
+                                    ],
+                                    "xml": {
+                                        "name": "response"
+                                    }
+                                }
+                            },
+                            "application\/ld+json": {
+                                "schema": {
+                                    "allOf": [
+                                        {
+                                            "$ref": "#\/x-swagger-bake\/components\/schemas\/JsonLd-Item"
+                                        },
+                                        {
+                                            "$ref": "#\/x-swagger-bake\/components\/schemas\/Language-Read"
+                                        }
+                                    ]
+                                }
+                            },
+                            "application\/hal+json": {
+                                "schema": {
+                                    "allOf": [
+                                        {
+                                            "$ref": "#\/x-swagger-bake\/components\/schemas\/HalJson-Item"
+                                        },
+                                        {
+                                            "$ref": "#\/x-swagger-bake\/components\/schemas\/Language-Read"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "ApiKey": []
+                    }
+                ],
+                "deprecated": false
+            },
+            "get": {
+                "summary": "View method",
+                "description": "",
+                "tags": [
+                    "Languages"
+                ],
+                "operationId": "adminapi.languages:view:get",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "500": {
+                        "description": "When record not found.",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$ref": "#\/components\/schemas\/Exception"
+                                }
+                            },
+                            "application\/xml": {
+                                "schema": {
+                                    "$ref": "#\/components\/schemas\/Exception"
+                                }
+                            },
+                            "application\/ld+json": {
+                                "schema": {
+                                    "$ref": "#\/components\/schemas\/Exception"
+                                }
+                            },
+                            "application\/hal+json": {
+                                "schema": {
+                                    "$ref": "#\/components\/schemas\/Exception"
+                                }
+                            }
+                        }
+                    },
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$ref": "#\/x-swagger-bake\/components\/schemas\/Language-Read"
+                                }
+                            },
+                            "application\/xml": {
+                                "schema": {
+                                    "allOf": [
+                                        {
+                                            "$ref": "#\/x-swagger-bake\/components\/schemas\/Language-Read"
+                                        }
+                                    ],
+                                    "xml": {
+                                        "name": "response"
+                                    }
+                                }
+                            },
+                            "application\/ld+json": {
+                                "schema": {
+                                    "allOf": [
+                                        {
+                                            "$ref": "#\/x-swagger-bake\/components\/schemas\/JsonLd-Item"
+                                        },
+                                        {
+                                            "$ref": "#\/x-swagger-bake\/components\/schemas\/Language-Read"
+                                        }
+                                    ]
+                                }
+                            },
+                            "application\/hal+json": {
+                                "schema": {
+                                    "allOf": [
+                                        {
+                                            "$ref": "#\/x-swagger-bake\/components\/schemas\/HalJson-Item"
+                                        },
+                                        {
+                                            "$ref": "#\/x-swagger-bake\/components\/schemas\/Language-Read"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                },
+                "deprecated": false
+            }
+        }
+    },
+    "definitions": null,
+    "components": {
+        "securitySchemes": {
+            "ApiKey": {
+                "description": "Use `123` as the API Key for all PUT\/POST\/PATCH\/DELETE operations.",
+                "type": "apiKey",
+                "in": "header",
+                "name": "API-KEY"
+            }
+        },
+        "schemas": {
+            "Actor": {
+                "description": "Actor Entity",
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "format": "int64",
+                        "readOnly": true
+                    },
+                    "first_name": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 64
+                    },
+                    "last_name": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 64
+                    },
+                    "modified": {
+                        "type": "string",
+                        "format": "date-time",
+                        "readOnly": true,
+                        "minLength": 1
+                    }
+                }
+            },
+            "Category": {
+                "description": "Category Entity",
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "format": "int64",
+                        "readOnly": true
+                    },
+                    "name": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 25
+                    },
+                    "modified": {
+                        "type": "string",
+                        "format": "date-time",
+                        "readOnly": true,
+                        "minLength": 1
+                    }
+                }
+            },
+            "Exception": {
+                "description": "",
+                "type": "object",
+                "properties": {
+                    "code": {
+                        "type": "integer",
+                        "example": 500
+                    },
+                    "url": {
+                        "type": "string",
+                        "example": "\/url\/path"
+                    },
+                    "message": {
+                        "type": "string",
+                        "example": "Internal Error"
+                    }
+                },
+                "xml": {
+                    "name": "response"
+                }
+            },
+            "Film": {
+                "description": "Film Entity",
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "format": "int64",
+                        "readOnly": true
+                    },
+                    "title": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 255
+                    },
+                    "description": {
+                        "type": "string",
+                        "format": "string",
+                        "minLength": 1
+                    },
+                    "release_year": {
+                        "type": "integer",
+                        "format": "int64",
+                        "minLength": 4,
+                        "maxLength": 4
+                    },
+                    "language_id": {
+                        "type": "integer",
+                        "format": "int64",
+                        "enum": [
+                            1,
+                            2,
+                            3,
+                            4,
+                            5,
+                            6
+                        ],
+                        "minLength": 1
+                    },
+                    "rental_duration": {
+                        "type": "integer",
+                        "format": "int64",
+                        "minimum": 1
+                    },
+                    "rental_rate": {
+                        "type": "number",
+                        "format": "float",
+                        "minimum": 1
+                    },
+                    "length": {
+                        "type": "integer",
+                        "format": "int64",
+                        "minimum": 1
+                    },
+                    "replacement_cost": {
+                        "type": "number",
+                        "format": "float",
+                        "minimum": 1
+                    },
+                    "rating": {
+                        "type": "string",
+                        "enum": [
+                            "PG",
+                            "PG-13",
+                            "R",
+                            "NC-17",
+                            "NR"
+                        ],
+                        "minLength": 1,
+                        "maxLength": 5
+                    },
+                    "special_features": {
+                        "type": "string",
+                        "maxLength": 255
+                    },
+                    "modified": {
+                        "type": "string",
+                        "format": "date-time",
+                        "readOnly": true,
+                        "minLength": 1
+                    }
+                }
+            },
+            "Language": {
+                "description": "Language Entity",
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "format": "int64",
+                        "readOnly": true
+                    },
+                    "name": {
+                        "type": "string",
+                        "format": "string",
+                        "minLength": 1,
+                        "maxLength": 20
+                    },
+                    "is_active": {
+                        "type": "integer",
+                        "format": "int64",
+                        "enum": [
+                            1,
+                            0
+                        ],
+                        "minLength": 1
+                    }
+                }
+            },
+            "OperationResult": {
+                "description": "",
+                "type": "object",
+                "properties": {
+                    "result": {
+                        "type": "boolean"
+                    }
+                },
+                "xml": {
+                    "name": "response"
+                }
+            }
+        }
+    },
+    "x-mixerapi-demo": {
+        "components": {
+            "schemas": {
+                "FilmByRating": {
+                    "type": "object",
+                    "properties": {
+                        "rating": {
+                            "type": "string",
+                            "example": "PG"
+                        },
+                        "total": {
+                            "type": "integer",
+                            "example": 100
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "x-swagger-bake": {
+        "components": {
+            "parameters": {
+                "paginatorPage": {
+                    "name": "page",
+                    "in": "query",
+                    "required": false,
+                    "schema": {
+                        "type": "integer"
+                    }
+                },
+                "paginatorLimit": {
+                    "name": "limit",
+                    "in": "query",
+                    "required": false,
+                    "schema": {
+                        "type": "integer"
+                    }
+                },
+                "paginatorSort": {
+                    "name": "direction",
+                    "in": "query",
+                    "required": false,
+                    "schema": {
+                        "type": "string"
+                    }
+                },
+                "paginatorDirection": {
+                    "name": "direction",
+                    "in": "query",
+                    "required": false,
+                    "schema": {
+                        "type": "string",
+                        "enum": [
+                            "asc",
+                            "desc"
+                        ]
+                    }
+                }
+            },
+            "schemas": {
+                "HalJson-Item": {
+                    "type": "object",
+                    "properties": {
+                        "links": {
+                            "type": "object",
+                            "properties": {
+                                "self": {
+                                    "type": "object",
+                                    "properties": {
+                                        "href": {
+                                            "type": "string",
+                                            "format": "url",
+                                            "example": "\/entity\/:id"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "HalJson-Collection": {
+                    "type": "object",
+                    "properties": {
+                        "links": {
+                            "type": "object",
+                            "properties": {
+                                "self": {
+                                    "type": "object",
+                                    "properties": {
+                                        "href": {
+                                            "type": "string",
+                                            "format": "url",
+                                            "example": "\/collection"
+                                        }
+                                    }
+                                },
+                                "next": {
+                                    "type": "object",
+                                    "properties": {
+                                        "href": {
+                                            "type": "string",
+                                            "format": "url",
+                                            "example": "\/collection?page=:number"
+                                        }
+                                    }
+                                },
+                                "prev": {
+                                    "type": "object",
+                                    "properties": {
+                                        "href": {
+                                            "type": "string",
+                                            "format": "url",
+                                            "example": "\/collection?page=:number"
+                                        }
+                                    }
+                                },
+                                "first": {
+                                    "type": "object",
+                                    "properties": {
+                                        "href": {
+                                            "type": "string",
+                                            "format": "url",
+                                            "example": "\/collection?page=:number"
+                                        }
+                                    }
+                                },
+                                "properties": {
+                                    "href": {
+                                        "type": "string",
+                                        "format": "url",
+                                        "example": "\/collection?page=:number"
+                                    }
+                                }
+                            },
+                            "last": {
+                                "type": "object",
+                                "properties": {
+                                    "href": {
+                                        "type": "string",
+                                        "format": "url",
+                                        "example": "\/collection?page=:number"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "JsonLd-Item": {
+                    "type": "object",
+                    "properties": {
+                        "@id": {
+                            "type": "string",
+                            "format": "url",
+                            "example": "\/entity\/:id"
+                        },
+                        "@type": {
+                            "type": "string",
+                            "format": "url",
+                            "example": "https:\/\/schema.org\/Thing"
+                        },
+                        "@context": {
+                            "type": "string",
+                            "format": "url",
+                            "example": "\/context\/Entity"
+                        }
+                    }
+                },
+                "JsonLd-Collection": {
+                    "type": "object",
+                    "properties": {
+                        "@id": {
+                            "type": "string",
+                            "format": "url",
+                            "example": "\/entity\/:id"
+                        },
+                        "@type": {
+                            "type": "string",
+                            "format": "url",
+                            "example": "https:\/\/schema.org\/Thing"
+                        },
+                        "@context": {
+                            "type": "string",
+                            "format": "url",
+                            "example": "\/context\/Entity"
+                        },
+                        "view": {
+                            "type": "object",
+                            "properties": {
+                                "@id": {
+                                    "type": "string",
+                                    "format": "url",
+                                    "example": "\/index"
+                                },
+                                "@type": {
+                                    "type": "string",
+                                    "example": "PartialCollectionView"
+                                },
+                                "next": {
+                                    "type": "string",
+                                    "format": "url",
+                                    "example": "\/index?page=:number"
+                                },
+                                "prev": {
+                                    "type": "string",
+                                    "format": "url",
+                                    "example": "\/index?page=:number"
+                                },
+                                "first": {
+                                    "type": "string",
+                                    "format": "url",
+                                    "example": "\/index"
+                                },
+                                "last": {
+                                    "type": "string",
+                                    "format": "url",
+                                    "example": "\/index?page=:number"
+                                }
+                            }
+                        }
+                    }
+                },
+                "Generic-Collection": {
+                    "type": "object",
+                    "properties": {
+                        "collection": {
+                            "type": "object",
+                            "properties": {
+                                "url": {
+                                    "type": "string",
+                                    "format": "url",
+                                    "example": "\/collection"
+                                },
+                                "count": {
+                                    "type": "integer",
+                                    "example": 50
+                                },
+                                "pages": {
+                                    "type": "integer",
+                                    "example": 20
+                                },
+                                "total": {
+                                    "type": "integer",
+                                    "example": 200
+                                },
+                                "next": {
+                                    "type": "string",
+                                    "format": "url",
+                                    "example": "\/collection?page=:number"
+                                },
+                                "prev": {
+                                    "type": "string",
+                                    "format": "url",
+                                    "example": "\/collection?page=:number"
+                                },
+                                "first": {
+                                    "type": "string",
+                                    "format": "url",
+                                    "example": "\/collection?page=:number"
+                                },
+                                "last": {
+                                    "type": "string",
+                                    "format": "url",
+                                    "example": "\/collection?page=:number"
+                                }
+                            }
+                        }
+                    },
+                    "x-data-element": "data"
+                },
+                "Category-Read": {
+                    "description": "Category Entity",
+                    "type": "object",
+                    "properties": {
+                        "id": {
+                            "type": "integer",
+                            "format": "int64",
+                            "readOnly": true
+                        },
+                        "name": {
+                            "type": "string",
+                            "minLength": 1,
+                            "maxLength": 25
+                        },
+                        "modified": {
+                            "type": "string",
+                            "format": "date-time",
+                            "readOnly": true,
+                            "minLength": 1
+                        }
+                    }
+                },
+                "Category-Write": {
+                    "description": "Category Entity",
+                    "type": "object",
+                    "properties": {
+                        "name": {
+                            "type": "string",
+                            "minLength": 1,
+                            "maxLength": 25
+                        }
+                    }
+                },
+                "Category-Add": {
+                    "description": "Category Entity",
+                    "type": "object",
+                    "required": [
+                        "name"
+                    ],
+                    "allOf": [
+                        {
+                            "$ref": "#\/x-swagger-bake\/components\/schemas\/Category-Write"
+                        }
+                    ]
+                },
+                "Category-Edit": {
+                    "description": "Category Entity",
+                    "type": "object",
+                    "allOf": [
+                        {
+                            "$ref": "#\/x-swagger-bake\/components\/schemas\/Category-Write"
+                        }
+                    ]
+                },
+                "Actor-Read": {
+                    "description": "Actor Entity",
+                    "type": "object",
+                    "properties": {
+                        "id": {
+                            "type": "integer",
+                            "format": "int64",
+                            "readOnly": true
+                        },
+                        "first_name": {
+                            "type": "string",
+                            "minLength": 1,
+                            "maxLength": 64
+                        },
+                        "last_name": {
+                            "type": "string",
+                            "minLength": 1,
+                            "maxLength": 64
+                        },
+                        "modified": {
+                            "type": "string",
+                            "format": "date-time",
+                            "readOnly": true,
+                            "minLength": 1
+                        }
+                    }
+                },
+                "Actor-Write": {
+                    "description": "Actor Entity",
+                    "type": "object",
+                    "properties": {
+                        "first_name": {
+                            "type": "string",
+                            "minLength": 1,
+                            "maxLength": 64
+                        },
+                        "last_name": {
+                            "type": "string",
+                            "minLength": 1,
+                            "maxLength": 64
+                        }
+                    }
+                },
+                "Actor-Add": {
+                    "description": "Actor Entity",
+                    "type": "object",
+                    "required": [
+                        "first_name",
+                        "last_name"
+                    ],
+                    "allOf": [
+                        {
+                            "$ref": "#\/x-swagger-bake\/components\/schemas\/Actor-Write"
+                        }
+                    ]
+                },
+                "Actor-Edit": {
+                    "description": "Actor Entity",
+                    "type": "object",
+                    "allOf": [
+                        {
+                            "$ref": "#\/x-swagger-bake\/components\/schemas\/Actor-Write"
+                        }
+                    ]
+                },
+                "Language-Read": {
+                    "description": "Language Entity",
+                    "type": "object",
+                    "properties": {
+                        "id": {
+                            "type": "integer",
+                            "format": "int64",
+                            "readOnly": true
+                        },
+                        "name": {
+                            "type": "string",
+                            "format": "string",
+                            "minLength": 1,
+                            "maxLength": 20
+                        },
+                        "is_active": {
+                            "type": "integer",
+                            "format": "int64",
+                            "enum": [
+                                1,
+                                0
+                            ],
+                            "minLength": 1
+                        }
+                    }
+                },
+                "Language-Write": {
+                    "description": "Language Entity",
+                    "type": "object",
+                    "properties": {
+                        "name": {
+                            "type": "string",
+                            "format": "string",
+                            "minLength": 1,
+                            "maxLength": 20
+                        },
+                        "is_active": {
+                            "type": "integer",
+                            "format": "int64",
+                            "enum": [
+                                1,
+                                0
+                            ],
+                            "minLength": 1
+                        }
+                    }
+                },
+                "Language-Add": {
+                    "description": "Language Entity",
+                    "type": "object",
+                    "required": [
+                        "name"
+                    ],
+                    "allOf": [
+                        {
+                            "$ref": "#\/x-swagger-bake\/components\/schemas\/Language-Write"
+                        }
+                    ]
+                },
+                "Language-Edit": {
+                    "description": "Language Entity",
+                    "type": "object",
+                    "allOf": [
+                        {
+                            "$ref": "#\/x-swagger-bake\/components\/schemas\/Language-Write"
+                        }
+                    ]
+                },
+                "ViewFilmCategory": {
+                    "description": "ViewFilmCategory Entity",
+                    "type": "object",
+                    "properties": {
+                        "id": {
+                            "type": "integer",
+                            "example": "1"
+                        },
+                        "name": {
+                            "type": "string",
+                            "example": "Action"
+                        },
+                        "total": {
+                            "type": "integer",
+                            "example": "100"
+                        }
+                    }
+                },
+                "ViewFilmCategory-Read": {
+                    "description": "ViewFilmCategory Entity",
+                    "type": "object",
+                    "properties": {
+                        "id": {
+                            "type": "integer",
+                            "example": "1"
+                        },
+                        "name": {
+                            "type": "string",
+                            "example": "Action"
+                        },
+                        "total": {
+                            "type": "integer",
+                            "example": "100"
+                        }
+                    }
+                },
+                "ViewFilmCategory-Write": {
+                    "description": "ViewFilmCategory Entity",
+                    "type": "object",
+                    "properties": {
+                        "id": {
+                            "type": "integer",
+                            "example": "1"
+                        },
+                        "name": {
+                            "type": "string",
+                            "example": "Action"
+                        },
+                        "total": {
+                            "type": "integer",
+                            "example": "100"
+                        }
+                    }
+                },
+                "ViewFilmCategory-Add": {
+                    "description": "ViewFilmCategory Entity",
+                    "type": "object",
+                    "allOf": [
+                        {
+                            "$ref": "#\/x-swagger-bake\/components\/schemas\/ViewFilmCategory-Write"
+                        }
+                    ]
+                },
+                "ViewFilmCategory-Edit": {
+                    "description": "ViewFilmCategory Entity",
+                    "type": "object",
+                    "allOf": [
+                        {
+                            "$ref": "#\/x-swagger-bake\/components\/schemas\/ViewFilmCategory-Write"
+                        }
+                    ]
+                },
+                "Film-Read": {
+                    "description": "Film Entity",
+                    "type": "object",
+                    "properties": {
+                        "id": {
+                            "type": "integer",
+                            "format": "int64",
+                            "readOnly": true
+                        },
+                        "title": {
+                            "type": "string",
+                            "minLength": 1,
+                            "maxLength": 255
+                        },
+                        "description": {
+                            "type": "string",
+                            "format": "string",
+                            "minLength": 1
+                        },
+                        "release_year": {
+                            "type": "integer",
+                            "format": "int64",
+                            "minLength": 4,
+                            "maxLength": 4
+                        },
+                        "language_id": {
+                            "type": "integer",
+                            "format": "int64",
+                            "enum": [
+                                1,
+                                2,
+                                3,
+                                4,
+                                5,
+                                6
+                            ],
+                            "minLength": 1
+                        },
+                        "rental_duration": {
+                            "type": "integer",
+                            "format": "int64",
+                            "minimum": 1
+                        },
+                        "rental_rate": {
+                            "type": "number",
+                            "format": "float",
+                            "minimum": 1
+                        },
+                        "length": {
+                            "type": "integer",
+                            "format": "int64",
+                            "minimum": 1
+                        },
+                        "replacement_cost": {
+                            "type": "number",
+                            "format": "float",
+                            "minimum": 1
+                        },
+                        "rating": {
+                            "type": "string",
+                            "enum": [
+                                "PG",
+                                "PG-13",
+                                "R",
+                                "NC-17",
+                                "NR"
+                            ],
+                            "minLength": 1,
+                            "maxLength": 5
+                        },
+                        "special_features": {
+                            "type": "string",
+                            "maxLength": 255
+                        },
+                        "modified": {
+                            "type": "string",
+                            "format": "date-time",
+                            "readOnly": true,
+                            "minLength": 1
+                        }
+                    }
+                },
+                "Film-Write": {
+                    "description": "Film Entity",
+                    "type": "object",
+                    "properties": {
+                        "title": {
+                            "type": "string",
+                            "minLength": 1,
+                            "maxLength": 255
+                        },
+                        "description": {
+                            "type": "string",
+                            "format": "string",
+                            "minLength": 1
+                        },
+                        "release_year": {
+                            "type": "integer",
+                            "format": "int64",
+                            "minLength": 4,
+                            "maxLength": 4
+                        },
+                        "language_id": {
+                            "type": "integer",
+                            "format": "int64",
+                            "enum": [
+                                1,
+                                2,
+                                3,
+                                4,
+                                5,
+                                6
+                            ],
+                            "minLength": 1
+                        },
+                        "rental_duration": {
+                            "type": "integer",
+                            "format": "int64",
+                            "minimum": 1
+                        },
+                        "rental_rate": {
+                            "type": "number",
+                            "format": "float",
+                            "minimum": 1
+                        },
+                        "length": {
+                            "type": "integer",
+                            "format": "int64",
+                            "minimum": 1
+                        },
+                        "replacement_cost": {
+                            "type": "number",
+                            "format": "float",
+                            "minimum": 1
+                        },
+                        "rating": {
+                            "type": "string",
+                            "enum": [
+                                "PG",
+                                "PG-13",
+                                "R",
+                                "NC-17",
+                                "NR"
+                            ],
+                            "minLength": 1,
+                            "maxLength": 5
+                        },
+                        "special_features": {
+                            "type": "string",
+                            "maxLength": 255
+                        }
+                    }
+                },
+                "Film-Add": {
+                    "description": "Film Entity",
+                    "type": "object",
+                    "required": [
+                        "title",
+                        "description",
+                        "release_year",
+                        "language_id",
+                        "rating"
+                    ],
+                    "allOf": [
+                        {
+                            "$ref": "#\/x-swagger-bake\/components\/schemas\/Film-Write"
+                        }
+                    ]
+                },
+                "Film-Edit": {
+                    "description": "Film Entity",
+                    "type": "object",
+                    "allOf": [
+                        {
+                            "$ref": "#\/x-swagger-bake\/components\/schemas\/Film-Write"
+                        }
+                    ]
+                }
+            }
+        }
+    }
+}
