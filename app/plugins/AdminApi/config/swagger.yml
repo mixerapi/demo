@@ -8,7 +8,7 @@ info:
 
     If you are viewing this on demo.mixerapi.com then the database resets every 24 hours.
 
-    Browse the [JSON-LD vocabulary](/partner/vocab) for this API.
+    Browse the [JSON-LD vocabulary](/admin/vocab) for this API.
 
     Go back to the [homepage](/).
 
@@ -42,13 +42,6 @@ components:
         message:
           type: string
           example: Internal Error
-      xml:
-        name: response
-    OperationResult:
-      type: object
-      properties:
-        result:
-          type: boolean
       xml:
         name: response
 x-swagger-bake:

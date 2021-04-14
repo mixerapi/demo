@@ -13,10 +13,9 @@ A [mixerapi/mixerapi](https://github.com/mixerapi/mixerapi) demo application. Th
 [mixerapi/app](https://github.com/mixerapi/app) template.
 
 
-
 ## Installation
 
-You can run this demo via Docker or a local LAMP stack. Fork/clone this repository to get started.
+You can run this demo via Docker and/or a local LAMP stack. Fork/clone this repository to get started.
 
 ### Docker
 
@@ -28,7 +27,7 @@ make init
 
 Next, generate schema and seed data:
 
-```
+```console
 make php.sh
 bin/cake migrations migrate
 bin/cake migrations seed
@@ -40,7 +39,7 @@ That's it! Now browse to [http://localhost:8080](http://localhost:8080).
 
 Configure your database settings in `app/config/.env` and run:
 
-```
+```console
 cd app
 composer install
 bin/cake migrations migrate

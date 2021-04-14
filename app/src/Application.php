@@ -45,7 +45,6 @@ class Application extends BaseApplication
     public function bootstrap(): void
     {
         $this->addPlugin('MixerApi');
-        //$this->addPlugin('PartnerApi');
         $this->addPlugin('AdminApi');
 
         // Call parent to load bootstrap from files.
