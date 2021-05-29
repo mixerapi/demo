@@ -1,6 +1,6 @@
 # MixerAPI Demo
 
-[![Build](https://github.com/mixerapi/app/workflows/Build/badge.svg?branch=main)](https://github.com/mixerapi/app/actions)
+[![Build](https://github.com/mixerapi/demo/workflows/Build/badge.svg?branch=main)](https://github.com/mixerapi/demo/actions)
 [![MixerApi](https://mixerapi.com/assets/img/mixer-api-red.svg)](http://mixerapi.com)
 [![CakePHP](https://img.shields.io/badge/cakephp-4.2-red?logo=cakephp)](https://book.cakephp.org/4/en/index.html)
 [![Docker](https://img.shields.io/badge/docker-ffffff.svg?logo=docker)](https://hub.docker.com/r/mixerapidev/demo)
