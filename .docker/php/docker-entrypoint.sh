@@ -21,7 +21,7 @@ if [ "$1" = 'php-fpm' ] || [ "$1" = 'php' ] || [ "$1" = 'bin/cakephp' ]; then
     chmod 775 -R logs tmp
     setfacl -R -m u:www-data:rwX -m u:"$(whoami)":rwX logs
     setfacl -dR -m u:www-data:rwX -m u:"$(whoami)":rwX tmp
-    bin/cake cache clear_all
+    #bin/cake cache clear_all
 
 fi
 
