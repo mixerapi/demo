@@ -31,7 +31,9 @@ class Plugin extends BasePlugin implements AuthenticationServiceProviderInterfac
      */
     public function bootstrap(PluginApplicationInterface $app): void
     {
+        parent::bootstrap($app);
 
+        $app->addPlugin('Authentication');
     }
 
     /**

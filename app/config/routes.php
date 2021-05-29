@@ -73,6 +73,7 @@ $routes->scope('/public', function (RouteBuilder $builder) {
             ]
         ]
     ]);
+    $builder->setExtensions(['json', 'xml']);
     $builder->fallbacks();
 });
 
