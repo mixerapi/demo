@@ -11,9 +11,9 @@ if [ "$1" = 'php-fpm' ] || [ "$1" = 'php' ] || [ "$1" = 'bin/cakephp' ]; then
     chown -R cakephp:www-data .
 
     if [ "$APP_ENV" = 'prod' ]; then
-    #    composer install --prefer-dist --no-interaction --no-dev
+        composer install --prefer-dist --no-interaction --no-dev
     else
-    #    composer install --prefer-dist --no-interaction
+        composer install --prefer-dist --no-interaction
     fi
 
     mkdir -p logs tmp/cache/models tmp/cache/models/persistent tmp/sessions tmp/tests
