@@ -9,8 +9,8 @@
 [![NGINX](https://img.shields.io/badge/nginx-1.19-009639.svg?logo=nginx)](https://www.nginx.com/)
 [![MySQL](https://img.shields.io/badge/mysql-8-00758F.svg?logo=mysql)](https://www.mysql.com/)
 
-A [mixerapi/mixerapi](https://github.com/mixerapi/mixerapi) demo application. This project was built using the
-[mixerapi/app](https://github.com/mixerapi/app) template.
+A [mixerapi/mixerapi](https://github.com/mixerapi/mixerapi) demo application. This project was generated from the
+[mixerapi/app](https://github.com/mixerapi/app) template. See that project for additional details.
 
 
 ## Installation
