@@ -8,7 +8,7 @@ minikube start
 kubectl apply -f .kube/namespace.yaml
 kubectl apply -f .kube/mysql-secret.yaml
 kubectl apply -f .kube/php-secret.yaml
-kubectl apply -f .
+kubectl apply -f .kube/.
 minikube service nginx-service -n cakephp-docker
 ```
 
