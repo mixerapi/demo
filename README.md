@@ -3,7 +3,7 @@
 [![Build](https://github.com/mixerapi/app/workflows/Build/badge.svg?branch=main)](https://github.com/mixerapi/app/actions)
 [![MixerApi](https://mixerapi.com/assets/img/mixer-api-red.svg)](http://mixerapi.com)
 [![CakePHP](https://img.shields.io/badge/cakephp-4.2-red?logo=cakephp)](https://book.cakephp.org/4/en/index.html)
-[![Docker](https://img.shields.io/badge/docker-ffffff.svg?logo=docker)](https://www.docker.com)
+[![Docker](https://img.shields.io/badge/docker-ffffff.svg?logo=docker)](https://hub.docker.com/r/mixerapidev/demo)
 [![Kubernetes](https://img.shields.io/badge/kubernetes-D3D3D3.svg?logo=kubernetes)](https://kubernetes.io/)
 [![PHP](https://img.shields.io/badge/php-7.4-8892BF.svg?logo=php)](https://php.net/)
 [![NGINX](https://img.shields.io/badge/nginx-1.19-009639.svg?logo=nginx)](https://www.nginx.com/)
