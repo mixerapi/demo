@@ -29,14 +29,14 @@ HEALTHCHECK --interval=10s --timeout=3s --retries=3 CMD ["docker-healthcheck"]
 COPY .docker/php/docker-entrypoint.sh /usr/local/bin/docker-entrypoint
 RUN chmod +x /usr/local/bin/docker-entrypoint
 
+COPY .assets /srv/.assets
+COPY app /srv/app
+
 WORKDIR /srv/app
 
 RUN adduser --disabled-password --gecos '' -u $UID cakephp;
 
 COPY --from=composer /usr/bin/composer /usr/bin/composer
-
-COPY ./.assets /srv/.assets
-COPY ./app .
 
 ENTRYPOINT ["docker-entrypoint"]
 CMD ["php-fpm"]
