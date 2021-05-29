@@ -16,10 +16,10 @@ if [ "$1" = 'php-fpm' ] || [ "$1" = 'php' ] || [ "$1" = 'bin/cakephp' ]; then
         composer install --prefer-dist --no-interaction
     fi
 
-    mkdir -p logs tmp/cache/models tmp/cache/models/persistent tmp/sessions tmp/tests
-    setfacl -R -m u:www-data:rwX -m u:"$(whoami)":rwX logs
-    setfacl -dR -m u:www-data:rwX -m u:"$(whoami)":rwX tmp
-    bin/cake cache clear_all
+    #mkdir -p logs tmp/cache/models tmp/cache/models/persistent tmp/sessions tmp/tests
+    #setfacl -R -m u:www-data:rwX -m u:"$(whoami)":rwX logs
+    #setfacl -dR -m u:www-data:rwX -m u:"$(whoami)":rwX tmp
+    #bin/cake cache clear_all
 
 fi
 
