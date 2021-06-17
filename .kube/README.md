@@ -43,6 +43,8 @@ MySQL:
 mysql -u cakephp -h 192.168.49.2 -p --port 32089
 ```
 
+> Password is `cakephp`
+
 You'll want to exec into the php-nginx pod and run migrations/seeds:
 
 ```console
