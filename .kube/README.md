@@ -18,10 +18,29 @@ kubectl apply -f .kube/php-secret.yaml
 kubectl apply -f .kube/.
 ```
 
-Get Kubernetes URL:
+Minikube dashboard:
 
 ```console
-minikube service nginx-service -n mixerapi-docker
+minikube dashboard --url
+```
+
+Create services:
+
+```console
+minikube service nginx -n mixerapi-docker
+minikube service mysql -n mixerapi-docker
+```
+
+Browse to the given nginx url:
+
+```console
+minikube service list
+```
+
+MySQL:
+
+```console
+mysql -u cakephp -h 192.168.49.2 -p --port 32089
 ```
 
 ## Using local image
