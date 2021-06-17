@@ -43,6 +43,15 @@ MySQL:
 mysql -u cakephp -h 192.168.49.2 -p --port 32089
 ```
 
+You'll want to exec into the php-nginx pod and run migrations/seeds:
+
+```console
+bin/cake migrations migrate
+bin/cake migrations seed
+```
+
+You may need to recreate the pod by deleting it at this point since no schema/data was present during initial creation.
+
 Docker build / push commands:
 
 ```console
