@@ -77,7 +77,7 @@ return [
      *   You should treat it as extremely sensitive data.
      */
     'Security' => [
-        'salt' => env('SECURITY_SALT'),
+        'salt' => env('SECURITY_SALT') ?? 'this-should-be-a-random-value-1234!',
     ],
 
     /*
@@ -288,7 +288,7 @@ return [
          */
         'default' => [
             'className' => Connection::class,
-            'driver' => Sqlite::class,
+            'driver' => Mysql::class,
             'persistent' => false,
             'timezone' => 'UTC',
 
