@@ -63,7 +63,7 @@ class Application extends BaseApplication
          * Only try to load DebugKit in development mode
          * Debug Kit should not be installed on a production system
          */
-        if (Configure::read('debug')) {
+        if (Configure::read('debug') && env('APP_ENV') != 'prod') {
             $this->addPlugin('DebugKit');
         }
     }

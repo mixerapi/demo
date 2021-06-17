@@ -43,21 +43,6 @@ MySQL:
 mysql -u cakephp -h 192.168.49.2 -p --port 32089
 ```
 
-## Using local image
-
-You may find it helpful to work with a local image instead of continually deploying to a container registry.
-
-```console
-eval (minikube docker-env)
-docker run -d -p 5005:5005 --restart=always --name registry registry:2
-docker build . -f .docker/Dockerfile -t localhost:5005/mixerapidev-demo:latest
-docker push localhost:5005/mixerapidev-demo:latest
-```
-
-In [php.yaml](php.yaml.bak) change the image to `localhost:5005/mixerapidev-demo:latest`.
-
-> Source: https://shashanksrivastava.medium.com/how-to-set-up-minikube-to-use-your-local-docker-registry-10a5b564883
-
 Docker build / push commands:
 
 ```console
