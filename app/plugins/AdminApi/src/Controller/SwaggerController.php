@@ -36,6 +36,10 @@ class SwaggerController extends AppController
         $doctype = $this->SwaggerUi->getDocType($this->request);
         $this->viewBuilder()->setLayout($config->getLayout($doctype));
 
+        if ($doctype === 'swagger') {
+            return $this->render('Swagger/index');
+        }
+
         return $this->render($config->getView($doctype));
     }
 }
