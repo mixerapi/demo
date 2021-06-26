@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "0ce113f0f510789472d03aebabb68d8a",
+    "content-hash": "4f2e3eb834d6ed6aad7d5a0a75ee82d8",
     "packages": [
         {
             "name": "adbario/php-dot-notation",
@@ -228,16 +228,16 @@
         },
         {
             "name": "cakephp/cakephp",
-            "version": "4.2.5",
+            "version": "4.2.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/cakephp/cakephp.git",
-                "reference": "fe9a4e932d1008b65c165aea2b2ee599bd1fc3d3"
+                "reference": "bd2d476e0b14b21c6103eca789667a016ec14458"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/cakephp/cakephp/zipball/fe9a4e932d1008b65c165aea2b2ee599bd1fc3d3",
-                "reference": "fe9a4e932d1008b65c165aea2b2ee599bd1fc3d3",
+                "url": "https://api.github.com/repos/cakephp/cakephp/zipball/bd2d476e0b14b21c6103eca789667a016ec14458",
+                "reference": "bd2d476e0b14b21c6103eca789667a016ec14458",
                 "shasum": ""
             },
             "require": {
@@ -327,7 +327,7 @@
                 "issues": "https://github.com/cakephp/cakephp/issues",
                 "source": "https://github.com/cakephp/cakephp"
             },
-            "time": "2021-04-03T01:07:40+00:00"
+            "time": "2021-06-16T21:23:42+00:00"
         },
         {
             "name": "cakephp/chronos",
@@ -7175,6 +7175,7 @@
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
+        "mixerapi/mixerapi": 20,
         "psy/psysh": 0
     },
     "prefer-stable": true,

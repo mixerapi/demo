@@ -3,9 +3,11 @@ declare(strict_types=1);
 
 namespace App\Model\Entity;
 
+use App\Service\HyperMedia;
 use Cake\Datasource\EntityInterface;
 use Cake\ORM\Entity;
 use MixerApi\HalView\HalResourceInterface;
+use MixerApi\JsonLdView\JsonLdDataInterface;
 use MixerApi\JsonLdView\JsonLdSchema;
 
 /**
@@ -17,7 +19,7 @@ use MixerApi\JsonLdView\JsonLdSchema;
  *
  * @property \App\Model\Entity\Film[] $films
  */
-class Language extends Entity implements HalResourceInterface
+class Language extends Entity implements HalResourceInterface, JsonLdDataInterface
 {
     /**
      * Fields that can be mass assigned using newEntity() or patchEntity().
@@ -41,7 +43,7 @@ class Language extends Entity implements HalResourceInterface
     {
         return [
             'self' => [
-                'href' => '/languages/' . $entity->get('id'),
+                'href' => (new HyperMedia())->getHref('/%s/languages/%s', $entity),
             ],
         ];
     }
@@ -51,7 +53,7 @@ class Language extends Entity implements HalResourceInterface
      */
     public function getJsonLdContext(): string
     {
-        return '/contexts/language';
+        return '/public/contexts/language';
     }
 
     /**
@@ -67,7 +69,7 @@ class Language extends Entity implements HalResourceInterface
      */
     public function getJsonLdIdentifier(EntityInterface $entity): string
     {
-        return '/languages/' . $entity->get('id');
+        return (new HyperMedia())->getHref('/%s/languages/%s', $entity);
     }
 
     /**

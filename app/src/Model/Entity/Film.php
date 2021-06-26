@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace App\Model\Entity;
 
+use App\Service\HyperMedia;
 use Cake\Datasource\EntityInterface;
 use Cake\ORM\Entity;
 use MixerApi\HalView\HalResourceInterface;
@@ -73,7 +74,7 @@ class Film extends Entity implements HalResourceInterface, JsonLdDataInterface
     {
         return [
             'self' => [
-                'href' => '/films/' . $entity->get('id'),
+                'href' => (new HyperMedia())->getHref('/%s/films/%s', $entity),
             ],
         ];
     }
@@ -83,7 +84,7 @@ class Film extends Entity implements HalResourceInterface, JsonLdDataInterface
      */
     public function getJsonLdContext(): string
     {
-        return '/contexts/Film';
+        return '/public/contexts/Film';
     }
 
     /**
@@ -99,7 +100,7 @@ class Film extends Entity implements HalResourceInterface, JsonLdDataInterface
      */
     public function getJsonLdIdentifier(EntityInterface $entity): string
     {
-        return '/films/' . $entity->get('id');
+        return (new HyperMedia())->getHref('/%s/films/%s', $entity);
     }
 
     /**
