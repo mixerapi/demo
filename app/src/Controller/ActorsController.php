@@ -3,7 +3,6 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
-use Cake\ORM\TableRegistry;
 use Crud\GetRecordService;
 use Crud\SearchCollectionService;
 use SwaggerBake\Lib\Annotation as Swag;
@@ -21,7 +20,7 @@ class ActorsController extends AppController
     {
         parent::initialize();
         $this->loadComponent('Search.Search', [
-            'actions' => ['index'],
+            'actions' => ['index', 'viewFilms'],
         ]);
     }
 
