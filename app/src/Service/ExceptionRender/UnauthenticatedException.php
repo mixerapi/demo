@@ -5,6 +5,11 @@ namespace App\Service\ExceptionRender;
 
 use MixerApi\ExceptionRender\ErrorDecorator;
 
+/**
+ * An exception for unauthenticated requests. Informs users to use the demo api-key.
+ *
+ * @package App\Service\ExceptionRender
+ */
 class UnauthenticatedException implements ExceptionRenderInterface
 {
     /**

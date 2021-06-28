@@ -1,5 +1,6 @@
 openapi: "3.0.0"
 info:
+  version: "v0.2.10"
   title: MixerAPI Demo (Admin API)
   description: |
     Check out [MixerAPI.com](https://mixerapi.com) to streamline your API development.
@@ -14,13 +15,9 @@ info:
 
   license:
     name: MIT
-  externalDocs:
-    description: MixerAPI.com
-    url: https://mixerapi.com
 
 paths:
 
-definitions:
 
 components:
   securitySchemes:

@@ -3,7 +3,11 @@ declare(strict_types=1);
 
 namespace AdminApi\Controller;
 
-use Cake\ORM\TableRegistry;
+use Crud\AddRecordService;
+use Crud\DeleteRecordService;
+use Crud\EditRecordService;
+use Crud\GetRecordService;
+use Crud\SearchCollectionService;
 use SwaggerBake\Lib\Annotation as Swag;
 use SwaggerBake\Lib\Extension\CakeSearch\Annotation\SwagSearch;
 
@@ -20,117 +24,81 @@ class LanguagesController extends AppController
         parent::initialize();
         $this->loadComponent('Search.Search', [
             'actions' => ['index'],
+            'modelClass' => 'Languages'
         ]);
-        $this->loadComponent('Authentication.Authentication');
-        $this->Languages = TableRegistry::getTableLocator()->get('Languages');
     }
 
     /**
      * Index method
      *
+     * @param SearchCollectionService $search
      * @return \Cake\Http\Response|null|void Renders view
-     * @throws \Cake\Http\Exception\MethodNotAllowedException
+     * @throws \Cake\Http\Exception\MethodNotAllowedException When invalid method
      * @Swag\SwagPaginator()
-     * @SwagSearch(tableClass="\App\Model\Table\LanguagesTable", collection="default")
+     * @SwagSearch(tableClass="\App\Model\Table\ActorsTable", collection="default")
      */
-    public function index()
+    public function index(SearchCollectionService $search)
     {
-        $this->request->allowMethod('get');
-        $query = $this->Languages
-            ->find('search', [
-                'search' => $this->request->getQueryParams(),
-                'collection' => 'default',
-            ]);
-        $languages = $this->paginate($query);
-
-        $this->set(compact('languages'));
-        $this->viewBuilder()->setOption('serialize', 'languages');
+        $this->set('languages', $search->table('Languages')->search($this));
     }
 
     /**
      * View method
      *
-     * @param string|null $id Language id.
+     * @param GetRecordService $getRecord
+     * @param string|null $id Actor id.
      * @return \Cake\Http\Response|null|void Renders view
-     * @throws \Cake\Datasource\Exception\RecordNotFoundException
+     * @throws \Cake\Datasource\Exception\RecordNotFoundException Actor Not Found
      * @throws \Cake\Http\Exception\MethodNotAllowedException
      */
-    public function view($id = null)
+    public function view(GetRecordService $getRecord, string $id)
     {
-        $this->request->allowMethod('get');
-
-        $language = $this->Languages->get($id, [
-            'contain' => ['Films'],
-        ]);
-
-        $this->set('language', $language);
-        $this->viewBuilder()->setOption('serialize', 'language');
+        $this->set('language', $getRecord->table('Languages')->retrieve($id));
     }
 
     /**
      * Add method
      *
-     * @return \Cake\Http\Response|null|void
+     * @param AddRecordService $addRecord
+     * @return \Cake\Http\Response|null|void HTTP 200 on successful add
      * @throws \Cake\Http\Exception\MethodNotAllowedException
      * @throws \MixerApi\ExceptionRender\ValidationException
      * @throws \Exception
      */
-    public function add()
+    public function add(AddRecordService $addRecord)
     {
-        $this->request->allowMethod('post');
-        $language = $this->Languages->newEmptyEntity();
-        $language = $this->Languages->patchEntity($language, $this->request->getData());
-        if ($this->Languages->save($language)) {
-            $this->set('language', $language);
-            $this->viewBuilder()->setOption('serialize', 'language');
-
-            return;
-        }
-        throw new \Exception('Record not created');
+        $this->set('language', $addRecord->table('Languages')->save($this->request));
     }
 
     /**
      * Edit method
      *
-     * @param string|null $id Language id.
-     * @return \Cake\Http\Response|null|void
-     * @throws \Cake\Datasource\Exception\RecordNotFoundException Language Not Found
+     * @param EditRecordService $editRecord
+     * @param string $id
+     * @return \Cake\Http\Response|null|void HTTP 200 on successful edit
+     * @throws \Cake\Datasource\Exception\RecordNotFoundException
      * @throws \Cake\Http\Exception\MethodNotAllowedException
      * @throws \MixerApi\ExceptionRender\ValidationException
      * @throws \Exception
      */
-    public function edit($id = null)
+    public function edit(EditRecordService $editRecord, string $id)
     {
-        $this->request->allowMethod(['patch', 'post', 'put']);
-        $language = $this->Languages->get($id, [
-            'contain' => [],
-        ]);
-        $language = $this->Languages->patchEntity($language, $this->request->getData());
-        if ($this->Languages->save($language)) {
-            $this->set('language', $language);
-            $this->viewBuilder()->setOption('serialize', 'language');
-
-            return;
-        }
-        throw new \Exception('Record not saved');
+        $this->set('language', $editRecord->table('Languages')->save($this->request, $id));
     }
 
     /**
      * Delete method
      *
-     * @param string|null $id Language id.
+     * @param DeleteRecordService $deleteRecord
+     * @param string $id
      * @return \Cake\Http\Response|null|void HTTP 204 on success
-     * @throws \Cake\Datasource\Exception\RecordNotFoundException Language Not Found
+     * @throws \Cake\Datasource\Exception\RecordNotFoundException
      * @throws \Cake\Http\Exception\MethodNotAllowedException
      * @throws \Exception
      */
-    public function delete($id = null)
+    public function delete(DeleteRecordService $deleteRecord, string $id)
     {
-        $this->request->allowMethod(['delete']);
-        $language = $this->Languages->get($id);
-        if ($this->Languages->delete($language)) {
-            return $this->response->withStatus(204);
-        }
-        throw new \Exception('Record not deleted');
+        $deleteRecord->table('Languages')->delete($id);
+        return $this->response->withStatus(204);
     }
 }

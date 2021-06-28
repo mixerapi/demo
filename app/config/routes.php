@@ -73,6 +73,26 @@ $routes->scope('/public', function (RouteBuilder $builder) {
             ]
         ]
     ]);
+    $builder->resources('Actors', [
+        'only' => ['view','index','view-films'],
+        'map' => [
+            'view-films' => [
+                'method' => 'get',
+                'action' => 'viewFilms',
+                'path' => ':id/films'
+            ]
+        ]
+    ]);
+    $builder->resources('Films', [
+        'only' => ['view','index','view-actors'],
+        'map' => [
+            'view-actors' => [
+                'method' => 'get',
+                'action' => 'viewActors',
+                'path' => ':id/actors'
+            ]
+        ]
+    ]);
     $builder->setExtensions(['json', 'xml']);
     $builder->fallbacks();
 });

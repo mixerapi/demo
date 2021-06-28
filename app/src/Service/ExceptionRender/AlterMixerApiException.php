@@ -3,11 +3,15 @@ declare(strict_types=1);
 
 namespace App\Service\ExceptionRender;
 
-
 use MixerApi\ExceptionRender\ErrorDecorator;
 use MixerApi\ExceptionRender\MixerApiExceptionRenderer;
 use ReflectionClass;
 
+/**
+ * Modifies MixerApi exception messages based on key-value pair in self::MAPPING
+ *
+ * @package App\Service\ExceptionRender
+ */
 class AlterMixerApiException
 {
     /**

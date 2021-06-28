@@ -14,9 +14,9 @@ use SwaggerBake\Lib\Annotation as Swag;
 class FilmReportsController extends AppController
 {
     /**
-     * List total films by rating
+     * Film Ratings
      *
-     * This example demonstrates creating a report referencing an adhoc schema
+     * List a sum count of films by rating. This example demonstrates creating a report referencing an adhoc schema
      * `#/x-mixerapi-demo/components/schemas/FilmByRating`
      *
      * @Swag\SwagPaginator(sortEnum={"rating","total"})
@@ -40,7 +40,9 @@ class FilmReportsController extends AppController
     }
 
     /**
-     * List film counts by category using a MySQL view
+     * Film Categories
+     *
+     * List a sum count of films by category using a MySQL View.
      *
      * @Swag\SwagPaginator(sortEnum={"name","total"})
      * @Swag\SwagResponseSchema(schemaItems={"$ref"="#/x-swagger-bake/components/schemas/ViewFilmCategory"})

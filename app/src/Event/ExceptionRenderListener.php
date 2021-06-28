@@ -8,6 +8,11 @@ use Cake\Event\EventListenerInterface;
 use App\Service\ExceptionRender\AlterMixerApiException;
 use MixerApi\ExceptionRender\ErrorDecorator;
 
+/**
+ * Listens for the MixerApi.ExceptionRender.beforeRender event and calls AlterMixerApiException::decorate
+ *
+ * @package App\Event
+ */
 class ExceptionRenderListener implements EventListenerInterface
 {
     public function implementedEvents(): array

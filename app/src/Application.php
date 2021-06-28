@@ -16,6 +16,7 @@ declare(strict_types=1);
  */
 namespace App;
 
+use Crud\CrudServiceProvider;
 use Cake\Core\Configure;
 use Cake\Core\ContainerInterface;
 use Cake\Core\Exception\MissingPluginException;
@@ -27,6 +28,7 @@ use Cake\Http\MiddlewareQueue;
 use Cake\ORM\Locator\TableLocator;
 use Cake\Routing\Middleware\AssetMiddleware;
 use Cake\Routing\Middleware\RoutingMiddleware;
+use League\Container\Container;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 
@@ -45,6 +47,7 @@ class Application extends BaseApplication
      */
     public function bootstrap(): void
     {
+        $this->addPlugin('Crud');
         $this->addPlugin('MixerApi');
         $this->addPlugin('AdminApi');
 
@@ -67,8 +70,6 @@ class Application extends BaseApplication
         if (Configure::read('debug') && env('APP_ENV') != 'prod') {
             $this->addPlugin('DebugKit');
         }
-
-
     }
 
     /**
@@ -138,7 +139,8 @@ class Application extends BaseApplication
      */
     public function services(ContainerInterface $container): void
     {
-
+        /** @var Container $container */
+        $container->addServiceProvider(new CrudServiceProvider());
     }
 
     /**

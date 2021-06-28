@@ -3,6 +3,8 @@ declare(strict_types=1);
 
 namespace App\Model\Table;
 
+use Cake\Http\ServerRequest;
+use Cake\ORM\Query;
 use Cake\ORM\Table;
 use Cake\Validation\Validator;
 
@@ -69,5 +71,19 @@ class LanguagesTable extends Table
             ->inList('is_active', [1,0]);
 
         return $validator;
+    }
+
+    /**
+     * @param ServerRequest $request
+     * @param string $collection
+     * @return Query
+     * @see https://github.com/FriendsOfCake/search
+     */
+    public function search(ServerRequest $request, string $collection = 'default'): Query
+    {
+        return $this->find('search', [
+            'search' => $request->getQueryParams(),
+            'collection' => $collection,
+        ]);
     }
 }

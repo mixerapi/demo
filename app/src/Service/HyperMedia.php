@@ -7,6 +7,11 @@ use Cake\Datasource\EntityInterface;
 use Cake\Http\ServerRequest;
 use Cake\Http\ServerRequestFactory;
 
+/**
+ * Determines the HyperMedia href for JSON-LD and HAL+JSON requests based on the plugin found in the URL
+ *
+ * @package App\Service
+ */
 class HyperMedia
 {
     /**

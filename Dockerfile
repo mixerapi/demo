@@ -41,7 +41,8 @@ COPY --from=composer /usr/bin/composer /usr/bin/composer
 COPY app .
 
 RUN if [[ "$ENV" = "prod" ]]; then \
-    composer install --prefer-dist --no-interaction --no-dev; \
+    composer install --prefer-dist --no-interaction --no-dev \
+    bin/cake preloader;
 fi
 
 ENTRYPOINT ["docker-entrypoint"]

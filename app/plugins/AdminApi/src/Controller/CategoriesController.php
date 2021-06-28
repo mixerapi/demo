@@ -3,7 +3,11 @@ declare(strict_types=1);
 
 namespace AdminApi\Controller;
 
-use Cake\ORM\TableRegistry;
+use Crud\AddRecordService;
+use Crud\DeleteRecordService;
+use Crud\EditRecordService;
+use Crud\GetRecordService;
+use Crud\SearchCollectionService;
 use SwaggerBake\Lib\Annotation as Swag;
 use SwaggerBake\Lib\Extension\CakeSearch\Annotation\SwagSearch;
 
@@ -15,118 +19,86 @@ use SwaggerBake\Lib\Extension\CakeSearch\Annotation\SwagSearch;
  */
 class CategoriesController extends AppController
 {
-    public function initialize() : void
+    public function initialize(): void
     {
         parent::initialize();
         $this->loadComponent('Search.Search', [
             'actions' => ['index'],
+            'modelClass' => 'Categories'
         ]);
-        $this->loadComponent('Authentication.Authentication');
-        $this->Categories = TableRegistry::getTableLocator()->get('Categories');
     }
 
     /**
      * Index method
      *
+     * @param SearchCollectionService $search
      * @return \Cake\Http\Response|null|void Renders view
-     * @throws \Cake\Http\Exception\MethodNotAllowedException
-     * @throws \MixerApi\ExceptionRender\ValidationException
+     * @throws \Cake\Http\Exception\MethodNotAllowedException When invalid method
      * @Swag\SwagPaginator()
      * @SwagSearch(tableClass="\App\Model\Table\CategoriesTable", collection="default")
      */
-    public function index()
+    public function index(SearchCollectionService $search)
     {
-        $this->request->allowMethod('get');
-        $query = $this->Categories->search($this->request);
-        $categories = $this->paginate($query);
-
-        $this->set(compact('categories'));
-        $this->viewBuilder()->setOption('serialize', 'categories');
+        $this->set('categories', $search->table('Categories')->search($this));
     }
 
     /**
      * View method
      *
+     * @param GetRecordService $getRecord
      * @param string|null $id Category id.
      * @return \Cake\Http\Response|null|void Renders view
      * @throws \Cake\Datasource\Exception\RecordNotFoundException Category Not Found
      * @throws \Cake\Http\Exception\MethodNotAllowedException
      */
-    public function view($id = null)
+    public function view(GetRecordService $getRecord, string $id)
     {
-        $this->request->allowMethod('get');
-
-        $category = $this->Categories->get($id, [
-            'contain' => ['FilmCategories'],
-        ]);
-
-        $this->set('category', $category);
-        $this->viewBuilder()->setOption('serialize', 'category');
+        $this->set('category', $getRecord->table('Categories')->retrieve($id));
     }
 
     /**
      * Add method
      *
-     * @return \Cake\Http\Response|null|void HTTP 200
+     * @param AddRecordService $addRecord
+     * @return \Cake\Http\Response|null|void HTTP 200 on successful add
      * @throws \Cake\Http\Exception\MethodNotAllowedException
      * @throws \MixerApi\ExceptionRender\ValidationException
      * @throws \Exception
      */
-    public function add()
+    public function add(AddRecordService $addRecord)
     {
-        $this->request->allowMethod('post');
-        $category = $this->Categories->newEmptyEntity();
-        $category = $this->Categories->patchEntity($category, $this->request->getData());
-        if ($this->Categories->save($category)) {
-            $this->set('category', $category);
-            $this->viewBuilder()->setOption('serialize', 'category');
-
-            return;
-        }
-        throw new \Exception('Record not created');
+        $this->set('category', $addRecord->table('Categories')->save($this->request));
     }
 
     /**
      * Edit method
      *
-     * @param string|null $id Category id.
+     * @param EditRecordService $editRecord
+     * @param string $id
      * @return \Cake\Http\Response|null|void HTTP 200 on successful edit
-     * @throws \Cake\Datasource\Exception\RecordNotFoundException Category Not Found
+     * @throws \Cake\Datasource\Exception\RecordNotFoundException
      * @throws \Cake\Http\Exception\MethodNotAllowedException
+     * @throws \MixerApi\ExceptionRender\ValidationException
      * @throws \Exception
      */
-    public function edit($id = null)
+    public function edit(EditRecordService $editRecord, string $id)
     {
-        $this->request->allowMethod(['patch', 'post', 'put']);
-        $category = $this->Categories->get($id, [
-            'contain' => [],
-        ]);
-        $category = $this->Categories->patchEntity($category, $this->request->getData());
-        if ($this->Categories->save($category)) {
-            $this->set('category', $category);
-            $this->viewBuilder()->setOption('serialize', 'category');
-
-            return;
-        }
-        throw new \Exception('Record not saved');
+        $this->set('category', $editRecord->table('Categories')->save($this->request, $id));
     }
 
     /**
      * Delete method
      *
-     * @param string|null $id Category id.
+     * @param DeleteRecordService $deleteRecord
+     * @param string $id
      * @return \Cake\Http\Response|null|void HTTP 204 on success
-     * @throws \Cake\Datasource\Exception\RecordNotFoundException Category Not Found
+     * @throws \Cake\Datasource\Exception\RecordNotFoundException
      * @throws \Cake\Http\Exception\MethodNotAllowedException
      * @throws \Exception
      */
-    public function delete($id = null)
+    public function delete(DeleteRecordService $deleteRecord, string $id)
     {
-        $this->request->allowMethod(['delete']);
-        $category = $this->Categories->get($id);
-        if ($this->Categories->delete($category)) {
-            return $this->response->withStatus(204);
-        }
-        throw new \Exception('Record not deleted');
+        $deleteRecord->table('Categories')->delete($id);
+        return $this->response->withStatus(204);
     }
 }

@@ -3,6 +3,9 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
+use Cake\ORM\TableRegistry;
+use Crud\GetRecordService;
+use Crud\SearchCollectionService;
 use SwaggerBake\Lib\Annotation as Swag;
 use SwaggerBake\Lib\Extension\CakeSearch\Annotation\SwagSearch;
 
@@ -23,44 +26,61 @@ class FilmsController extends AppController
     }
 
     /**
-     * Film Collection
+     * Films Collection
      *
-     * Search a collection of films.
+     * Returns a collection of films
      *
+     * @param SearchCollectionService $search
      * @return \Cake\Http\Response|null|void Renders view
-     * @throws \Cake\Http\Exception\MethodNotAllowedException
+     * @throws \Cake\Http\Exception\MethodNotAllowedException When invalid method
      * @Swag\SwagPaginator()
-     * @SwagSearch(tableClass="\App\Model\Table\FilmsTable", collection="default")
+     * @SwagSearch(tableClass="\App\Model\Table\ActorsTable", collection="default")
      */
-    public function index()
+    public function index(SearchCollectionService $search)
     {
-        $this->request->allowMethod('get');
-        $query = $this->Films->search($this->request);
-        $films = $this->paginate($query);
-
-        $this->set(compact('films'));
-        $this->viewBuilder()->setOption('serialize', 'films');
+        $this->set('films', $search->table('Films')->search($this));
     }
 
     /**
      * View Film
      *
-     * Retrieve information about a specific film.
+     * Returns a film
      *
-     * @param string|null $id Film id.
+     * @param GetRecordService $getRecord
+     * @param string|null $id Actor id.
      * @return \Cake\Http\Response|null|void Renders view
-     * @throws \Cake\Datasource\Exception\RecordNotFoundException Film Not Found
+     * @throws \Cake\Datasource\Exception\RecordNotFoundException Actor Not Found
      * @throws \Cake\Http\Exception\MethodNotAllowedException
      */
-    public function view($id = null)
+    public function view(GetRecordService $getRecord, string $id)
+    {
+        $this->set('film', $getRecord->table('Films')->retrieve($id));
+    }
+
+    /**
+     * View Film's Actors
+     *
+     * Returns a collection of the film's actors
+     *
+     * @param string $id Actor Id
+     * @Swag\SwagPaginator(sortEnum={"Actors.first_name","Actors.last_name"})
+     * @Swag\SwagResponseSchema(schemaItems={"$ref"="#/x-mixerapi-demo/components/schemas/FilmActor"})
+     */
+    public function viewActors(string $id)
     {
         $this->request->allowMethod('get');
 
-        $film = $this->Films->get($id, [
-            'contain' => ['Languages', 'Categories', 'Actors'],
+        $this->paginate = [
+            'sortableFields' => [
+                'Actors.first_name', 'Actors.last_name'
+            ]
+        ];
+
+        $query = TableRegistry::getTableLocator()->get('FilmActors')->find('actorsByFilm', [
+            'film_id' => $id
         ]);
 
-        $this->set('film', $film);
-        $this->viewBuilder()->setOption('serialize', 'film');
+        $this->set('films', $this->paginate($query));
+        $this->viewBuilder()->setOption('serialize', 'films');
     }
 }

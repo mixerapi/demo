@@ -1,6 +1,6 @@
 openapi: "3.0.0"
 info:
-  version: 0.2.5
+  version: "v0.2.10"
   title: MixerAPI Demo (Public API)
   description: |
     Check out [MixerAPI.com](https://mixerapi.com) to streamline your API development.
@@ -15,12 +15,9 @@ info:
 
   license:
     name: MIT
-  externalDocs:
-    description: MixerAPI.com
-    url: https://mixerapi.com
+
 paths:
 
-definitions:
 
 components:
   schemas:
@@ -50,3 +47,34 @@ x-mixerapi-demo:
           total:
             type: integer
             example: 100
+      ActorFilm:
+        type: object
+        properties:
+          id:
+            type: string
+            example: "9d90c3bc-8433-11ea-82ad-2079182842a9"
+          actor_id:
+            type: integer
+            example: 21
+          film_id:
+            type: integer
+            example: 117
+          film:
+            type: object
+            $ref: '#/components/schemas/Film'
+      FilmActor:
+        type: object
+        properties:
+          id:
+            type: string
+            example: "9d90c3bc-8433-11ea-82ad-2079182842a9"
+          actor_id:
+            type: integer
+            example: 21
+          film_id:
+            type: integer
+            example: 117
+          film:
+            type: object
+            $ref: '#/components/schemas/Actor'
+

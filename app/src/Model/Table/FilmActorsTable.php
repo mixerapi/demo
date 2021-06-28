@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace App\Model\Table;
 
+use Cake\ORM\Query;
 use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
 use Cake\Validation\Validator;
@@ -85,5 +86,29 @@ class FilmActorsTable extends Table
         $rules->add($rules->existsIn(['film_id'], 'Films'), ['errorField' => 'film_id']);
 
         return $rules;
+    }
+
+    /**
+     * @param Query $query
+     * @param string $id
+     * @return Query
+     */
+    public function findFilmsByActor(Query $query, array $options): Query
+    {
+        return $query
+            ->contain(['Films'])
+            ->where(['actor_id' => $options['actor_id']]);
+    }
+
+    /**
+     * @param Query $query
+     * @param string $id
+     * @return Query
+     */
+    public function findActorsByFilm(Query $query, array $options): Query
+    {
+        return $query
+            ->contain(['Actors'])
+            ->where(['film_id' => $options['film_id']]);
     }
 }
