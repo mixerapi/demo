@@ -55,4 +55,4 @@ Browse to the URL given by the `server` console command.
 
 For Docker see this [README](https://github.com/mixerapi/app).
 
-For information on the demo application code see [app/README.md])(app/README.md).
+For information on the demo application code see [app/README.md](./app/README.md)
