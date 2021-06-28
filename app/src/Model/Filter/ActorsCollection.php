@@ -13,6 +13,15 @@ class ActorsCollection extends FilterCollection
     public function initialize(): void
     {
         $this
+            ->add('q', 'Search.Like', [
+                'before' => true,
+                'after' => true,
+                'mode' => 'or',
+                'comparison' => 'LIKE',
+                'wildcardAny' => '*',
+                'wildcardOne' => '?',
+                'fields' => ['first_name','last_name'],
+            ])
             ->add('first_name', 'Search.Like', [
                 'before' => true,
                 'after' => true,

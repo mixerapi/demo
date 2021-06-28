@@ -34,7 +34,7 @@ class FilmsController extends AppController
      * @return \Cake\Http\Response|null|void Renders view
      * @throws \Cake\Http\Exception\MethodNotAllowedException When invalid method
      * @Swag\SwagPaginator()
-     * @SwagSearch(tableClass="\App\Model\Table\ActorsTable", collection="default")
+     * @SwagSearch(tableClass="\App\Model\Table\FilmsTable", collection="default")
      */
     public function index(SearchCollectionService $search)
     {

@@ -60,8 +60,7 @@ x-mixerapi-demo:
             type: integer
             example: 117
           film:
-            type: object
-            $ref: '#/components/schemas/Film'
+            $ref: '#/x-swagger-bake/components/schemas/Film-Read'
       FilmActor:
         type: object
         properties:
@@ -75,6 +74,5 @@ x-mixerapi-demo:
             type: integer
             example: 117
           film:
-            type: object
-            $ref: '#/components/schemas/Actor'
+            $ref: '#/x-swagger-bake/components/schemas/Actor-Read'
 

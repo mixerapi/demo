@@ -44,6 +44,7 @@ class FilmActorsTable extends Table
         $this->setDisplayField('uuid');
         $this->setPrimaryKey('uuid');
 
+        $this->addBehavior('Search.Search');
         $this->addBehavior('Timestamp');
 
         $this->belongsTo('Actors', [

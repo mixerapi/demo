@@ -14,6 +14,15 @@ class FilmsCollection extends FilterCollection
     public function initialize(): void
     {
         $this
+            ->add('q', 'Search.Like', [
+                'before' => true,
+                'after' => true,
+                'mode' => 'or',
+                'comparison' => 'LIKE',
+                'wildcardAny' => '*',
+                'wildcardOne' => '?',
+                'fields' => ['title','description'],
+            ])
             ->add('title', 'Search.Like', [
                 'before' => true,
                 'after' => true,
@@ -59,6 +68,22 @@ class FilmsCollection extends FilterCollection
                 'callback' => function (Query $query, array $args, $manager) {
                     $query->matching('Actors', function (Query $query) use ($args) {
                         return $query->where(['Actors.last_name LIKE' => '%' . $args['actor_last_name'] .'%' ]);
+                    });
+                    return true;
+                }
+            ])
+            ->callback('film_category', [
+                'callback' => function (Query $query, array $args, $manager) {
+                    $query->matching('Categories', function (Query $query) use ($args) {
+                        return $query->where(['Categories.name LIKE' => '%' . $args['film_category'] .'%' ]);
+                    });
+                    return true;
+                }
+            ])
+            ->callback('film_language', [
+                'callback' => function (Query $query, array $args, $manager) {
+                    $query->matching('Languages', function (Query $query) use ($args) {
+                        return $query->where(['Languages.name LIKE' => '%' . $args['film_language'] .'%' ]);
                     });
                     return true;
                 }

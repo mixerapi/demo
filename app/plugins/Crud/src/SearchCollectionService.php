@@ -60,7 +60,7 @@ class SearchCollectionService
 
         $table = $this->locator->get($this->tableName);
 
-        if (!$table->hasBehavior('Search')) {
+        if ($table->hasBehavior('Search')) {
             $query = $table->find('search', [
                 'search' => $controller->getRequest()->getQueryParams(),
                 'collection' => $this->collectionName,
