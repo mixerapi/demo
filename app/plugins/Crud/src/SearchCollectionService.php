@@ -6,8 +6,8 @@ namespace Crud;
 use Cake\Controller\Controller;
 use Cake\Datasource\ResultSetInterface;
 use Cake\ORM\Locator\LocatorInterface;
+use Cake\ORM\Query;
 use Cake\ORM\Table;
-use InvalidArgumentException;
 
 class SearchCollectionService
 {
@@ -45,17 +45,26 @@ class SearchCollectionService
     }
 
     /**
-     * Performs the search
+     * Performs the search and returns a ResultSetInterface suitable for CakePHP view rendering
      *
-     * @param mixed $controller The Controller object
+     * @param Controller $controller The Controller object
      * @return ResultSetInterface
      */
-    public function search($controller): ResultSetInterface
+    public function search(Controller $controller): ResultSetInterface
     {
-        if (!$controller instanceof Controller) {
-            throw new InvalidArgumentException('Argument must be an instance of ' . Controller::class);
-        }
+        return $controller->paginate(
+            $this->query($controller)
+        );
+    }
 
+    /**
+     * Builds a Query object and returns it
+     *
+     * @param Controller $controller
+     * @return Query
+     */
+    public function query(Controller $controller): Query
+    {
         $controller->getRequest()->allowMethod('get');
 
         $table = $this->locator->get($this->tableName);
@@ -69,7 +78,7 @@ class SearchCollectionService
             $query = $table->find('all');
         }
 
-        return $controller->paginate($query);
+        return $query;
     }
 
     /**
