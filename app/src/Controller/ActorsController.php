@@ -62,11 +62,13 @@ class ActorsController extends AppController
      *
      * Returns a collection of the actor's films
      *
+     * @param SearchCollectionService $search
      * @param string $id Actor Id
      * @Swag\SwagPaginator(sortEnum={"Films.title","Films.release_year"})
      * @Swag\SwagResponseSchema(schemaItems={"$ref"="#/x-mixerapi-demo/components/schemas/ActorFilm"})
+     * @SwagSearch(tableClass="\App\Model\Table\FilmActorsTable", collection="filmsByActor")
      */
-    public function viewFilms(string $id)
+    public function viewFilms(SearchCollectionService $search, string $id)
     {
         $this->request->allowMethod('get');
 
@@ -76,11 +78,13 @@ class ActorsController extends AppController
             ]
         ];
 
-        $query = TableRegistry::getTableLocator()->get('FilmActors')->find('filmsByActor', [
-            'actor_id' => $id
-        ]);
-
-        $this->set('actors', $this->paginate($query));
-        $this->viewBuilder()->setOption('serialize', 'actors');
+        $this->set('actors',
+            $this->paginate(
+                $search
+                    ->table('FilmActors')->collection('FilmsByActor')->query($this)
+                    ->contain(['Films'])
+                    ->andWhere(['actor_id' => $id])
+            )
+        );
     }
 }

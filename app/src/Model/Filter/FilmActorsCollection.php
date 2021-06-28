@@ -13,9 +13,7 @@ class FilmActorsCollection extends FilterCollection
      */
     public function initialize(): void
     {
-
         $this
-            ->_manager->useCollection('default')
             ->add('actor_id', 'Search.Value', [
                 'mode' => 'and',
                 'fields' => ['actor_id'],
@@ -28,42 +26,5 @@ class FilmActorsCollection extends FilterCollection
                 'mode' => 'and',
                 'fields' => ['uuid'],
             ]);
-
-        $this
-            ->_manager->useCollection('filmsByActor')
-            ->add('title', 'Search.Like', [
-                'before' => true,
-                'after' => true,
-                'mode' => 'or',
-                'comparison' => 'LIKE',
-                'wildcardAny' => '*',
-                'wildcardOne' => '?',
-                'fields' => ['title'],
-            ])
-            ->add('release_year', 'Search.Value', [
-                'before' => true,
-                'after' => true,
-                'mode' => 'or',
-                'wildcardAny' => '*',
-                'wildcardOne' => '?',
-                'fields' => ['release_year'],
-            ])
-            ->callback('film_category', [
-                'callback' => function (Query $query, array $args, $manager) {
-                    $query->matching('Categories', function (Query $query) use ($args) {
-                        return $query->where(['Categories.name LIKE' => '%' . $args['film_category'] .'%' ]);
-                    });
-                    return true;
-                }
-            ])
-            ->callback('film_language', [
-                'callback' => function (Query $query, array $args, $manager) {
-                    $query->matching('Languages', function (Query $query) use ($args) {
-                        return $query->where(['Languages.name LIKE' => '%' . $args['film_language'] .'%' ]);
-                    });
-                    return true;
-                }
-            ]);
-
     }
 }
