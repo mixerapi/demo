@@ -59,10 +59,14 @@ class DeleteRecordService
      * Deletes the record and returns a Response object with status code (default: 204)
      *
      * @param int $status defaults to 204
-     * @throws \Exception
+     * @param Response|null $response a response object
      */
-    public function respond(int $status = 204): Response
+    public function respond(int $status = 204, ?Response $response = null): Response
     {
+        if ($response) {
+            return $response->withStatus($status);
+        }
+
         return (new Response())->withStatus($status);
     }
 
