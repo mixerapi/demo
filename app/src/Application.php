@@ -29,6 +29,7 @@ use Cake\ORM\Locator\TableLocator;
 use Cake\Routing\Middleware\AssetMiddleware;
 use Cake\Routing\Middleware\RoutingMiddleware;
 use League\Container\Container;
+use MixerApi\Core\Event\EventListenerLoader;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 
@@ -70,6 +71,11 @@ class Application extends BaseApplication
         if (Configure::read('debug') && env('APP_ENV') != 'prod') {
             $this->addPlugin('DebugKit');
         }
+
+        /**
+         * Loads all events for all EventInterfaces in App\Event
+         */
+        (new EventListenerLoader())->load();
     }
 
     /**
@@ -140,7 +146,7 @@ class Application extends BaseApplication
     public function services(ContainerInterface $container): void
     {
         /** @var Container $container */
-        $container->addServiceProvider(new CrudServiceProvider());
+        $container->addServiceProvider((new CrudServiceProvider())->withSharing());
     }
 
     /**
