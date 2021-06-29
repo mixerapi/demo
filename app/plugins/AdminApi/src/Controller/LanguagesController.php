@@ -59,21 +59,21 @@ class LanguagesController extends AppController
     /**
      * Add method
      *
-     * @param AddRecordService $addRecord
+     * @param AddRecordService $add
      * @return \Cake\Http\Response|null|void HTTP 200 on successful add
      * @throws \Cake\Http\Exception\MethodNotAllowedException
      * @throws \MixerApi\ExceptionRender\ValidationException
      * @throws \Exception
      */
-    public function add(AddRecordService $addRecord)
+    public function add(AddRecordService $add)
     {
-        $this->set('language', $addRecord->table('Languages')->save($this->request));
+        $this->set('language', $add->table('Languages')->save($this->request));
     }
 
     /**
      * Edit method
      *
-     * @param EditRecordService $editRecord
+     * @param EditRecordService $edit
      * @param string $id
      * @return \Cake\Http\Response|null|void HTTP 200 on successful edit
      * @throws \Cake\Datasource\Exception\RecordNotFoundException
@@ -81,24 +81,24 @@ class LanguagesController extends AppController
      * @throws \MixerApi\ExceptionRender\ValidationException
      * @throws \Exception
      */
-    public function edit(EditRecordService $editRecord, string $id)
+    public function edit(EditRecordService $edit, string $id)
     {
-        $this->set('language', $editRecord->table('Languages')->save($this->request, $id));
+        $this->set('language', $edit->table('Languages')->save($this->request, $id));
     }
 
     /**
      * Delete method
      *
-     * @param DeleteRecordService $deleteRecord
+     * @param DeleteRecordService $delete
      * @param string $id
      * @return \Cake\Http\Response|null|void HTTP 204 on success
      * @throws \Cake\Datasource\Exception\RecordNotFoundException
      * @throws \Cake\Http\Exception\MethodNotAllowedException
      * @throws \Exception
      */
-    public function delete(DeleteRecordService $deleteRecord, string $id)
+    public function delete(DeleteRecordService $delete, string $id)
     {
-        $deleteRecord->table('Languages')->delete($id);
+        $delete->table('Languages')->delete($id);
         return $this->response->withStatus(204);
     }
 }

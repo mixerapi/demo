@@ -46,15 +46,15 @@ class FilmsController extends AppController
      *
      * Returns a film
      *
-     * @param GetRecordService $getRecord
+     * @param GetRecordService $get
      * @param string|null $id Actor id.
      * @return \Cake\Http\Response|null|void Renders view
      * @throws \Cake\Datasource\Exception\RecordNotFoundException Actor Not Found
      * @throws \Cake\Http\Exception\MethodNotAllowedException
      */
-    public function view(GetRecordService $getRecord, string $id)
+    public function view(GetRecordService $get, string $id)
     {
-        $this->set('film', $getRecord->table('Films')->retrieve($id));
+        $this->set('film', $get->table('Films')->retrieve($id));
     }
 
     /**

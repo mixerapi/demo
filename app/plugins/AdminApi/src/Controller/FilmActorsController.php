@@ -51,29 +51,29 @@ class FilmActorsController extends AppController
      * @throws \Cake\Datasource\Exception\RecordNotFoundException Category Not Found
      * @throws \Cake\Http\Exception\MethodNotAllowedException
      */
-    public function view(GetRecordService $getRecord, string $id)
+    public function view(GetRecordService $get, string $id)
     {
-        $this->set('film_actor', $getRecord->table('FilmActors')->retrieve($id));
+        $this->set('film_actor', $get->table('FilmActors')->retrieve($id));
     }
 
     /**
      * Add method
      *
-     * @param AddRecordService $addRecord
+     * @param AddRecordService $add
      * @return \Cake\Http\Response|null|void HTTP 200 on successful add
      * @throws \Cake\Http\Exception\MethodNotAllowedException
      * @throws \MixerApi\ExceptionRender\ValidationException
      * @throws \Exception
      */
-    public function add(AddRecordService $addRecord)
+    public function add(AddRecordService $add)
     {
-        $this->set('film_actor', $addRecord->table('FilmActors')->save($this->request));
+        $this->set('film_actor', $add->table('FilmActors')->save($this->request));
     }
 
     /**
      * Edit method
      *
-     * @param EditRecordService $editRecord
+     * @param EditRecordService $edit
      * @param string $id
      * @return \Cake\Http\Response|null|void HTTP 200 on successful edit
      * @throws \Cake\Datasource\Exception\RecordNotFoundException
@@ -81,24 +81,23 @@ class FilmActorsController extends AppController
      * @throws \MixerApi\ExceptionRender\ValidationException
      * @throws \Exception
      */
-    public function edit(EditRecordService $editRecord, string $id)
+    public function edit(EditRecordService $edit, string $id)
     {
-        $this->set('film_actor', $editRecord->table('FilmActors')->save($this->request, $id));
+        $this->set('film_actor', $edit->table('FilmActors')->save($this->request, $id));
     }
 
     /**
      * Delete method
      *
-     * @param DeleteRecordService $deleteRecord
+     * @param DeleteRecordService $delete
      * @param string $id
      * @return \Cake\Http\Response|null|void HTTP 204 on success
      * @throws \Cake\Datasource\Exception\RecordNotFoundException
      * @throws \Cake\Http\Exception\MethodNotAllowedException
      * @throws \Exception
      */
-    public function delete(DeleteRecordService $deleteRecord, string $id)
+    public function delete(DeleteRecordService $delete, string $id)
     {
-        $deleteRecord->table('FilmActors')->delete($id);
-        return $this->response->withStatus(204);
+        return $delete->table('FilmActors')->delete($id)->delete($id)->respond();
     }
 }
