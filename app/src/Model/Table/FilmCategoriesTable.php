@@ -69,6 +69,10 @@ class FilmCategoriesTable extends Table
             ->allowEmptyString('uuid', null, 'create')
             ->add('uuid', 'unique', ['rule' => 'validateUnique', 'provider' => 'table']);
 
+        $validator->integer('actor_id');
+
+        $validator->integer('category_id');
+
         return $validator;
     }
 

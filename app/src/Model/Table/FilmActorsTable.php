@@ -70,6 +70,10 @@ class FilmActorsTable extends Table
             ->allowEmptyString('uuid', null, 'create')
             ->add('uuid', 'unique', ['rule' => 'validateUnique', 'provider' => 'table']);
 
+        $validator->integer('actor_id');
+
+        $validator->integer('film_id');
+
         return $validator;
     }
 
