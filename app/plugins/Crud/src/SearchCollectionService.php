@@ -8,7 +8,6 @@ use Cake\Core\Plugin;
 use Cake\Datasource\ResultSetInterface;
 use Cake\ORM\Locator\LocatorInterface;
 use Cake\ORM\Query;
-use Cake\ORM\Table;
 use Cake\ORM\TableRegistry;
 
 class SearchCollectionService
@@ -28,6 +27,8 @@ class SearchCollectionService
     private $hasSearch;
 
     /**
+     * The search collection name
+     *
      * @var string
      */
     private $collectionName = 'default';
@@ -40,19 +41,6 @@ class SearchCollectionService
     {
         $this->locator = $locator ?? TableRegistry::getTableLocator();
         $this->hasSearch = ($plugin ?? new Plugin())::isLoaded('Search');
-    }
-
-    /**
-     * The search collection to use
-     *
-     * @param string $collection
-     * @return $this
-     */
-    public function collection(string $collection)
-    {
-        $this->collectionName = $collection;
-
-        return $this;
     }
 
     /**
@@ -80,23 +68,26 @@ class SearchCollectionService
 
         $table = $this->locator->get($this->tableName);
 
-        if ($this->hasSearch && $table->hasBehavior('Search')) {
-            return $table->find('search', [
-                'search' => $controller->getRequest()->getQueryParams(),
-                'collection' => $this->collectionName,
-            ]);
+        if (!$this->hasSearch || !$table->hasBehavior('Search')) {
+            return $table->find('all');
         }
 
-        return $table->find('all');
+        return $table->find('search', [
+            'search' => $controller->getRequest()->getQueryParams(),
+            'collection' => $this->collectionName,
+        ]);
     }
 
     /**
-     * Returns the Table
+     * The search collection to use
      *
-     * @return Table
+     * @param string $collection
+     * @return $this
      */
-    public function getTable(): Table
+    public function setCollection(string $collection)
     {
-        return $this->locator->get($this->tableName);
+        $this->collectionName = $collection;
+
+        return $this;
     }
 }

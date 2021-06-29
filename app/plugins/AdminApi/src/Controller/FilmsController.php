@@ -6,7 +6,7 @@ namespace AdminApi\Controller;
 use Crud\AddRecordService;
 use Crud\DeleteRecordService;
 use Crud\EditRecordService;
-use Crud\GetRecordService;
+use Crud\GetResourceService;
 use Crud\SearchCollectionService;
 use SwaggerBake\Lib\Annotation as Swag;
 use SwaggerBake\Lib\Extension\CakeSearch\Annotation\SwagSearch;
@@ -38,21 +38,21 @@ class FilmsController extends AppController
      */
     public function index(SearchCollectionService $search)
     {
-        $this->set('films', $search->table('Films')->search($this));
+        $this->set('films', $search->setTable('Films')->search($this));
     }
 
     /**
      * View method
      *
-     * @param GetRecordService $getRecord
+     * @param GetResourceService $resource
      * @param string|null $id Actor id.
      * @return \Cake\Http\Response|null|void Renders view
      * @throws \Cake\Datasource\Exception\RecordNotFoundException Actor Not Found
      * @throws \Cake\Http\Exception\MethodNotAllowedException
      */
-    public function view(GetRecordService $getRecord, string $id)
+    public function view(GetResourceService $resource, string $id)
     {
-        $this->set('film', $getRecord->table('Films')->retrieve($id));
+        $this->set('film', $resource->setTable('Films')->get($id));
     }
 
     /**
@@ -66,7 +66,7 @@ class FilmsController extends AppController
      */
     public function add(AddRecordService $add)
     {
-        $this->set('film', $add->table('Films')->save($this->request));
+        $this->set('film', $add->setTable('Films')->save($this->request));
     }
 
     /**
@@ -82,7 +82,7 @@ class FilmsController extends AppController
      */
     public function edit(EditRecordService $edit, string $id)
     {
-        $this->set('film', $edit->table('Films')->save($this->request, $id));
+        $this->set('film', $edit->setTable('Films')->save($this->request, $id));
     }
 
     /**
@@ -97,8 +97,6 @@ class FilmsController extends AppController
      */
     public function delete(DeleteRecordService $delete, string $id)
     {
-        $this->request->allowMethod('delete');
-        $delete->table('Films')->delete($id);
-        return $this->response->withStatus(204);
+        return $delete->setTable('Films')->delete($id)->respond();
     }
 }

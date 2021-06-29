@@ -7,7 +7,7 @@ use AdminApi\Controller\AppController;
 use Crud\AddRecordService;
 use Crud\DeleteRecordService;
 use Crud\EditRecordService;
-use Crud\GetRecordService;
+use Crud\GetResourceService;
 use Crud\SearchCollectionService;
 use SwaggerBake\Lib\Annotation as Swag;
 use SwaggerBake\Lib\Extension\CakeSearch\Annotation\SwagSearch;
@@ -39,21 +39,21 @@ class FilmActorsController extends AppController
      */
     public function index(SearchCollectionService $search)
     {
-        $this->set('film_actors', $search->table('FilmActors')->search($this));
+        $this->set('film_actors', $search->setTable('FilmActors')->search($this));
     }
 
     /**
      * View method
      *
-     * @param GetRecordService $getRecord
+     * @param GetResourceService $resource
      * @param string|null $id Category id.
      * @return \Cake\Http\Response|null|void Renders view
      * @throws \Cake\Datasource\Exception\RecordNotFoundException Category Not Found
      * @throws \Cake\Http\Exception\MethodNotAllowedException
      */
-    public function view(GetRecordService $get, string $id)
+    public function view(GetResourceService $get, string $id)
     {
-        $this->set('film_actor', $get->table('FilmActors')->retrieve($id));
+        $this->set('film_actor', $get->setTable('FilmActors')->get($id));
     }
 
     /**
@@ -67,7 +67,7 @@ class FilmActorsController extends AppController
      */
     public function add(AddRecordService $add)
     {
-        $this->set('film_actor', $add->table('FilmActors')->save($this->request));
+        $this->set('film_actor', $add->setTable('FilmActors')->save($this->request));
     }
 
     /**
@@ -83,7 +83,7 @@ class FilmActorsController extends AppController
      */
     public function edit(EditRecordService $edit, string $id)
     {
-        $this->set('film_actor', $edit->table('FilmActors')->save($this->request, $id));
+        $this->set('film_actor', $edit->setTable('FilmActors')->save($this->request, $id));
     }
 
     /**
@@ -98,6 +98,6 @@ class FilmActorsController extends AppController
      */
     public function delete(DeleteRecordService $delete, string $id)
     {
-        return $delete->table('FilmActors')->delete($id)->delete($id)->respond();
+        return $delete->setTable('FilmActors')->delete($id)->delete($id)->respond();
     }
 }

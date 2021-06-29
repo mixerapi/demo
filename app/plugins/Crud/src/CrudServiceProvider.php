@@ -20,7 +20,7 @@ class CrudServiceProvider extends ServiceProvider
         AddRecordService::class,
         EditRecordService::class,
         DeleteRecordService::class,
-        GetRecordService::class,
+        GetResourceService::class,
         SearchCollectionService::class,
     ];
 

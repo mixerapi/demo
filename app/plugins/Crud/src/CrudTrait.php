@@ -3,6 +3,11 @@ declare(strict_types=1);
 
 namespace Crud;
 
+use Cake\Http\Exception\BadRequestException;
+use Cake\Http\Response;
+use Cake\Http\ServerRequest;
+use Cake\Utility\Xml;
+
 trait CrudTrait
 {
     /**
@@ -16,7 +21,7 @@ trait CrudTrait
      * @param string $table
      * @return $this
      */
-    public function table(string $table)
+    public function setTable(string $table)
     {
         $this->tableName = $table;
 

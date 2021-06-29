@@ -6,7 +6,7 @@ namespace AdminApi\Controller;
 use Crud\AddRecordService;
 use Crud\DeleteRecordService;
 use Crud\EditRecordService;
-use Crud\GetRecordService;
+use Crud\GetResourceService;
 use Crud\SearchCollectionService;
 use SwaggerBake\Lib\Annotation as Swag;
 use SwaggerBake\Lib\Extension\CakeSearch\Annotation\SwagSearch;
@@ -38,21 +38,21 @@ class ActorsController extends AppController
      */
     public function index(SearchCollectionService $search)
     {
-        $this->set('actors', $search->table('Actors')->search($this));
+        $this->set('actors', $search->setTable('Actors')->search($this));
     }
 
     /**
      * View method
      *
-     * @param GetRecordService $get
+     * @param GetResourceService $get
      * @param string|null $id Actor id.
      * @return \Cake\Http\Response|null|void Renders view
      * @throws \Cake\Datasource\Exception\RecordNotFoundException Actor Not Found
      * @throws \Cake\Http\Exception\MethodNotAllowedException
      */
-    public function view(GetRecordService $get, string $id)
+    public function view(GetResourceService $get, string $id)
     {
-        $this->set('actor', $get->table('Actors')->retrieve($id));
+        $this->set('actor', $get->setTable('Actors')->get($id));
     }
 
     /**
@@ -66,7 +66,7 @@ class ActorsController extends AppController
      */
     public function add(AddRecordService $add)
     {
-        $this->set('actor', $add->table('Actors')->save($this->request));
+        $this->set('actor', $add->setTable('Actors')->save($this->request));
     }
 
     /**
@@ -82,7 +82,7 @@ class ActorsController extends AppController
      */
     public function edit(EditRecordService $edit, string $id)
     {
-        $this->set('actor', $edit->table('Actors')->save($this->request, $id));
+        $this->set('actor', $edit->setTable('Actors')->save($this->request, $id));
     }
 
     /**
@@ -97,6 +97,6 @@ class ActorsController extends AppController
      */
     public function delete(DeleteRecordService $delete, string $id)
     {
-        return $delete->table('Actors')->delete($id)->respond();
+        return $delete->setTable('Actors')->delete($id)->respond();
     }
 }

@@ -6,7 +6,7 @@ namespace AdminApi\Controller;
 use Crud\AddRecordService;
 use Crud\DeleteRecordService;
 use Crud\EditRecordService;
-use Crud\GetRecordService;
+use Crud\GetResourceService;
 use Crud\SearchCollectionService;
 use SwaggerBake\Lib\Annotation as Swag;
 use SwaggerBake\Lib\Extension\CakeSearch\Annotation\SwagSearch;
@@ -39,21 +39,21 @@ class CategoriesController extends AppController
      */
     public function index(SearchCollectionService $search)
     {
-        $this->set('categories', $search->table('Categories')->search($this));
+        $this->set('categories', $search->setTable('Categories')->search($this));
     }
 
     /**
      * View method
      *
-     * @param GetRecordService $getRecord
+     * @param GetResourceService $resource
      * @param string|null $id Category id.
      * @return \Cake\Http\Response|null|void Renders view
      * @throws \Cake\Datasource\Exception\RecordNotFoundException Category Not Found
      * @throws \Cake\Http\Exception\MethodNotAllowedException
      */
-    public function view(GetRecordService $getRecord, string $id)
+    public function view(GetResourceService $resource, string $id)
     {
-        $this->set('category', $getRecord->table('Categories')->retrieve($id));
+        $this->set('category', $resource->setTable('Categories')->get($id));
     }
 
     /**
@@ -67,7 +67,7 @@ class CategoriesController extends AppController
      */
     public function add(AddRecordService $add)
     {
-        $this->set('category', $add->table('Categories')->save($this->request));
+        $this->set('category', $add->setTable('Categories')->save($this->request));
     }
 
     /**
@@ -83,7 +83,7 @@ class CategoriesController extends AppController
      */
     public function edit(EditRecordService $edit, string $id)
     {
-        $this->set('category', $edit->table('Categories')->save($this->request, $id));
+        $this->set('category', $edit->setTable('Categories')->save($this->request, $id));
     }
 
     /**
@@ -98,6 +98,6 @@ class CategoriesController extends AppController
      */
     public function delete(DeleteRecordService $delete, string $id)
     {
-        return $delete->table('Categories')->delete($id)->respond();
+        return $delete->setTable('Categories')->delete($id)->respond();
     }
 }

@@ -7,6 +7,8 @@ use Cake\Datasource\EntityInterface;
 use Cake\Http\ServerRequest;
 use Cake\ORM\Locator\LocatorInterface;
 use Cake\ORM\TableRegistry;
+use Cake\Utility\Inflector;
+use Crud\Exception\RecordNotSavedException;
 use Exception;
 
 class EditRecordService
@@ -19,18 +21,28 @@ class EditRecordService
     private $locator;
 
     /**
-     * @var GetRecordService
+     * @var GetResourceService
      */
-    private $getRecord;
+    private $resource;
+
+    /**
+     * @var Deserializer
+     */
+    private $deserializer;
 
     /**
      * @param LocatorInterface|null $locator
-     * @param GetRecordService|null $getRecord
+     * @param GetResourceService|null $resource
+     * @param Deserializer|null $deserializer
      */
-    public function __construct(?LocatorInterface $locator = null, ?GetRecordService $getRecord = null)
-    {
+    public function __construct(
+        ?LocatorInterface $locator = null,
+        ?GetResourceService $resource = null,
+        ?Deserializer $deserializer = null
+    ){
         $this->locator = $locator ?? TableRegistry::getTableLocator();
-        $this->getRecord = $getRecord ?? new GetRecordService();
+        $this->resource = $resource ?? new GetResourceService();
+        $this->deserializer = $deserializer ?? new Deserializer();
     }
 
     /**
@@ -40,19 +52,22 @@ class EditRecordService
      * @param string|integer $id
      * @return EntityInterface
      * @throws Exception
+     * @throws RecordNotSavedException
      */
     public function save(ServerRequest $request, $id): EntityInterface
     {
         $table = $this->locator->get($this->tableName);
+
         $entity = $table->patchEntity(
-            $this->getRecord->table($this->tableName)->retrieve($id),
-            $request->getData()
+            $this->resource->setTable($this->tableName)->get($id),
+            $this->deserializer->deserialize($request)
         );
 
         $entity = $table->save($entity);
 
         if (!$entity) {
-            throw new Exception("Unable to save $this->tableName record");
+            $name = ucwords(Inflector::singularize(Inflector::delimit($this->tableName, ' ')));
+            throw new RecordNotSavedException("Unable to save $name");
         }
 
         return $entity;

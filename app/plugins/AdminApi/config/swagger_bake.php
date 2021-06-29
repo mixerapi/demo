@@ -51,7 +51,8 @@ return [
         /** optional configurations below:  **/
         'requestAccepts' => [
             'application/x-www-form-urlencoded',
-            'application/json'
+            'application/json',
+            'application/xml',
         ],
         'responseContentTypes' => [
             'application/json',

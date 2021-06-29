@@ -10,6 +10,8 @@ use Cake\Http\Exception\MethodNotAllowedException;
 use Cake\Http\Response;
 use Cake\ORM\Locator\LocatorInterface;
 use Cake\ORM\TableRegistry;
+use Cake\Utility\Inflector;
+use Crud\Exception\RecordNotDeletedException;
 use Exception;
 
 class DeleteRecordService
@@ -22,18 +24,18 @@ class DeleteRecordService
     private $locator;
 
     /**
-     * @var GetRecordService
+     * @var GetResourceService
      */
-    private $getRecord;
+    private $resource;
 
     /**
      * @param LocatorInterface|null $locator
-     * @param GetRecordService|null $getRecord
+     * @param GetResourceService|null $getRecord
      */
-    public function __construct(?LocatorInterface $locator = null, ?GetRecordService $getRecord = null)
+    public function __construct(?LocatorInterface $locator = null, ?GetResourceService $resource = null)
     {
         $this->locator = $locator ?? TableRegistry::getTableLocator();
-        $this->getRecord = $getRecord ?? new GetRecordService();
+        $this->resource = $resource ?? new GetResourceService();
     }
 
     /**
@@ -45,11 +47,12 @@ class DeleteRecordService
      */
     public function delete($id)
     {
-        $entity = $this->getRecord->table($this->tableName)->retrieve($id);
+        $entity = $this->resource->setTable($this->tableName)->get($id);
         $this->allowDelete($entity);
 
         if (!$this->locator->get($this->tableName)->delete($entity)) {
-            throw new Exception("Unable to delete $this->tableName record");
+            $name = ucwords(Inflector::singularize(Inflector::delimit($this->tableName, ' ')));
+            throw new RecordNotDeletedException("Unable to save $name");
         }
 
         return $this;

@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
-use Crud\GetRecordService;
+use Crud\GetResourceService;
 use Crud\SearchCollectionService;
 use SwaggerBake\Lib\Annotation as Swag;
 use SwaggerBake\Lib\Extension\CakeSearch\Annotation\SwagSearch;
@@ -37,23 +37,23 @@ class ActorsController extends AppController
      */
     public function index(SearchCollectionService $search)
     {
-        $this->set('actors', $search->table('Actors')->search($this));
+        $this->set('actors', $search->setTable('Actors')->search($this));
     }
 
     /**
-     * View Actor
+     * Actor Resource
      *
      * Returns an actor
      *
-     * @param GetRecordService $get
+     * @param GetResourceService $resource
      * @param string|null $id Actor id.
      * @return \Cake\Http\Response|null|void Renders view
      * @throws \Cake\Datasource\Exception\RecordNotFoundException Actor Not Found
      * @throws \Cake\Http\Exception\MethodNotAllowedException
      */
-    public function view(GetRecordService $get, string $id)
+    public function view(GetResourceService $resource, string $id)
     {
-        $this->set('actor', $get->table('Actors')->retrieve($id));
+        $this->set('actor', $resource->setTable('Actors')->get($id));
     }
 
     /**
@@ -80,7 +80,7 @@ class ActorsController extends AppController
         $this->set('actors',
             $this->paginate(
                 $search
-                    ->table('FilmActors')->collection('FilmsByActor')->query($this)
+                    ->setTable('FilmActors')->setCollection('FilmsByActor')->query($this)
                     ->contain(['Films'])
                     ->andWhere(['actor_id' => $id])
             )

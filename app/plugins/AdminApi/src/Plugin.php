@@ -47,6 +47,7 @@ class Plugin extends BasePlugin implements AuthenticationServiceProviderInterfac
     public function routes(RouteBuilder $routes): void
     {
         $routes->plugin('AdminApi', ['path' => '/admin'], function (RouteBuilder $builder) {
+            $builder->setExtensions(['json','xml']);
             (new AutoRouter($builder, 'AdminApi\Controller'))->buildResources();
             $builder->connect('/', [
                 'plugin' => 'AdminApi', 'controller' => 'Swagger', 'action' => 'index'

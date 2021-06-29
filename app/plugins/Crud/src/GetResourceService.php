@@ -4,12 +4,10 @@ declare(strict_types=1);
 namespace Crud;
 
 use Cake\Datasource\EntityInterface;
-use Cake\Datasource\RepositoryInterface;
 use Cake\ORM\Locator\LocatorInterface;
-use Cake\ORM\Table;
 use Cake\ORM\TableRegistry;
 
-class GetRecordService
+class GetResourceService
 {
     use CrudTrait;
 
@@ -27,24 +25,17 @@ class GetRecordService
     }
 
     /**
+     * Returns the Entity
+     *
      * @param string|integer $id
      * @return \App\Model\Entity\Actor
      * @throws \Exception
+     * @throws \Cake\Datasource\Exception\RecordNotFoundException
      */
-    public function retrieve($id): EntityInterface
+    public function get($id): EntityInterface
     {
         return $this->locator->get($this->tableName)->get($id, [
             'contain' => [],
         ]);
-    }
-
-    /**
-     * Returns the Table
-     *
-     * @return Table
-     */
-    public function getRepository(): Table
-    {
-        return $this->locator->get($this->tableName);
     }
 }

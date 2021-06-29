@@ -6,7 +6,7 @@ namespace AdminApi\Controller;
 use Crud\AddRecordService;
 use Crud\DeleteRecordService;
 use Crud\EditRecordService;
-use Crud\GetRecordService;
+use Crud\GetResourceService;
 use Crud\SearchCollectionService;
 use SwaggerBake\Lib\Annotation as Swag;
 use SwaggerBake\Lib\Extension\CakeSearch\Annotation\SwagSearch;
@@ -39,21 +39,21 @@ class LanguagesController extends AppController
      */
     public function index(SearchCollectionService $search)
     {
-        $this->set('languages', $search->table('Languages')->search($this));
+        $this->set('languages', $search->setTable('Languages')->search($this));
     }
 
     /**
      * View method
      *
-     * @param GetRecordService $getRecord
+     * @param GetResourceService $resource
      * @param string|null $id Actor id.
      * @return \Cake\Http\Response|null|void Renders view
      * @throws \Cake\Datasource\Exception\RecordNotFoundException Actor Not Found
      * @throws \Cake\Http\Exception\MethodNotAllowedException
      */
-    public function view(GetRecordService $getRecord, string $id)
+    public function view(GetResourceService $resource, string $id)
     {
-        $this->set('language', $getRecord->table('Languages')->retrieve($id));
+        $this->set('language', $resource->setTable('Languages')->get($id));
     }
 
     /**
@@ -67,7 +67,7 @@ class LanguagesController extends AppController
      */
     public function add(AddRecordService $add)
     {
-        $this->set('language', $add->table('Languages')->save($this->request));
+        $this->set('language', $add->setTable('Languages')->save($this->request));
     }
 
     /**
@@ -83,7 +83,7 @@ class LanguagesController extends AppController
      */
     public function edit(EditRecordService $edit, string $id)
     {
-        $this->set('language', $edit->table('Languages')->save($this->request, $id));
+        $this->set('language', $edit->setTable('Languages')->save($this->request, $id));
     }
 
     /**
@@ -98,7 +98,6 @@ class LanguagesController extends AppController
      */
     public function delete(DeleteRecordService $delete, string $id)
     {
-        $delete->table('Languages')->delete($id);
-        return $this->response->withStatus(204);
+        return $delete->setTable('Languages')->delete($id)->respond();
     }
 }
