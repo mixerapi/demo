@@ -39,7 +39,7 @@ class Deserializer
             $node = reset($keys);
 
             if (!isset($array[$node]) || empty($array[$node])) {
-                throw new BadRequestException('Xml payload is empty');
+                throw new BadRequestException('Xml not not found');
             }
 
             return $array[$node];
