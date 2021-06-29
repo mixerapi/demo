@@ -21,9 +21,11 @@ class SearchCollectionService
     private $locator;
 
     /**
-     * @var Plugin
+     * Does this application have https://github.com/FriendsOfCake/search
+     *
+     * @var bool
      */
-    private $plugin;
+    private $hasSearch;
 
     /**
      * @var string
@@ -37,7 +39,7 @@ class SearchCollectionService
     public function __construct(?LocatorInterface $locator = null, ?Plugin $plugin = null)
     {
         $this->locator = $locator ?? TableRegistry::getTableLocator();
-        $this->plugin = $plugin ?? new Plugin();
+        $this->hasSearch = ($plugin ?? new Plugin())::isLoaded('Search');
     }
 
     /**
@@ -78,7 +80,7 @@ class SearchCollectionService
 
         $table = $this->locator->get($this->tableName);
 
-        if ($this->plugin::isLoaded('Search') && $table->hasBehavior('Search')) {
+        if ($this->hasSearch && $table->hasBehavior('Search')) {
             return $table->find('search', [
                 'search' => $controller->getRequest()->getQueryParams(),
                 'collection' => $this->collectionName,
