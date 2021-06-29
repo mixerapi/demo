@@ -7,6 +7,7 @@ use Cake\Chronos\Chronos;
 use Cake\Core\Configure;
 use Cake\Datasource\EntityInterface;
 use Cake\Http\Exception\MethodNotAllowedException;
+use Cake\Http\Response;
 use Cake\ORM\Locator\LocatorInterface;
 use Cake\ORM\TableRegistry;
 use Exception;
@@ -36,10 +37,13 @@ class DeleteRecordService
     }
 
     /**
+     * Deletes the record
+     *
      * @param string|integer $id
+     * @return $this
      * @throws \Exception
      */
-    public function delete($id): void
+    public function delete($id)
     {
         $entity = $this->getRecord->table($this->tableName)->retrieve($id);
         $this->allowDelete($entity);
@@ -47,6 +51,19 @@ class DeleteRecordService
         if (!$this->locator->get($this->tableName)->delete($entity)) {
             throw new Exception("Unable to delete $this->tableName record");
         }
+
+        return $this;
+    }
+
+    /**
+     * Deletes the record and returns a Response object with status code (default: 204)
+     *
+     * @param int $status defaults to 204
+     * @throws \Exception
+     */
+    public function respond(int $status = 204): Response
+    {
+        return (new Response())->withStatus($status);
     }
 
     /**
