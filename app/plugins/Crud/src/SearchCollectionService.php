@@ -4,10 +4,12 @@ declare(strict_types=1);
 namespace Crud;
 
 use Cake\Controller\Controller;
+use Cake\Core\Plugin;
 use Cake\Datasource\ResultSetInterface;
 use Cake\ORM\Locator\LocatorInterface;
 use Cake\ORM\Query;
 use Cake\ORM\Table;
+use Cake\ORM\TableRegistry;
 
 class SearchCollectionService
 {
@@ -19,16 +21,23 @@ class SearchCollectionService
     private $locator;
 
     /**
+     * @var Plugin
+     */
+    private $plugin;
+
+    /**
      * @var string
      */
     private $collectionName = 'default';
 
     /**
-     * @param LocatorInterface $locator
+     * @param LocatorInterface|null $locator
+     * @param Plugin|null $plugin
      */
-    public function __construct(LocatorInterface $locator)
+    public function __construct(?LocatorInterface $locator = null, ?Plugin $plugin = null)
     {
-        $this->locator = $locator;
+        $this->locator = $locator ?? TableRegistry::getTableLocator();
+        $this->plugin = $plugin ?? new Plugin();
     }
 
     /**
@@ -69,16 +78,14 @@ class SearchCollectionService
 
         $table = $this->locator->get($this->tableName);
 
-        if ($table->hasBehavior('Search')) {
-            $query = $table->find('search', [
+        if ($this->plugin::isLoaded('Search') && $table->hasBehavior('Search')) {
+            return $table->find('search', [
                 'search' => $controller->getRequest()->getQueryParams(),
                 'collection' => $this->collectionName,
             ]);
-        } else {
-            $query = $table->find('all');
         }
 
-        return $query;
+        return $table->find('all');
     }
 
     /**

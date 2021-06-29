@@ -14,6 +14,7 @@
 A [mixerapi/mixerapi](https://github.com/mixerapi/mixerapi) demo application. This project was generated from the
 [mixerapi/app](https://github.com/mixerapi/app) template. See that project for additional details.
 
+Checkout the live demo: [https://demo.mixerapi.com](https://demo.mixerapi.com)
 
 ## Installation
 

@@ -6,6 +6,7 @@ namespace Crud;
 use Cake\Datasource\EntityInterface;
 use Cake\Http\ServerRequest;
 use Cake\ORM\Locator\LocatorInterface;
+use Cake\ORM\TableRegistry;
 use Exception;
 
 class AddRecordService
@@ -18,11 +19,11 @@ class AddRecordService
     private $locator;
 
     /**
-     * @param LocatorInterface $locator
+     * @param LocatorInterface|null $locator
      */
-    public function __construct(LocatorInterface $locator)
+    public function __construct(?LocatorInterface $locator = null)
     {
-        $this->locator = $locator;
+        $this->locator = $locator ?? TableRegistry::getTableLocator();
     }
 
     /**

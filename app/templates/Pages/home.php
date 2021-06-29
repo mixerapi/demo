@@ -57,6 +57,10 @@
         </ul>
         <h3>About</h3>
         <p>
+            Note: On demo.mixerapi.com, the database is refreshed once every 24 hours and you may only delete
+            new records.
+        </p>
+        <p>
             This demo uses the main APP namespace to host the Public API. The two remaining APIs
             are exposed via plugins. While MixerAPI is setup to run off your main APP namespace by default, this
             demo illustrates how you may logically separate your API using plugins.

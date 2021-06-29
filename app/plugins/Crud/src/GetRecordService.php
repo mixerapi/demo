@@ -7,6 +7,7 @@ use Cake\Datasource\EntityInterface;
 use Cake\Datasource\RepositoryInterface;
 use Cake\ORM\Locator\LocatorInterface;
 use Cake\ORM\Table;
+use Cake\ORM\TableRegistry;
 
 class GetRecordService
 {
@@ -18,11 +19,11 @@ class GetRecordService
     private $locator;
 
     /**
-     * @param LocatorInterface $locator
+     * @param LocatorInterface|null $locator
      */
-    public function __construct(LocatorInterface $locator)
+    public function __construct(?LocatorInterface $locator = null)
     {
-        $this->locator = $locator;
+        $this->locator = $locator ?? TableRegistry::getTableLocator();
     }
 
     /**
