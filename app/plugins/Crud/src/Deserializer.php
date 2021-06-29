@@ -15,6 +15,9 @@ class Deserializer
      */
     private $response;
 
+    /**
+     * @param Response|null $response
+     */
     public function __construct(?Response $response = null)
     {
         $this->response = $response ?? new Response();
