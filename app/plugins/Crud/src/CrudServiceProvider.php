@@ -40,6 +40,8 @@ class CrudServiceProvider extends ServiceProvider
     }
 
     /**
+     * Adds all services found in $this->provides to the container
+     *
      * @inheritDoc
      */
     public function services(ContainerInterface $container): void
