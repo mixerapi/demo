@@ -52,10 +52,6 @@ class Plugin extends BasePlugin implements AuthenticationServiceProviderInterfac
             $builder->connect('/', [
                 'plugin' => 'AdminApi', 'controller' => 'Swagger', 'action' => 'index'
             ]);
-            // todo: these are not displaying on demo.mixerapi.com
-            $builder->resources('Actors');
-            $builder->resources('Films');
-            // todo: remove code block later
             $builder->fallbacks();
         });
 
