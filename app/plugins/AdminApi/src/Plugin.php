@@ -52,6 +52,12 @@ class Plugin extends BasePlugin implements AuthenticationServiceProviderInterfac
             $builder->connect('/', [
                 'plugin' => 'AdminApi', 'controller' => 'Swagger', 'action' => 'index'
             ]);
+            $builder->connect('/contexts/*', [
+                'plugin' => 'MixerApi/JsonLdView', 'controller' => 'JsonLd', 'action' => 'contexts'
+            ]);
+            $builder->connect('/vocab', [
+                'plugin' => 'MixerApi/JsonLdView', 'controller' => 'JsonLd', 'action' => 'vocab'
+            ]);
             $builder->fallbacks();
         });
 
