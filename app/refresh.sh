@@ -24,4 +24,4 @@ printf "\n# Running Swagger Bake \n"
 
 bin/cake swagger bake
 bin/cake swagger bake --config AdminApi.swagger_bake
-bin/cake preloader
+bin/cake cache clear_all
