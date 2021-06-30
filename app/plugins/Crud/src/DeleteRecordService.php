@@ -87,13 +87,13 @@ class DeleteRecordService
 
         if (!$entity->has('modified')) {
             throw new MethodNotAllowedException(
-                'Deletes on certain records are disabled on the public demo, try another.'
+                'Deletes on certain records are disabled n the public demo, try another.'
             );
         }
 
         if (Chronos::today()->diffInMonths($entity->get('modified'), false) < 0) {
             throw new MethodNotAllowedException(
-                'You may only delete new records. Try creating a record then deleting it instead'
+                'You may only delete new records in the public demo. Try creating a record then deleting it.'
             );
         }
     }
