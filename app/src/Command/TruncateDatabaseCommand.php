@@ -39,7 +39,7 @@ class TruncateDatabaseCommand extends Command
         $connection->execute('TRUNCATE TABLE languages');
         $connection->execute('TRUNCATE TABLE payments');
         $connection->execute('TRUNCATE TABLE rentals');
-        $connection->execute('TRUNCATE TABLE sakila_phinxlog');
+        $connection->execute('TRUNCATE TABLE phinxlog');
         $connection->execute('TRUNCATE TABLE stores');
     }
 }

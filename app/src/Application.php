@@ -16,9 +16,7 @@ declare(strict_types=1);
  */
 namespace App;
 
-use Crud\CrudServiceProvider;
 use Cake\Core\Configure;
-use Cake\Core\ContainerInterface;
 use Cake\Core\Exception\MissingPluginException;
 use Cake\Datasource\FactoryLocator;
 use Cake\Error\Middleware\ErrorHandlerMiddleware;
@@ -28,7 +26,6 @@ use Cake\Http\MiddlewareQueue;
 use Cake\ORM\Locator\TableLocator;
 use Cake\Routing\Middleware\AssetMiddleware;
 use Cake\Routing\Middleware\RoutingMiddleware;
-use League\Container\Container;
 use MixerApi\Core\Event\EventListenerLoader;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
@@ -134,19 +131,6 @@ class Application extends BaseApplication
             //]));
 
         return $middlewareQueue;
-    }
-
-    /**
-     * Register application container services.
-     *
-     * @param \Cake\Core\ContainerInterface $container The Container to update.
-     * @return void
-     * @link https://book.cakephp.org/4/en/development/dependency-injection.html#dependency-injection
-     */
-    public function services(ContainerInterface $container): void
-    {
-        /** @var Container $container */
-        $container->addServiceProvider((new CrudServiceProvider())->withSharing());
     }
 
     /**
