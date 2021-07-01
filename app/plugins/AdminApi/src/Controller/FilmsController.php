@@ -3,11 +3,7 @@ declare(strict_types=1);
 
 namespace AdminApi\Controller;
 
-use Crud\AddRecordService;
-use Crud\DeleteRecordService;
-use Crud\EditRecordService;
-use Crud\GetResourceService;
-use Crud\SearchCollectionService;
+use MixerApi\Crud\Interfaces\{CreateInterface, ReadInterface, UpdateInterface, DeleteInterface, SearchInterface};
 use SwaggerBake\Lib\Annotation as Swag;
 use SwaggerBake\Lib\Extension\CakeSearch\Annotation\SwagSearch;
 
@@ -30,73 +26,71 @@ class FilmsController extends AppController
     /**
      * Index method
      *
-     * @param SearchCollectionService $search
+     * @param SearchInterface $search
      * @return \Cake\Http\Response|null|void Renders view
      * @throws \Cake\Http\Exception\MethodNotAllowedException When invalid method
      * @Swag\SwagPaginator()
      * @SwagSearch(tableClass="\App\Model\Table\FilmsTable", collection="default")
      */
-    public function index(SearchCollectionService $search)
+    public function index(SearchInterface $search)
     {
-        $this->set('films', $search->setTable('Films')->search($this));
+        $this->set('data', $search->search($this));
     }
 
     /**
      * View method
      *
-     * @param GetResourceService $resource
+     * @param ReadInterface $read
      * @param string|null $id Actor id.
      * @return \Cake\Http\Response|null|void Renders view
      * @throws \Cake\Datasource\Exception\RecordNotFoundException Actor Not Found
      * @throws \Cake\Http\Exception\MethodNotAllowedException
      */
-    public function view(GetResourceService $resource, string $id)
+    public function view(ReadInterface $read)
     {
-        $this->set('film', $resource->setTable('Films')->get($id));
+        $this->set('data', $read->read($this));
     }
 
     /**
      * Add method
      *
-     * @param AddRecordService $add
+     * @param CreateInterface $create
      * @return \Cake\Http\Response|null|void HTTP 200 on successful add
      * @throws \Cake\Http\Exception\MethodNotAllowedException
      * @throws \MixerApi\ExceptionRender\ValidationException
      * @throws \Exception
      */
-    public function add(AddRecordService $add)
+    public function add(CreateInterface $create)
     {
-        $this->set('film', $add->setTable('Films')->save($this->request));
+        $this->set('data', $create->save($this));
     }
 
     /**
      * Edit method
      *
-     * @param EditRecordService $edit
-     * @param string $id
+     * @param UpdateInterface $update
      * @return \Cake\Http\Response|null|void HTTP 200 on successful edit
      * @throws \Cake\Datasource\Exception\RecordNotFoundException
      * @throws \Cake\Http\Exception\MethodNotAllowedException
      * @throws \MixerApi\ExceptionRender\ValidationException
      * @throws \Exception
      */
-    public function edit(EditRecordService $edit, string $id)
+    public function edit(UpdateInterface $update)
     {
-        $this->set('film', $edit->setTable('Films')->save($this->request, $id));
+        $this->set('data', $update->save($this));
     }
 
     /**
      * Delete method
      *
-     * @param DeleteRecordService $delete
-     * @param string $id
+     * @param DeleteInterface $delete
      * @return \Cake\Http\Response|null|void HTTP 204 on success
      * @throws \Cake\Datasource\Exception\RecordNotFoundException
      * @throws \Cake\Http\Exception\MethodNotAllowedException
      * @throws \Exception
      */
-    public function delete(DeleteRecordService $delete, string $id)
+    public function delete(DeleteInterface $delete)
     {
-        return $delete->setTable('Films')->delete($id)->respond();
+        return $delete->delete($this)->respond();
     }
 }

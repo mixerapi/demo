@@ -4,8 +4,7 @@ declare(strict_types=1);
 namespace App\Controller;
 
 use Cake\ORM\TableRegistry;
-use Crud\GetResourceService;
-use Crud\SearchCollectionService;
+use MixerApi\Crud\Interfaces\{SearchInterface, ReadInterface};
 use SwaggerBake\Lib\Annotation as Swag;
 use SwaggerBake\Lib\Extension\CakeSearch\Annotation\SwagSearch;
 
@@ -30,15 +29,15 @@ class FilmsController extends AppController
      *
      * Returns a collection of films
      *
-     * @param SearchCollectionService $search
+     * @param SearchInterface $search
      * @return \Cake\Http\Response|null|void Renders view
      * @throws \Cake\Http\Exception\MethodNotAllowedException When invalid method
      * @Swag\SwagPaginator()
      * @SwagSearch(tableClass="\App\Model\Table\FilmsTable", collection="default")
      */
-    public function index(SearchCollectionService $search)
+    public function index(SearchInterface $search)
     {
-        $this->set('films', $search->setTable('Films')->search($this));
+        $this->set('data', $search->search($this));
     }
 
     /**
@@ -46,15 +45,14 @@ class FilmsController extends AppController
      *
      * Returns a film
      *
-     * @param GetResourceService $resource
-     * @param string|null $id Actor id.
+     * @param ReadInterface $read
      * @return \Cake\Http\Response|null|void Renders view
      * @throws \Cake\Datasource\Exception\RecordNotFoundException Actor Not Found
      * @throws \Cake\Http\Exception\MethodNotAllowedException
      */
-    public function view(GetResourceService $resource, string $id)
+    public function view(ReadInterface $read)
     {
-        $this->set('film', $resource->setTable('Films')->get($id));
+        $this->set('data', $read->read($this));
     }
 
     /**

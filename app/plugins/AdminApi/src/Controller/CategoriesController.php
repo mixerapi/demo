@@ -3,11 +3,7 @@ declare(strict_types=1);
 
 namespace AdminApi\Controller;
 
-use Crud\AddRecordService;
-use Crud\DeleteRecordService;
-use Crud\EditRecordService;
-use Crud\GetResourceService;
-use Crud\SearchCollectionService;
+use MixerApi\Crud\Interfaces\{CreateInterface, ReadInterface, UpdateInterface, DeleteInterface, SearchInterface};
 use SwaggerBake\Lib\Annotation as Swag;
 use SwaggerBake\Lib\Extension\CakeSearch\Annotation\SwagSearch;
 
@@ -31,73 +27,71 @@ class CategoriesController extends AppController
     /**
      * Index method
      *
-     * @param SearchCollectionService $search
+     * @param SearchInterface $search
      * @return \Cake\Http\Response|null|void Renders view
      * @throws \Cake\Http\Exception\MethodNotAllowedException When invalid method
      * @Swag\SwagPaginator()
      * @SwagSearch(tableClass="\App\Model\Table\CategoriesTable", collection="default")
      */
-    public function index(SearchCollectionService $search)
+    public function index(SearchInterface $search)
     {
-        $this->set('categories', $search->setTable('Categories')->search($this));
+        $this->set('categories', $search->search($this));
     }
 
     /**
      * View method
      *
-     * @param GetResourceService $resource
+     * @param ReadInterface $read
      * @param string|null $id Category id.
      * @return \Cake\Http\Response|null|void Renders view
      * @throws \Cake\Datasource\Exception\RecordNotFoundException Category Not Found
      * @throws \Cake\Http\Exception\MethodNotAllowedException
      */
-    public function view(GetResourceService $resource, string $id)
+    public function view(ReadInterface $read)
     {
-        $this->set('category', $resource->setTable('Categories')->get($id));
+        $this->set('category', $read->read($this));
     }
 
     /**
      * Add method
      *
-     * @param AddRecordService $add
+     * @param CreateInterface $create
      * @return \Cake\Http\Response|null|void HTTP 200 on successful add
      * @throws \Cake\Http\Exception\MethodNotAllowedException
      * @throws \MixerApi\ExceptionRender\ValidationException
      * @throws \Exception
      */
-    public function add(AddRecordService $add)
+    public function add(CreateInterface $create)
     {
-        $this->set('category', $add->setTable('Categories')->save($this->request));
+        $this->set('category', $create->save($this));
     }
 
     /**
      * Edit method
      *
-     * @param EditRecordService $edit
-     * @param string $id
+     * @param UpdateInterface $update
      * @return \Cake\Http\Response|null|void HTTP 200 on successful edit
      * @throws \Cake\Datasource\Exception\RecordNotFoundException
      * @throws \Cake\Http\Exception\MethodNotAllowedException
      * @throws \MixerApi\ExceptionRender\ValidationException
      * @throws \Exception
      */
-    public function edit(EditRecordService $edit, string $id)
+    public function edit(UpdateInterface $update)
     {
-        $this->set('category', $edit->setTable('Categories')->save($this->request, $id));
+        $this->set('category', $update->save($this));
     }
 
     /**
      * Delete method
      *
-     * @param DeleteRecordService $delete
-     * @param string $id
+     * @param DeleteInterface $delete
      * @return \Cake\Http\Response|null|void HTTP 204 on success
      * @throws \Cake\Datasource\Exception\RecordNotFoundException
      * @throws \Cake\Http\Exception\MethodNotAllowedException
      * @throws \Exception
      */
-    public function delete(DeleteRecordService $delete, string $id)
+    public function delete(DeleteInterface $delete)
     {
-        return $delete->setTable('Categories')->delete($id)->respond();
+        return $delete->delete($this)->respond();
     }
 }

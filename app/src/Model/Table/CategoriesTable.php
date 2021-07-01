@@ -71,18 +71,4 @@ class CategoriesTable extends Table
 
         return $validator;
     }
-
-    /**
-     * @param ServerRequest $request
-     * @param string $collection
-     * @return Query
-     * @see https://github.com/FriendsOfCake/search
-     */
-    public function search(ServerRequest $request, string $collection = 'default'): Query
-    {
-        return $this->find('search', [
-            'search' => $request->getQueryParams(),
-            'collection' => $collection,
-        ]);
-    }
 }

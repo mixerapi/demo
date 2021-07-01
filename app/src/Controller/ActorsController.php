@@ -3,8 +3,7 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
-use Crud\GetResourceService;
-use Crud\SearchCollectionService;
+use MixerApi\Crud\Interfaces\{SearchInterface, ReadInterface};
 use SwaggerBake\Lib\Annotation as Swag;
 use SwaggerBake\Lib\Extension\CakeSearch\Annotation\SwagSearch;
 
@@ -29,15 +28,15 @@ class ActorsController extends AppController
      *
      * Returns a collection of actors
      *
-     * @param SearchCollectionService $search
+     * @param SearchInterface $search
      * @return \Cake\Http\Response|null|void Renders view
      * @throws \Cake\Http\Exception\MethodNotAllowedException When invalid method
      * @Swag\SwagPaginator()
      * @SwagSearch(tableClass="\App\Model\Table\ActorsTable", collection="default")
      */
-    public function index(SearchCollectionService $search)
+    public function index(SearchInterface $search)
     {
-        $this->set('actors', $search->setTable('Actors')->search($this));
+        $this->set('data', $search->search($this));
     }
 
     /**
@@ -45,15 +44,14 @@ class ActorsController extends AppController
      *
      * Returns an actor
      *
-     * @param GetResourceService $resource
-     * @param string|null $id Actor id.
+     * @param ReadInterface $read
      * @return \Cake\Http\Response|null|void Renders view
      * @throws \Cake\Datasource\Exception\RecordNotFoundException Actor Not Found
      * @throws \Cake\Http\Exception\MethodNotAllowedException
      */
-    public function view(GetResourceService $resource, string $id)
+    public function view(ReadInterface $read)
     {
-        $this->set('actor', $resource->setTable('Actors')->get($id));
+        $this->set('data', $read->read($this));
     }
 
     /**
@@ -61,29 +59,30 @@ class ActorsController extends AppController
      *
      * Returns a collection of the actor's films
      *
-     * @param SearchCollectionService $search
+     * @param SearchInterface $search
      * @param string $id Actor Id
      * @Swag\SwagPaginator(sortEnum={"Films.title","Films.release_year"})
      * @Swag\SwagResponseSchema(schemaItems={"$ref"="#/x-mixerapi-demo/components/schemas/ActorFilm"})
      * @SwagSearch(tableClass="\App\Model\Table\FilmActorsTable", collection="filmsByActor")
      */
-    public function viewFilms(SearchCollectionService $search, string $id)
+    public function viewFilms(SearchInterface $search, string $id)
     {
-        $this->request->allowMethod('get');
-
         $this->paginate = [
             'sortableFields' => [
                 'Films.title', 'Films.release_year'
             ]
         ];
 
-        $this->set('actors',
+        $this->set('data',
             $this->paginate(
                 $search
-                    ->setTable('FilmActors')->setCollection('FilmsByActor')->query($this)
+                    ->setAllowMethod('get')
+                    ->setTableName('FilmActors')->setCollection('FilmsByActor')->query($this)
                     ->contain(['Films'])
                     ->andWhere(['actor_id' => $id])
             )
         );
+
+        $this->viewBuilder()->setOption('_serialize', 'data');
     }
 }

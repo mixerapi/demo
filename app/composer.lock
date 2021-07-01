@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "3aef4cb2777d5854725b2bb6e8426ca6",
+    "content-hash": "fddd5ed5d2af9d3e032aa0a535d0904d",
     "packages": [
         {
             "name": "adbario/php-dot-notation",
@@ -1409,21 +1409,21 @@
         },
         {
             "name": "mixerapi/bake",
-            "version": "v0.2.10",
+            "version": "v0.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/mixerapi/bake.git",
-                "reference": "5a41249d1250f3a8dc2deaa5fdeb3dbc49d89121"
+                "reference": "320a031261074f3c6f861b56bedad28768eacc38"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/mixerapi/bake/zipball/5a41249d1250f3a8dc2deaa5fdeb3dbc49d89121",
-                "reference": "5a41249d1250f3a8dc2deaa5fdeb3dbc49d89121",
+                "url": "https://api.github.com/repos/mixerapi/bake/zipball/320a031261074f3c6f861b56bedad28768eacc38",
+                "reference": "320a031261074f3c6f861b56bedad28768eacc38",
                 "shasum": ""
             },
             "require": {
                 "cakephp/bake": "^2.1",
-                "cakephp/cakephp": "^4.0",
+                "cakephp/cakephp": "~4.0",
                 "php": ">=7.2"
             },
             "type": "cakephp-plugin",
@@ -1452,25 +1452,25 @@
                 "issues": "https://github.com/mixerapi/mixerapi-dev/issues",
                 "source": "https://github.com/mixerapi/bake"
             },
-            "time": "2021-06-26T17:24:19+00:00"
+            "time": "2021-07-01T12:43:50+00:00"
         },
         {
             "name": "mixerapi/collection-view",
-            "version": "v0.2.10",
+            "version": "v0.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/mixerapi/collection-view.git",
-                "reference": "28f96ed0c79757d6b13d1f1c54012a404096d8b7"
+                "reference": "8eeb39b0e42655332579795f330a1862159f7c34"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/mixerapi/collection-view/zipball/28f96ed0c79757d6b13d1f1c54012a404096d8b7",
-                "reference": "28f96ed0c79757d6b13d1f1c54012a404096d8b7",
+                "url": "https://api.github.com/repos/mixerapi/collection-view/zipball/8eeb39b0e42655332579795f330a1862159f7c34",
+                "reference": "8eeb39b0e42655332579795f330a1862159f7c34",
                 "shasum": ""
             },
             "require": {
                 "adbario/php-dot-notation": "^2.2",
-                "cakephp/cakephp": "^4.0",
+                "cakephp/cakephp": "~4.0",
                 "php": ">=7.2"
             },
             "type": "cakephp-plugin",
@@ -1499,7 +1499,7 @@
                 "issues": "https://github.com/mixerapi/mixerapi-dev/issues",
                 "source": "https://github.com/mixerapi/collection-view"
             },
-            "time": "2021-06-26T17:24:19+00:00"
+            "time": "2021-07-01T12:43:50+00:00"
         },
         {
             "name": "mixerapi/core",
@@ -1548,21 +1548,60 @@
             "time": "2021-06-26T17:24:19+00:00"
         },
         {
-            "name": "mixerapi/exception-render",
-            "version": "v0.2.10",
+            "name": "mixerapi/crud",
+            "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "https://github.com/mixerapi/exception-render.git",
-                "reference": "70a97897f9b622380bb53c017d2086ab211e3581"
+                "url": "https://github.com/mixerapi/crud.git",
+                "reference": "17fd2466ff3808d5f68dea5106a04c271824bdb7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/mixerapi/exception-render/zipball/70a97897f9b622380bb53c017d2086ab211e3581",
-                "reference": "70a97897f9b622380bb53c017d2086ab211e3581",
+                "url": "https://api.github.com/repos/mixerapi/crud/zipball/17fd2466ff3808d5f68dea5106a04c271824bdb7",
+                "reference": "17fd2466ff3808d5f68dea5106a04c271824bdb7",
                 "shasum": ""
             },
             "require": {
-                "cakephp/cakephp": "^4.0",
+                "cakephp/cakephp": "~4.2",
+                "php": ">=7.2"
+            },
+            "suggest": {
+                "friendsofcake/search": "Integrates with mixerapi/crud for easy paginatable search filters"
+            },
+            "default-branch": true,
+            "type": "cakephp-plugin",
+            "autoload": {
+                "psr-4": {
+                    "MixerApi\\Crud\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "A CRUD (Create, Read, Update, Delete) plugin for your CakePHP project.",
+            "support": {
+                "issues": "https://github.com/mixerapi/crud/issues",
+                "source": "https://github.com/mixerapi/crud/tree/master"
+            },
+            "time": "2021-07-01T12:43:50+00:00"
+        },
+        {
+            "name": "mixerapi/exception-render",
+            "version": "v0.3.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/mixerapi/exception-render.git",
+                "reference": "b6c942cd038c83dbd67c50067b326da41d5c5db9"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/mixerapi/exception-render/zipball/b6c942cd038c83dbd67c50067b326da41d5c5db9",
+                "reference": "b6c942cd038c83dbd67c50067b326da41d5c5db9",
+                "shasum": ""
+            },
+            "require": {
+                "cakephp/cakephp": "~4.0",
                 "php": ">=7.2"
             },
             "type": "cakephp-plugin",
@@ -1591,24 +1630,24 @@
                 "issues": "https://github.com/mixerapi/mixerapi-dev/issues",
                 "source": "https://github.com/mixerapi/exception-render"
             },
-            "time": "2021-06-26T17:44:05+00:00"
+            "time": "2021-07-01T12:43:50+00:00"
         },
         {
             "name": "mixerapi/hal-view",
-            "version": "v0.2.10",
+            "version": "v0.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/mixerapi/hal-view.git",
-                "reference": "78817da7beeddcbaa92439a1351f9694ff6157e2"
+                "reference": "b8224b21a0d02c30dd3a61297d301fbcf7febb8d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/mixerapi/hal-view/zipball/78817da7beeddcbaa92439a1351f9694ff6157e2",
-                "reference": "78817da7beeddcbaa92439a1351f9694ff6157e2",
+                "url": "https://api.github.com/repos/mixerapi/hal-view/zipball/b8224b21a0d02c30dd3a61297d301fbcf7febb8d",
+                "reference": "b8224b21a0d02c30dd3a61297d301fbcf7febb8d",
                 "shasum": ""
             },
             "require": {
-                "cakephp/cakephp": "^4.0",
+                "cakephp/cakephp": "~4.0",
                 "ext-json": "*",
                 "mixerapi/core": "^0.2",
                 "php": ">=7.2"
@@ -1641,33 +1680,27 @@
                 "issues": "https://github.com/mixerapi/mixerapi-dev/issues",
                 "source": "https://github.com/mixerapi/hal-view"
             },
-            "time": "2021-06-26T17:24:19+00:00"
+            "time": "2021-07-01T12:43:50+00:00"
         },
         {
             "name": "mixerapi/json-ld-view",
-            "version": "v0.2.10",
+            "version": "v0.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/mixerapi/json-ld-view.git",
-                "reference": "03c27f75fa650f9b1f56f861d662b678b1ea85d2"
+                "reference": "7bf74d85fa7254a2d9510f4e3d07cc37c368c6ca"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/mixerapi/json-ld-view/zipball/03c27f75fa650f9b1f56f861d662b678b1ea85d2",
-                "reference": "03c27f75fa650f9b1f56f861d662b678b1ea85d2",
+                "url": "https://api.github.com/repos/mixerapi/json-ld-view/zipball/7bf74d85fa7254a2d9510f4e3d07cc37c368c6ca",
+                "reference": "7bf74d85fa7254a2d9510f4e3d07cc37c368c6ca",
                 "shasum": ""
             },
             "require": {
-                "cakephp/cakephp": "^4.0",
+                "cakephp/cakephp": "~4.0",
                 "ext-json": "*",
                 "mixerapi/core": "^0.2",
                 "php": ">=7.2"
-            },
-            "require-dev": {
-                "cakephp/cakephp-codesniffer": "^4.2",
-                "phpmd/phpmd": "^2.8",
-                "phpstan/phpstan": "^0.12.32",
-                "phpunit/phpunit": "~8.5.0"
             },
             "type": "cakephp-plugin",
             "autoload": {
@@ -1696,43 +1729,37 @@
             "support": {
                 "source": "https://github.com/mixerapi/json-ld-view"
             },
-            "time": "2021-06-26T17:34:40+00:00"
+            "time": "2021-07-01T12:43:50+00:00"
         },
         {
             "name": "mixerapi/mixerapi",
-            "version": "v0.2.10",
+            "version": "v0.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/mixerapi/mixerapi.git",
-                "reference": "3b6956baea75c4c22118b25c605a5362cf67736c"
+                "reference": "fef2e27b2bcc155503b7c994d9bca4a196638cb7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/mixerapi/mixerapi/zipball/3b6956baea75c4c22118b25c605a5362cf67736c",
-                "reference": "3b6956baea75c4c22118b25c605a5362cf67736c",
+                "url": "https://api.github.com/repos/mixerapi/mixerapi/zipball/fef2e27b2bcc155503b7c994d9bca4a196638cb7",
+                "reference": "fef2e27b2bcc155503b7c994d9bca4a196638cb7",
                 "shasum": ""
             },
             "require": {
                 "cakephp/cakephp": "~4.0",
-                "cnizzardini/cakephp-swagger-bake": "^1.0",
-                "friendsofcake/search": "^6.0",
-                "mixerapi/bake": "^0.2",
-                "mixerapi/collection-view": "^0.2",
-                "mixerapi/core": "^0.2",
-                "mixerapi/exception-render": "^0.2",
-                "mixerapi/hal-view": "^0.2",
-                "mixerapi/json-ld-view": "^0.2",
-                "mixerapi/rest": "^0.2",
+                "cnizzardini/cakephp-swagger-bake": "~1.0",
+                "mixerapi/bake": "~0.2",
+                "mixerapi/collection-view": "~0.2",
+                "mixerapi/core": "~0.2",
+                "mixerapi/exception-render": "~0.2",
+                "mixerapi/hal-view": "~0.2",
+                "mixerapi/json-ld-view": "~0.2",
+                "mixerapi/rest": "~0.2",
                 "php": ">=7.2"
             },
-            "require-dev": {
-                "cakephp/cakephp-codesniffer": "^4.2",
-                "phpmd/phpmd": "^2.8",
-                "phpstan/phpstan": "^0.12.32",
-                "phpunit/phpunit": "~8.5.0"
-            },
             "suggest": {
-                "cnizzardini/cakephp-preloader": "An OpCache preloader for php >= 7.4 cakephp projects"
+                "cnizzardini/cakephp-preloader": "An OpCache preloader for php >= 7.4 cakephp projects",
+                "friendsofcake/search": "Search provides a simple interface to create paginate-able filters for your project"
             },
             "type": "cakephp-plugin",
             "autoload": {
@@ -1760,24 +1787,24 @@
                 "issues": "https://github.com/mixerapi/mixerapi/issues",
                 "source": "https://github.com/mixerapi/mixerapi"
             },
-            "time": "2021-06-26T17:24:19+00:00"
+            "time": "2021-07-01T12:43:50+00:00"
         },
         {
             "name": "mixerapi/rest",
-            "version": "v0.2.10",
+            "version": "v0.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/mixerapi/rest.git",
-                "reference": "5a85e900a5f01cabcc4f900ad521f4b740959957"
+                "reference": "23b77ff7ce64ea02a639d79402260d5c937e2f6a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/mixerapi/rest/zipball/5a85e900a5f01cabcc4f900ad521f4b740959957",
-                "reference": "5a85e900a5f01cabcc4f900ad521f4b740959957",
+                "url": "https://api.github.com/repos/mixerapi/rest/zipball/23b77ff7ce64ea02a639d79402260d5c937e2f6a",
+                "reference": "23b77ff7ce64ea02a639d79402260d5c937e2f6a",
                 "shasum": ""
             },
             "require": {
-                "cakephp/cakephp": "^4.0",
+                "cakephp/cakephp": "~4.0",
                 "nikic/php-parser": "^4.8",
                 "php": ">=7.2",
                 "thecodingmachine/class-explorer": "^1.1"
@@ -1808,7 +1835,7 @@
                 "issues": "https://github.com/mixerapi/mixerapi-dev/issues",
                 "source": "https://github.com/mixerapi/rest"
             },
-            "time": "2021-06-26T17:24:19+00:00"
+            "time": "2021-07-01T12:43:50+00:00"
         },
         {
             "name": "mobiledetect/mobiledetectlib",
@@ -2701,16 +2728,16 @@
         },
         {
             "name": "symfony/config",
-            "version": "v5.3.2",
+            "version": "v5.3.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/config.git",
-                "reference": "9c307728cfacbd50914f0db28aee1e0ecd82b99f"
+                "reference": "a69e0c55528b47df88d3c4067ddedf32d485d662"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/config/zipball/9c307728cfacbd50914f0db28aee1e0ecd82b99f",
-                "reference": "9c307728cfacbd50914f0db28aee1e0ecd82b99f",
+                "url": "https://api.github.com/repos/symfony/config/zipball/a69e0c55528b47df88d3c4067ddedf32d485d662",
+                "reference": "a69e0c55528b47df88d3c4067ddedf32d485d662",
                 "shasum": ""
             },
             "require": {
@@ -2760,7 +2787,7 @@
             "description": "Helps you find, load, combine, autofill and validate configuration values of any kind",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/config/tree/v5.3.2"
+                "source": "https://github.com/symfony/config/tree/v5.3.3"
             },
             "funding": [
                 {
@@ -2776,7 +2803,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2021-06-12T10:15:17+00:00"
+            "time": "2021-06-24T08:13:00+00:00"
         },
         {
             "name": "symfony/console",
@@ -2945,16 +2972,16 @@
         },
         {
             "name": "symfony/filesystem",
-            "version": "v5.3.0",
+            "version": "v5.3.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/filesystem.git",
-                "reference": "348116319d7fb7d1faa781d26a48922428013eb2"
+                "reference": "19b71c8f313b411172dd5f470fd61f24466d79a9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/filesystem/zipball/348116319d7fb7d1faa781d26a48922428013eb2",
-                "reference": "348116319d7fb7d1faa781d26a48922428013eb2",
+                "url": "https://api.github.com/repos/symfony/filesystem/zipball/19b71c8f313b411172dd5f470fd61f24466d79a9",
+                "reference": "19b71c8f313b411172dd5f470fd61f24466d79a9",
                 "shasum": ""
             },
             "require": {
@@ -2987,7 +3014,7 @@
             "description": "Provides basic utilities for the filesystem",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/filesystem/tree/v5.3.0"
+                "source": "https://github.com/symfony/filesystem/tree/v5.3.3"
             },
             "funding": [
                 {
@@ -3003,7 +3030,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2021-05-26T17:43:10+00:00"
+            "time": "2021-06-30T07:27:52+00:00"
         },
         {
             "name": "symfony/polyfill-ctype",
@@ -3633,16 +3660,16 @@
         },
         {
             "name": "symfony/string",
-            "version": "v5.3.2",
+            "version": "v5.3.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/string.git",
-                "reference": "0732e97e41c0a590f77e231afc16a327375d50b0"
+                "reference": "bd53358e3eccec6a670b5f33ab680d8dbe1d4ae1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/string/zipball/0732e97e41c0a590f77e231afc16a327375d50b0",
-                "reference": "0732e97e41c0a590f77e231afc16a327375d50b0",
+                "url": "https://api.github.com/repos/symfony/string/zipball/bd53358e3eccec6a670b5f33ab680d8dbe1d4ae1",
+                "reference": "bd53358e3eccec6a670b5f33ab680d8dbe1d4ae1",
                 "shasum": ""
             },
             "require": {
@@ -3696,7 +3723,7 @@
                 "utf8"
             ],
             "support": {
-                "source": "https://github.com/symfony/string/tree/v5.3.2"
+                "source": "https://github.com/symfony/string/tree/v5.3.3"
             },
             "funding": [
                 {
@@ -3712,20 +3739,20 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2021-06-06T09:51:56+00:00"
+            "time": "2021-06-27T11:44:38+00:00"
         },
         {
             "name": "symfony/yaml",
-            "version": "v5.3.2",
+            "version": "v5.3.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/yaml.git",
-                "reference": "71719ab2409401711d619765aa255f9d352a59b2"
+                "reference": "485c83a2fb5893e2ff21bf4bfc7fdf48b4967229"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/yaml/zipball/71719ab2409401711d619765aa255f9d352a59b2",
-                "reference": "71719ab2409401711d619765aa255f9d352a59b2",
+                "url": "https://api.github.com/repos/symfony/yaml/zipball/485c83a2fb5893e2ff21bf4bfc7fdf48b4967229",
+                "reference": "485c83a2fb5893e2ff21bf4bfc7fdf48b4967229",
                 "shasum": ""
             },
             "require": {
@@ -3771,7 +3798,7 @@
             "description": "Loads and dumps YAML files",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/yaml/tree/v5.3.2"
+                "source": "https://github.com/symfony/yaml/tree/v5.3.3"
             },
             "funding": [
                 {
@@ -3787,7 +3814,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2021-06-06T09:51:56+00:00"
+            "time": "2021-06-24T08:13:00+00:00"
         },
         {
             "name": "thecodingmachine/class-explorer",
@@ -7105,16 +7132,16 @@
         },
         {
             "name": "symfony/var-dumper",
-            "version": "v5.3.2",
+            "version": "v5.3.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/var-dumper.git",
-                "reference": "905a22c68b292ffb6f20d7636c36b220d1fba5ae"
+                "reference": "46aa709affb9ad3355bd7a810f9662d71025c384"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/var-dumper/zipball/905a22c68b292ffb6f20d7636c36b220d1fba5ae",
-                "reference": "905a22c68b292ffb6f20d7636c36b220d1fba5ae",
+                "url": "https://api.github.com/repos/symfony/var-dumper/zipball/46aa709affb9ad3355bd7a810f9662d71025c384",
+                "reference": "46aa709affb9ad3355bd7a810f9662d71025c384",
                 "shasum": ""
             },
             "require": {
@@ -7173,7 +7200,7 @@
                 "dump"
             ],
             "support": {
-                "source": "https://github.com/symfony/var-dumper/tree/v5.3.2"
+                "source": "https://github.com/symfony/var-dumper/tree/v5.3.3"
             },
             "funding": [
                 {
@@ -7189,7 +7216,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2021-06-06T09:51:56+00:00"
+            "time": "2021-06-24T08:13:00+00:00"
         },
         {
             "name": "theseer/tokenizer",
@@ -7245,12 +7272,13 @@
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
+        "mixerapi/crud": 20,
         "psy/psysh": 0
     },
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
-        "php": ">=7.2"
+        "php": ">=7.4"
     },
     "platform-dev": [],
     "plugin-api-version": "2.0.0"
