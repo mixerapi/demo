@@ -83,6 +83,6 @@ class ActorsController extends AppController
             )
         );
 
-        $this->viewBuilder()->setOption('_serialize', 'data');
+        $this->viewBuilder()->setOption('serialize', 'data');
     }
 }
