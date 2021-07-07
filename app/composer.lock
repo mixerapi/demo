@@ -618,16 +618,16 @@
         },
         {
             "name": "cnizzardini/cakephp-swagger-bake",
-            "version": "v1.7.3",
+            "version": "v1.7.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/cnizzardini/cakephp-swagger-bake.git",
-                "reference": "58c1e14d1026f3d2ddcd92a998477e7927e277ed"
+                "reference": "6e40050266ce52ccdadd55f1ee420d4874573e01"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/cnizzardini/cakephp-swagger-bake/zipball/58c1e14d1026f3d2ddcd92a998477e7927e277ed",
-                "reference": "58c1e14d1026f3d2ddcd92a998477e7927e277ed",
+                "url": "https://api.github.com/repos/cnizzardini/cakephp-swagger-bake/zipball/6e40050266ce52ccdadd55f1ee420d4874573e01",
+                "reference": "6e40050266ce52ccdadd55f1ee420d4874573e01",
                 "shasum": ""
             },
             "require": {
@@ -682,7 +682,7 @@
                 "source": "https://github.com/cnizzardini/cakephp-swagger-bake",
                 "wiki": "https://github.com/cnizzardini/cakephp-swagger-bake/wiki"
             },
-            "time": "2021-06-30T18:06:57+00:00"
+            "time": "2021-07-07T14:35:46+00:00"
         },
         {
             "name": "composer/ca-bundle",
@@ -1553,12 +1553,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/mixerapi/crud.git",
-                "reference": "17fd2466ff3808d5f68dea5106a04c271824bdb7"
+                "reference": "0d6df34bf97a9f1cdc5e2a5e296868beda423e37"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/mixerapi/crud/zipball/17fd2466ff3808d5f68dea5106a04c271824bdb7",
-                "reference": "17fd2466ff3808d5f68dea5106a04c271824bdb7",
+                "url": "https://api.github.com/repos/mixerapi/crud/zipball/0d6df34bf97a9f1cdc5e2a5e296868beda423e37",
+                "reference": "0d6df34bf97a9f1cdc5e2a5e296868beda423e37",
                 "shasum": ""
             },
             "require": {
@@ -1584,7 +1584,7 @@
                 "issues": "https://github.com/mixerapi/crud/issues",
                 "source": "https://github.com/mixerapi/crud/tree/master"
             },
-            "time": "2021-07-01T12:43:50+00:00"
+            "time": "2021-07-01T14:53:51+00:00"
         },
         {
             "name": "mixerapi/exception-render",
@@ -1951,16 +1951,16 @@
         },
         {
             "name": "nikic/php-parser",
-            "version": "v4.10.5",
+            "version": "v4.11.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nikic/PHP-Parser.git",
-                "reference": "4432ba399e47c66624bc73c8c0f811e5c109576f"
+                "reference": "fe14cf3672a149364fb66dfe11bf6549af899f94"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/4432ba399e47c66624bc73c8c0f811e5c109576f",
-                "reference": "4432ba399e47c66624bc73c8c0f811e5c109576f",
+                "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/fe14cf3672a149364fb66dfe11bf6549af899f94",
+                "reference": "fe14cf3672a149364fb66dfe11bf6549af899f94",
                 "shasum": ""
             },
             "require": {
@@ -2001,9 +2001,9 @@
             ],
             "support": {
                 "issues": "https://github.com/nikic/PHP-Parser/issues",
-                "source": "https://github.com/nikic/PHP-Parser/tree/v4.10.5"
+                "source": "https://github.com/nikic/PHP-Parser/tree/v4.11.0"
             },
-            "time": "2021-05-03T19:11:20+00:00"
+            "time": "2021-07-03T13:36:55+00:00"
         },
         {
             "name": "phpdocumentor/reflection-common",
