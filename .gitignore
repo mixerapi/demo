@@ -39,3 +39,4 @@ nbproject/*
 .docker/php/development/conf.d/*.ini
 /app/webroot/swagger.json
 /app/plugins/AdminApi/webroot/swagger.json
+/app/preload.php
