@@ -36,6 +36,11 @@ class Language extends Entity implements HalResourceInterface, JsonLdDataInterfa
         'films' => true,
     ];
 
+    public function _getName(?string $v)
+    {
+        return h($v);
+    }
+
     /**
      * @inheritDoc
      */

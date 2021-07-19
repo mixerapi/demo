@@ -36,6 +36,11 @@ class Category extends Entity implements HalResourceInterface, JsonLdDataInterfa
         'film_categories' => true,
     ];
 
+    public function _getName(?string $v)
+    {
+        return h($v);
+    }
+
     /**
      * @inheritDoc
      */

@@ -62,6 +62,21 @@ class Film extends Entity implements HalResourceInterface, JsonLdDataInterface
         'inventories' => true,
     ];
 
+    public function _getTitle(?string $v)
+    {
+        return h($v);
+    }
+
+    public function _getDescription(?string $v)
+    {
+        return h($v);
+    }
+
+    public function _getSpecialFeatures(?string $v)
+    {
+        return h($v);
+    }
+
     protected $_hidden = [
         '_joinData',
         '_matchingData'

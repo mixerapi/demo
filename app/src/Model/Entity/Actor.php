@@ -42,6 +42,16 @@ class Actor extends Entity implements HalResourceInterface, JsonLdDataInterface
         '_joinData',
     ];
 
+    public function _getFirstName(?string $v)
+    {
+        return h($v);
+    }
+
+    public function _getLastName(?string $v)
+    {
+        return h($v);
+    }
+
     /**
      * @inheritDoc
      */
