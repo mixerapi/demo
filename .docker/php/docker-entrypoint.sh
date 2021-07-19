@@ -34,10 +34,10 @@ if [ "$1" = 'php-fpm' ] || [ "$1" = 'php' ] || [ "$1" = 'bin/cakephp' ]; then
 
         composer require mixerapi/mixerapi
         bin/cake plugin load MixerApi
-        
+
         composer require mixerapi/crud
         bin/cake plugin load MixerApi/Crud
-        
+
         bin/cake mixerapi install --auto Y
     fi
 
@@ -49,8 +49,12 @@ if [ "$1" = 'php-fpm' ] || [ "$1" = 'php' ] || [ "$1" = 'bin/cakephp' ]; then
     setfacl -R -m u:www-data:rwX -m u:"$(whoami)":rwX logs
     setfacl -R -m u:www-data:rwX -m u:"$(whoami)":rwX tmp
     setfacl -R -m g:nginx:rwX /srv/app
+
+    touch /srv/app/webroot/swagger.json
+    touch /srv/app/plugins/AdminApi/webroot/swagger.json
     chown -R cakephp:www-data .
     chmod 774 -R .
+
 fi
 
 exec docker-php-entrypoint "$@"

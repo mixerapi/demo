@@ -55,6 +55,7 @@ class Application extends BaseApplication
                 'index' => ['get']
             ]
         ]);
+        $this->addPlugin('Search');
         $this->addPlugin('AdminApi');
 
         // Call parent to load bootstrap from files.
