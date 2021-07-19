@@ -13,7 +13,7 @@
         "cnizzardini/cakephp-preloader": "^0.1.1",
         "dereuromark/cakephp-setup": "^2.1",
         "friendsofcake/search": "^6.2",
-        "mixerapi/crud": "dev-master",
+        "mixerapi/crud": "^0.3.0",
         "mixerapi/mixerapi": "^0.3.0",
         "mobiledetect/mobiledetectlib": "^2.8"
     },

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "fddd5ed5d2af9d3e032aa0a535d0904d",
+    "content-hash": "7f5af470af5ab0e91341d9ac5cba935e",
     "packages": [
         {
             "name": "adbario/php-dot-notation",
@@ -1549,7 +1549,7 @@
         },
         {
             "name": "mixerapi/crud",
-            "version": "dev-master",
+            "version": "v0.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/mixerapi/crud.git",
@@ -1568,7 +1568,6 @@
             "suggest": {
                 "friendsofcake/search": "Integrates with mixerapi/crud for easy paginatable search filters"
             },
-            "default-branch": true,
             "type": "cakephp-plugin",
             "autoload": {
                 "psr-4": {
@@ -1582,7 +1581,7 @@
             "description": "A CRUD (Create, Read, Update, Delete) plugin for your CakePHP project.",
             "support": {
                 "issues": "https://github.com/mixerapi/crud/issues",
-                "source": "https://github.com/mixerapi/crud/tree/master"
+                "source": "https://github.com/mixerapi/crud/tree/v0.3.0"
             },
             "time": "2021-07-07T17:42:46+00:00"
         },
@@ -5602,16 +5601,16 @@
         },
         {
             "name": "phpunit/phpunit",
-            "version": "9.5.6",
+            "version": "9.5.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "fb9b8333f14e3dce976a60ef6a7e05c7c7ed8bfb"
+                "reference": "d0dc8b6999c937616df4fb046792004b33fd31c5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/fb9b8333f14e3dce976a60ef6a7e05c7c7ed8bfb",
-                "reference": "fb9b8333f14e3dce976a60ef6a7e05c7c7ed8bfb",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/d0dc8b6999c937616df4fb046792004b33fd31c5",
+                "reference": "d0dc8b6999c937616df4fb046792004b33fd31c5",
                 "shasum": ""
             },
             "require": {
@@ -5689,7 +5688,7 @@
             ],
             "support": {
                 "issues": "https://github.com/sebastianbergmann/phpunit/issues",
-                "source": "https://github.com/sebastianbergmann/phpunit/tree/9.5.6"
+                "source": "https://github.com/sebastianbergmann/phpunit/tree/9.5.7"
             },
             "funding": [
                 {
@@ -5701,7 +5700,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2021-06-23T05:14:38+00:00"
+            "time": "2021-07-19T06:14:47+00:00"
         },
         {
             "name": "psy/psysh",
@@ -7285,7 +7284,6 @@
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
-        "mixerapi/crud": 20,
         "psy/psysh": 0
     },
     "prefer-stable": true,
