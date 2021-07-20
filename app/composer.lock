@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "7f5af470af5ab0e91341d9ac5cba935e",
+    "content-hash": "bfbd376d154f5d470043f0cefbeef151",
     "packages": [
         {
             "name": "adbario/php-dot-notation",
