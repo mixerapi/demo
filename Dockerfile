@@ -16,7 +16,8 @@ RUN if [[ "$ENV" != "prod" ]]; then \
     && apk add --no-cache --virtual .php-deps file re2c autoconf make zlib zlib-dev g++ curl \
     && pecl install xdebug \
     && docker-php-ext-enable xdebug \
-    && apk del -f .php-deps; \
+    && apk del -f .php-deps \
+    ; \
 fi
 
 #
@@ -42,7 +43,8 @@ COPY app .
 
 RUN if [[ "$ENV" = "prod" ]]; then \
     composer install --prefer-dist --no-interaction --no-dev \
-    bin/cake preloader; \
+    && bin/cake preloader \
+    ; \
 fi
 
 ENTRYPOINT ["docker-entrypoint"]
