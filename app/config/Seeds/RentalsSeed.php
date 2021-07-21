@@ -24,10 +24,10 @@ class RentalsSeed extends AbstractSeed
             [
                 'id' => '1',
                 'rental_date' => '2005-05-24 22:53:30',
-                'inventory_id' => '367',
-                'customer_id' => '130',
+                'film_id' => '1',
+                'customer_id' => '1',
                 'return_date' => '2005-05-26 22:04:30',
-                'employee_id' => '1',
+                //'employee_id' => '1',
                 'modified' => '2006-02-15 21:30:53',
             ]
         ];

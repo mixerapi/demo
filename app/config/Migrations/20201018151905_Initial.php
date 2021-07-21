@@ -37,6 +37,7 @@ class Initial extends AbstractMigration
             )
             ->create();
 
+        /*
         $this->table('addresses')
             ->addColumn('address', 'string', [
                 'default' => null,
@@ -89,6 +90,7 @@ class Initial extends AbstractMigration
                 ]
             )
             ->create();
+        */
 
         $this->table('categories')
             ->addColumn('name', 'string', [
@@ -103,6 +105,7 @@ class Initial extends AbstractMigration
             ])
             ->create();
 
+        /*
         $this->table('cities')
             ->addColumn('name', 'string', [
                 'default' => null,
@@ -125,7 +128,9 @@ class Initial extends AbstractMigration
                 ]
             )
             ->create();
+        */
 
+        /*
         $this->table('countries')
             ->addColumn('name', 'string', [
                 'default' => null,
@@ -133,13 +138,16 @@ class Initial extends AbstractMigration
                 'null' => false,
             ])
             ->create();
+        */
 
         $this->table('customers')
+            /*
             ->addColumn('store_id', 'integer', [
                 'default' => null,
                 'limit' => null,
                 'null' => false,
             ])
+            */
             ->addColumn('first_name', 'string', [
                 'default' => null,
                 'limit' => 45,
@@ -155,11 +163,13 @@ class Initial extends AbstractMigration
                 'limit' => 50,
                 'null' => true,
             ])
+            /*
             ->addColumn('address_id', 'integer', [
                 'default' => null,
                 'limit' => null,
                 'null' => false,
             ])
+            */
             ->addColumn('is_active', 'boolean', [
                 'default' => true,
                 'limit' => null,
@@ -180,6 +190,7 @@ class Initial extends AbstractMigration
                     'last_name',
                 ]
             )
+            /*
             ->addIndex(
                 [
                     'address_id',
@@ -190,8 +201,9 @@ class Initial extends AbstractMigration
                     'store_id',
                 ]
             )
+            */
             ->create();
-
+        /*
         $this->table('employees')
             ->addColumn('first_name', 'string', [
                 'default' => null,
@@ -254,6 +266,7 @@ class Initial extends AbstractMigration
                 ]
             )
             ->create();
+        */
 
         $this->table('film_actors', ['id' => false, 'primary_key' => ['uuid']])
             ->addColumn('uuid', 'uuid', [
@@ -404,6 +417,7 @@ class Initial extends AbstractMigration
             )
             ->create();
 
+        /*
         $this->table('inventories')
             ->addColumn('film_id', 'integer', [
                 'default' => null,
@@ -432,6 +446,7 @@ class Initial extends AbstractMigration
                 ]
             )
             ->create();
+        */
 
         $this->table('languages')
             ->addColumn('name', 'char', [
@@ -446,6 +461,7 @@ class Initial extends AbstractMigration
             ])
             ->create();
 
+        /*
         $this->table('payments')
             ->addColumn('customer_id', 'integer', [
                 'default' => null,
@@ -494,6 +510,7 @@ class Initial extends AbstractMigration
                 ]
             )
             ->create();
+        */
 
         $this->table('rentals')
             ->addColumn('rental_date', 'datetime', [
@@ -501,7 +518,7 @@ class Initial extends AbstractMigration
                 'limit' => null,
                 'null' => false,
             ])
-            ->addColumn('inventory_id', 'integer', [
+            ->addColumn('film_id', 'integer', [
                 'default' => null,
                 'limit' => null,
                 'null' => false,
@@ -516,11 +533,13 @@ class Initial extends AbstractMigration
                 'limit' => null,
                 'null' => true,
             ])
+            /*
             ->addColumn('employee_id', 'integer', [
                 'default' => null,
                 'limit' => null,
                 'null' => false,
             ])
+            */
             ->addColumn('modified', 'datetime', [
                 'default' => null,
                 'limit' => null,
@@ -529,16 +548,18 @@ class Initial extends AbstractMigration
             ->addIndex(
                 [
                     'rental_date',
-                    'inventory_id',
+                    //'inventory_id',
                     'customer_id',
                 ],
                 ['unique' => true]
             )
+            /*
             ->addIndex(
                 [
                     'employee_id',
                 ]
             )
+            */
             ->addIndex(
                 [
                     'customer_id',
@@ -546,11 +567,12 @@ class Initial extends AbstractMigration
             )
             ->addIndex(
                 [
-                    'inventory_id',
+                    'film_id',
                 ]
             )
             ->create();
 
+        /*
         $this->table('stores')
             ->addColumn('employee_id', 'integer', [
                 'default' => null,
@@ -579,6 +601,7 @@ class Initial extends AbstractMigration
                 ]
             )
             ->create();
+        */
     }
 
     /**
@@ -591,20 +614,20 @@ class Initial extends AbstractMigration
     public function down()
     {
         $this->table('actors')->drop()->save();
-        $this->table('addresses')->drop()->save();
+        //$this->table('addresses')->drop()->save();
         $this->table('categories')->drop()->save();
-        $this->table('cities')->drop()->save();
-        $this->table('countries')->drop()->save();
+        //$this->table('cities')->drop()->save();
+        //$this->table('countries')->drop()->save();
         $this->table('customers')->drop()->save();
-        $this->table('employees')->drop()->save();
+        //$this->table('employees')->drop()->save();
         $this->table('film_actors')->drop()->save();
         $this->table('film_categories')->drop()->save();
         $this->table('film_texts')->drop()->save();
         $this->table('films')->drop()->save();
-        $this->table('inventories')->drop()->save();
+        //$this->table('inventories')->drop()->save();
         $this->table('languages')->drop()->save();
         $this->table('payments')->drop()->save();
         $this->table('rentals')->drop()->save();
-        $this->table('stores')->drop()->save();
+        //$this->table('stores')->drop()->save();
     }
 }

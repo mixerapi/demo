@@ -5,6 +5,8 @@ use Migrations\AbstractSeed;
 
 /**
  * Cities seed.
+ *
+ * @deprecated
  */
 class CitiesSeed extends AbstractSeed
 {
@@ -17,9 +19,13 @@ class CitiesSeed extends AbstractSeed
      * https://book.cakephp.org/phinx/0/en/seeding.html
      *
      * @return void
+     * @deprecated
      */
     public function run()
     {
+        trigger_deprecation('mixerapi/demo', 'v0.3.2', 'this seed has been removed');
+        return;
+
         $data = [
             [
                 'id' => '1',

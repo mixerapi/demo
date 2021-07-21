@@ -5,6 +5,7 @@ use Migrations\AbstractSeed;
 
 /**
  * Stores seed.
+ * @deprecated
  */
 class StoresSeed extends AbstractSeed
 {
@@ -16,10 +17,14 @@ class StoresSeed extends AbstractSeed
      * More information on writing seeds is available here:
      * https://book.cakephp.org/phinx/0/en/seeding.html
      *
+     * @deprecated
      * @return void
      */
     public function run()
     {
+        trigger_deprecation('mixerapi/demo', 'v0.3.2', 'this seed has been removed');
+        return;
+
         $data = [
             [
                 'id' => '1',
