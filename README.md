@@ -27,6 +27,19 @@ Bring up stack:
 make init
 ```
 
+
+#### For Mac Users
+
+1. Change your `SHELL` in the Makefile to `/bin/zsh`. This improves various output from the Makefile such as emoji's.
+
+3. Mac ships with an older version of `sed` so install `gnu-sed` for some targets in the Makefile:
+
+```console
+brew install gnu-sed
+```
+
+Then update `sed` to `gsed` in the Makefile.
+
 Next, generate schema and seed data:
 
 ```console
