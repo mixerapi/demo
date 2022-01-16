@@ -1,8 +1,7 @@
 #
 # container
-# @see https://hub.docker.com/repository/docker/cnizzardini/php-fpm-alpine
-# @see https://github.com/cnizzardini/php-fpm-alpine/tree/php-7.4
-FROM cnizzardini/php-fpm-alpine:7.4-latest AS cakephp_php
+# @see https://github.com/cnizzardini/cakephp-docker
+FROM cnizzardini/php-fpm-alpine:8.0-latest AS cakephp_php
 
 ARG ENV=prod
 ARG UID=1000
@@ -34,8 +33,10 @@ COPY .assets /srv/.assets
 
 WORKDIR /srv/app
 
-RUN addgroup -g 101 nginx
 RUN adduser --disabled-password --gecos '' -u $UID cakephp;
+RUN addgroup -g 101 nginx
+RUN addgroup cakephp nginx
+RUN addgroup cakephp www-data
 
 COPY --from=composer /usr/bin/composer /usr/bin/composer
 

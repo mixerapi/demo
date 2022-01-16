@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace App\Model\Entity;
 
-use App\Service\HyperMedia;
+use App\Services\HyperMedia;
 use Cake\Datasource\EntityInterface;
 use Cake\ORM\Entity;
 use MixerApi\HalView\HalResourceInterface;
@@ -83,7 +83,7 @@ class Language extends Entity implements HalResourceInterface, JsonLdDataInterfa
     public function getJsonLdSchemas(): array
     {
         return [
-            (new JsonLdSchema())->setProperty('name')->setSchemaUrl('https://schema.org/name'),
+            new JsonLdSchema('name', 'https://schema.org/name'),
         ];
     }
 }

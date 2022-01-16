@@ -4,8 +4,9 @@ declare(strict_types=1);
 namespace App\Controller;
 
 use MixerApi\Crud\Interfaces\{SearchInterface, ReadInterface};
-use SwaggerBake\Lib\Annotation as Swag;
-use SwaggerBake\Lib\Extension\CakeSearch\Annotation\SwagSearch;
+use SwaggerBake\Lib\Attribute\OpenApiPaginator;
+use SwaggerBake\Lib\Attribute\OpenApiResponse;
+use SwaggerBake\Lib\Extension\CakeSearch\Attribute\OpenApiSearch;
 
 /**
  * Actors Controller
@@ -29,14 +30,14 @@ class ActorsController extends AppController
      * Returns a collection of actors
      *
      * @param SearchInterface $search
-     * @return \Cake\Http\Response|null|void Renders view
-     * @throws \Cake\Http\Exception\MethodNotAllowedException When invalid method
-     * @Swag\SwagPaginator()
-     * @SwagSearch(tableClass="\App\Model\Table\ActorsTable", collection="default")
+     * @return \Cake\Http\Response|null|void
+     * @throws \Cake\Http\Exception\MethodNotAllowedException
      */
+    #[OpenApiPaginator]
+    #[OpenApiSearch(tableClass: '\App\Model\Table\ActorsTable')]
     public function index(SearchInterface $search)
     {
-        $this->set('data', $search->search($this));
+        $this->set('data', $this->paginate($search->query($this)));
     }
 
     /**
@@ -45,8 +46,8 @@ class ActorsController extends AppController
      * Returns an actor
      *
      * @param ReadInterface $read
-     * @return \Cake\Http\Response|null|void Renders view
-     * @throws \Cake\Datasource\Exception\RecordNotFoundException Actor Not Found
+     * @return \Cake\Http\Response|null|void
+     * @throws \Cake\Datasource\Exception\RecordNotFoundException
      * @throws \Cake\Http\Exception\MethodNotAllowedException
      */
     public function view(ReadInterface $read)
@@ -57,14 +58,14 @@ class ActorsController extends AppController
     /**
      * View Actor's Films
      *
-     * Returns a collection of the actor's films
+     * Returns a collection of the actor's films.
      *
      * @param SearchInterface $search
      * @param string $id Actor Id
-     * @Swag\SwagPaginator(sortEnum={"Films.title","Films.release_year"})
-     * @Swag\SwagResponseSchema(schemaItems={"$ref"="#/x-mixerapi-demo/components/schemas/ActorFilm"})
-     * @SwagSearch(tableClass="\App\Model\Table\FilmActorsTable", collection="filmsByActor")
      */
+    #[OpenApiPaginator(sortEnum: ['Films.title', 'Films.release_year'])]
+    #[OpenApiSearch(tableClass: '\App\Model\Table\FilmActorsTable', collection: 'filmsByActor')]
+    #[OpenApiResponse(schemaType: 'array', associations: ['table' => 'FilmActors','whiteList' => ['Films.Languages']])]
     public function viewFilms(SearchInterface $search, string $id)
     {
         $this->paginate = [
@@ -77,8 +78,10 @@ class ActorsController extends AppController
             $this->paginate(
                 $search
                     ->setAllowMethod('get')
-                    ->setTableName('FilmActors')->setCollection('FilmsByActor')->query($this)
-                    ->contain(['Films'])
+                    ->setTableName('FilmActors')
+                    ->setCollection('FilmsByActor')
+                    ->query($this)
+                    ->contain(['Films' => ['Languages']])
                     ->andWhere(['actor_id' => $id])
             )
         );

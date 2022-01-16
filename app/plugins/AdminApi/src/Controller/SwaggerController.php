@@ -5,7 +5,7 @@ namespace AdminApi\Controller;
 
 use AdminApi\Controller\AppController;
 use Cake\Core\Configure;
-use SwaggerBake\Lib\Annotation\SwagOperation;
+use SwaggerBake\Lib\Attribute\OpenApiOperation;
 
 class SwaggerController extends AppController
 {
@@ -25,9 +25,9 @@ class SwaggerController extends AppController
     /**
      * Controller action for displaying built-in Swagger UI
      *
-     * @SwagOperation(isVisible=false)
      * @return \Cake\Http\Response|null|void Renders view
      */
+    #[OpenApiOperation(isVisible: false)]
     public function index()
     {
         $config = $this->SwaggerUi->getSwaggerBakeConfiguration();

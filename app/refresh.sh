@@ -8,9 +8,13 @@ printf "\n# Maintenance Mode \n"
 
 bin/cake Setup.MaintenanceMode activate
 
-printf "\n# Truncate \n"
+printf "\n# Drop Tables \n"
 
-bin/cake truncate_database
+bin/cake drop_tables
+
+printf "\n# Run migrations \n"
+
+bin/cake migrations migrate
 
 printf "\n# Seeding Database \n"
 

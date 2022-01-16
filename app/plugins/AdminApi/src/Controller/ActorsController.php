@@ -4,8 +4,9 @@ declare(strict_types=1);
 namespace AdminApi\Controller;
 
 use MixerApi\Crud\Interfaces\{CreateInterface, ReadInterface, UpdateInterface, DeleteInterface, SearchInterface};
-use SwaggerBake\Lib\Annotation as Swag;
-use SwaggerBake\Lib\Extension\CakeSearch\Annotation\SwagSearch;
+use SwaggerBake\Lib\Attribute\OpenApiPaginator;
+use SwaggerBake\Lib\Attribute\OpenApiResponse;
+use SwaggerBake\Lib\Extension\CakeSearch\Attribute\OpenApiSearch;
 
 /**
  * Actors Controller
@@ -29,9 +30,9 @@ class ActorsController extends AppController
      * @param SearchInterface $search
      * @return \Cake\Http\Response|null|void Renders view
      * @throws \Cake\Http\Exception\MethodNotAllowedException When invalid method
-     * @Swag\SwagPaginator()
-     * @SwagSearch(tableClass="\App\Model\Table\ActorsTable", collection="default")
      */
+    #[OpenApiPaginator]
+    #[OpenApiSearch(tableClass: '\App\Model\Table\ActorsTable')]
     public function index(SearchInterface $search)
     {
         $this->set('data', $search->search($this));
@@ -56,9 +57,10 @@ class ActorsController extends AppController
      * @param CreateInterface $create
      * @return \Cake\Http\Response|null|void HTTP 200 on successful add
      * @throws \Cake\Http\Exception\MethodNotAllowedException
-     * @throws \MixerApi\ExceptionRender\ValidationException
+     * @throws \MixerApi\ExceptionRender\OpenApiExceptionSchema
      * @throws \Exception
      */
+    #[OpenApiResponse(statusCode: '201')]
     public function add(CreateInterface $create)
     {
         $this->set('data', $create->save($this));
@@ -71,7 +73,7 @@ class ActorsController extends AppController
      * @return \Cake\Http\Response|null|void HTTP 200 on successful edit
      * @throws \Cake\Datasource\Exception\RecordNotFoundException
      * @throws \Cake\Http\Exception\MethodNotAllowedException
-     * @throws \MixerApi\ExceptionRender\ValidationException
+     * @throws \MixerApi\ExceptionRender\OpenApiExceptionSchema
      * @throws \Exception
      */
     public function edit(UpdateInterface $update)

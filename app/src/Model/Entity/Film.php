@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace App\Model\Entity;
 
-use App\Service\HyperMedia;
+use App\Services\HyperMedia;
 use Cake\Datasource\EntityInterface;
 use Cake\ORM\Entity;
 use MixerApi\HalView\HalResourceInterface;
@@ -124,22 +124,11 @@ class Film extends Entity implements HalResourceInterface, JsonLdDataInterface
     public function getJsonLdSchemas(): array
     {
         return [
-            (new JsonLdSchema())
-                ->setProperty('title')
-                ->setSchemaUrl('https://schema.org/name')
-                ->setDescription('The title of the movie'),
-            (new JsonLdSchema())
-                ->setProperty('description')
-                ->setSchemaUrl('https://schema.org/about'),
-            (new JsonLdSchema())
-                ->setProperty('length')
-                ->setSchemaUrl('https://schema.org/duration'),
-            (new JsonLdSchema())
-                ->setProperty('rating')
-                ->setSchemaUrl('https://schema.org/contentRating'),
-            (new JsonLdSchema())
-                ->setProperty('release_year')
-                ->setSchemaUrl('https://schema.org/copyrightYear'),
+            new JsonLdSchema('title', 'https://schema.org/name', 'The title of the movie'),
+            new JsonLdSchema('description', 'https://schema.org/about'),
+            new JsonLdSchema('length', 'https://schema.org/duration'),
+            new JsonLdSchema('rating', 'https://schema.org/contentRating'),
+            new JsonLdSchema('release_year', 'https://schema.org/copyrightYear'),
         ];
     }
 }

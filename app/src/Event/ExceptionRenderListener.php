@@ -5,7 +5,7 @@ namespace App\Event;
 
 use Cake\Event\Event;
 use Cake\Event\EventListenerInterface;
-use App\Service\ExceptionRender\AlterMixerApiException;
+use App\Services\ExceptionRender\AlterMixerApiException;
 use MixerApi\ExceptionRender\ErrorDecorator;
 
 /**

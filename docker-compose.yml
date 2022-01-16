@@ -14,6 +14,7 @@ services:
       - ./.docker/php/development:/usr/local/etc/php
       - ~/.ssh/:/home/root/.ssh
       - ./../mixerapi-dev/:/srv/mixerapi-dev  # for developing with mixerapi/mixerapi-dev
+      - ./../../cakephp-swagger-bake/:/srv/cakephp-swagger-bake  # for developing with mixerapi/mixerapi-dev
     depends_on:
       - db
 
@@ -37,6 +38,7 @@ services:
       - ./app:/srv/app
       - ./.docker/nginx:/etc/nginx/conf.d
       - ./../mixerapi-dev/:/srv/mixerapi-dev # for developing with mixerapi/mixerapi-dev
+      - ./../../cakephp-swagger-bake/:/srv/cakephp-swagger-bake  # for developing with mixerapi/mixerapi-dev
     ports:
       - "8080:80"
     depends_on:

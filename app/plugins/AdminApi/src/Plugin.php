@@ -12,6 +12,7 @@ use Cake\Core\PluginApplicationInterface;
 use Cake\Http\MiddlewareQueue;
 use Cake\Routing\RouteBuilder;
 use MixerApi\Rest\Lib\AutoRouter;
+use MixerApi\Rest\Lib\Route\ResourceScanner;
 use Psr\Http\Message\ServerRequestInterface;
 
 /**
@@ -48,7 +49,7 @@ class Plugin extends BasePlugin implements AuthenticationServiceProviderInterfac
     {
         $routes->plugin('AdminApi', ['path' => '/admin'], function (RouteBuilder $builder) {
             $builder->setExtensions(['json','xml']);
-            (new AutoRouter($builder, 'AdminApi\Controller'))->buildResources();
+            (new AutoRouter($builder, new ResourceScanner('AdminApi\Controller')))->buildResources();
             $builder->connect('/', [
                 'plugin' => 'AdminApi', 'controller' => 'Swagger', 'action' => 'index'
             ]);

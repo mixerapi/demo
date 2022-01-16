@@ -26,6 +26,7 @@ use Cake\Http\MiddlewareQueue;
 use Cake\ORM\Locator\TableLocator;
 use Cake\Routing\Middleware\AssetMiddleware;
 use Cake\Routing\Middleware\RoutingMiddleware;
+use Exception;
 use MixerApi\Core\Event\EventListenerLoader;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
@@ -155,6 +156,12 @@ class Application extends BaseApplication
             $this->addPlugin('Bake');
         } catch (MissingPluginException $e) {
             // Do not halt if the plugin is missing
+        }
+
+        try {
+            $this->addPlugin('IdeHelper');
+        } catch (Exception $e) {
+            // Do not halt
         }
 
         $this->addPlugin('CakePreloader');

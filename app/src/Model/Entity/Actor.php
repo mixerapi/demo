@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace App\Model\Entity;
 
-use App\Service\HyperMedia;
+use App\Services\HyperMedia;
 use Cake\Datasource\EntityInterface;
 use Cake\ORM\Entity;
 use MixerApi\HalView\HalResourceInterface;
@@ -94,8 +94,8 @@ class Actor extends Entity implements HalResourceInterface, JsonLdDataInterface
     public function getJsonLdSchemas(): array
     {
         return [
-            (new JsonLdSchema())->setProperty('first_name')->setSchemaUrl('https://schema.org/giveName'),
-            (new JsonLdSchema())->setProperty('last_name')->setSchemaUrl('https://schema.org/familyName'),
+            new JsonLdSchema('first_name', 'https://schema.org/giveName'),
+            new JsonLdSchema('last_name', 'https://schema.org/familyName'),
         ];
     }
 }

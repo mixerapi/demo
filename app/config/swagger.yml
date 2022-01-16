@@ -47,32 +47,3 @@ x-mixerapi-demo:
           total:
             type: integer
             example: 100
-      ActorFilm:
-        type: object
-        properties:
-          id:
-            type: string
-            example: "9d90c3bc-8433-11ea-82ad-2079182842a9"
-          actor_id:
-            type: integer
-            example: 21
-          film_id:
-            type: integer
-            example: 117
-          film:
-            $ref: '#/x-swagger-bake/components/schemas/Film-Read'
-      FilmActor:
-        type: object
-        properties:
-          id:
-            type: string
-            example: "9d90c3bc-8433-11ea-82ad-2079182842a9"
-          actor_id:
-            type: integer
-            example: 21
-          film_id:
-            type: integer
-            example: 117
-          film:
-            $ref: '#/x-swagger-bake/components/schemas/Actor-Read'
-

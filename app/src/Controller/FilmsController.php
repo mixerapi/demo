@@ -4,9 +4,11 @@ declare(strict_types=1);
 namespace App\Controller;
 
 use Cake\ORM\TableRegistry;
-use MixerApi\Crud\Interfaces\{SearchInterface, ReadInterface};
-use SwaggerBake\Lib\Annotation as Swag;
-use SwaggerBake\Lib\Extension\CakeSearch\Annotation\SwagSearch;
+use MixerApi\Crud\Interfaces\ReadInterface;
+use MixerApi\Crud\Interfaces\SearchInterface;
+use SwaggerBake\Lib\Attribute\OpenApiPaginator;
+use SwaggerBake\Lib\Attribute\OpenApiResponse;
+use SwaggerBake\Lib\Extension\CakeSearch\Attribute\OpenApiSearch;
 
 /**
  * Films Controller
@@ -30,11 +32,11 @@ class FilmsController extends AppController
      * Returns a collection of films
      *
      * @param SearchInterface $search
-     * @return \Cake\Http\Response|null|void Renders view
-     * @throws \Cake\Http\Exception\MethodNotAllowedException When invalid method
-     * @Swag\SwagPaginator()
-     * @SwagSearch(tableClass="\App\Model\Table\FilmsTable", collection="default")
+     * @return \Cake\Http\Response|null|void
+     * @throws \Cake\Http\Exception\MethodNotAllowedException
      */
+    #[OpenApiPaginator]
+    #[OpenApiSearch(tableClass: '\App\Model\Table\FilmsTable')]
     public function index(SearchInterface $search)
     {
         $this->set('data', $search->search($this));
@@ -46,8 +48,8 @@ class FilmsController extends AppController
      * Returns a film
      *
      * @param ReadInterface $read
-     * @return \Cake\Http\Response|null|void Renders view
-     * @throws \Cake\Datasource\Exception\RecordNotFoundException Actor Not Found
+     * @return \Cake\Http\Response|null|void
+     * @throws \Cake\Datasource\Exception\RecordNotFoundException
      * @throws \Cake\Http\Exception\MethodNotAllowedException
      */
     public function view(ReadInterface $read)
@@ -61,13 +63,11 @@ class FilmsController extends AppController
      * Returns a collection of the film's actors
      *
      * @param string $id Actor Id
-     * @Swag\SwagPaginator(sortEnum={"Actors.first_name","Actors.last_name"})
-     * @Swag\SwagResponseSchema(schemaItems={"$ref"="#/x-mixerapi-demo/components/schemas/FilmActor"})
      */
+    #[OpenApiPaginator(sortEnum: ['Actors.first_name','Actors.last_name'])]
+    #[OpenApiResponse(schemaType: 'array', associations: ['table' => 'FilmActors', 'whiteList' => ['Actors']])]
     public function viewActors(string $id)
     {
-        $this->request->allowMethod('get');
-
         $this->paginate = [
             'sortableFields' => [
                 'Actors.first_name', 'Actors.last_name'
