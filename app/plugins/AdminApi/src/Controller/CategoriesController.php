@@ -5,7 +5,6 @@ namespace AdminApi\Controller;
 
 use MixerApi\Crud\Interfaces\{CreateInterface, ReadInterface, UpdateInterface, DeleteInterface, SearchInterface};
 use SwaggerBake\Lib\Attribute\OpenApiPaginator;
-use SwaggerBake\Lib\Attribute\OpenApiResponse;
 use SwaggerBake\Lib\Extension\CakeSearch\Attribute\OpenApiSearch;
 
 /**
@@ -62,7 +61,6 @@ class CategoriesController extends AppController
      * @throws \MixerApi\ExceptionRender\OpenApiExceptionSchema
      * @throws \Exception
      */
-    #[OpenApiResponse(statusCode: '201')]
     public function add(CreateInterface $create)
     {
         $this->set('category', $create->save($this));

@@ -288,16 +288,16 @@
             },
             "type": "library",
             "autoload": {
-                "psr-4": {
-                    "Cake\\": "src/"
-                },
                 "files": [
                     "src/Core/functions.php",
                     "src/Collection/functions.php",
                     "src/I18n/functions.php",
                     "src/Routing/functions.php",
                     "src/Utility/bootstrap.php"
-                ]
+                ],
+                "psr-4": {
+                    "Cake\\": "src/"
+                }
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -619,16 +619,16 @@
         },
         {
             "name": "cnizzardini/cakephp-swagger-bake",
-            "version": "v2.2.0",
+            "version": "v2.2.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/cnizzardini/cakephp-swagger-bake.git",
-                "reference": "90bf2668608942872d9465ce333dcbfa6a70ad40"
+                "reference": "e50e7a2b786690a81a027f0bda777b442d691e81"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/cnizzardini/cakephp-swagger-bake/zipball/90bf2668608942872d9465ce333dcbfa6a70ad40",
-                "reference": "90bf2668608942872d9465ce333dcbfa6a70ad40",
+                "url": "https://api.github.com/repos/cnizzardini/cakephp-swagger-bake/zipball/e50e7a2b786690a81a027f0bda777b442d691e81",
+                "reference": "e50e7a2b786690a81a027f0bda777b442d691e81",
                 "shasum": ""
             },
             "require": {
@@ -680,7 +680,7 @@
                 "issues": "https://github.com/cnizzardini/cakephp-swagger-bake/issues",
                 "source": "https://github.com/cnizzardini/cakephp-swagger-bake"
             },
-            "time": "2022-02-01T00:49:29+00:00"
+            "time": "2022-02-04T00:25:05+00:00"
         },
         {
             "name": "composer/ca-bundle",
@@ -1255,7 +1255,7 @@
         },
         {
             "name": "mixerapi/bake",
-            "version": "v1.0.0",
+            "version": "v1.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/mixerapi/bake.git",
@@ -1302,7 +1302,7 @@
         },
         {
             "name": "mixerapi/collection-view",
-            "version": "v1.0.0",
+            "version": "v1.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/mixerapi/collection-view.git",
@@ -1349,7 +1349,7 @@
         },
         {
             "name": "mixerapi/core",
-            "version": "v1.0.0",
+            "version": "v1.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/mixerapi/core.git",
@@ -1395,7 +1395,7 @@
         },
         {
             "name": "mixerapi/crud",
-            "version": "v1.0.0",
+            "version": "v1.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/mixerapi/crud.git",
@@ -1427,13 +1427,13 @@
             "description": "A CRUD (Create, Read, Update, Delete) plugin for your CakePHP project.",
             "support": {
                 "issues": "https://github.com/mixerapi/crud/issues",
-                "source": "https://github.com/mixerapi/crud/tree/v1.0.0"
+                "source": "https://github.com/mixerapi/crud/tree/v1.0.1"
             },
             "time": "2022-01-16T15:18:12+00:00"
         },
         {
             "name": "mixerapi/exception-render",
-            "version": "v1.0.0",
+            "version": "v1.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/mixerapi/exception-render.git",
@@ -1482,7 +1482,7 @@
         },
         {
             "name": "mixerapi/hal-view",
-            "version": "v1.0.0",
+            "version": "v1.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/mixerapi/hal-view.git",
@@ -1531,7 +1531,7 @@
         },
         {
             "name": "mixerapi/json-ld-view",
-            "version": "v1.0.0",
+            "version": "v1.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/mixerapi/json-ld-view.git",
@@ -1579,16 +1579,16 @@
         },
         {
             "name": "mixerapi/mixerapi",
-            "version": "v1.0.0",
+            "version": "v1.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/mixerapi/mixerapi.git",
-                "reference": "b340cff92af7db3754d1724eb5f32783eff23871"
+                "reference": "e3cfabcd14f09a0fe13cd618bbdef0234f0f322a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/mixerapi/mixerapi/zipball/b340cff92af7db3754d1724eb5f32783eff23871",
-                "reference": "b340cff92af7db3754d1724eb5f32783eff23871",
+                "url": "https://api.github.com/repos/mixerapi/mixerapi/zipball/e3cfabcd14f09a0fe13cd618bbdef0234f0f322a",
+                "reference": "e3cfabcd14f09a0fe13cd618bbdef0234f0f322a",
                 "shasum": ""
             },
             "require": {
@@ -1633,11 +1633,11 @@
                 "issues": "https://github.com/mixerapi/mixerapi/issues",
                 "source": "https://github.com/mixerapi/mixerapi"
             },
-            "time": "2022-01-16T15:18:12+00:00"
+            "time": "2022-02-02T11:19:37+00:00"
         },
         {
             "name": "mixerapi/rest",
-            "version": "v1.0.0",
+            "version": "v1.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/mixerapi/rest.git",
@@ -1705,12 +1705,12 @@
             },
             "type": "library",
             "autoload": {
-                "classmap": [
-                    "Mobile_Detect.php"
-                ],
                 "psr-0": {
                     "Detection": "namespaced/"
-                }
+                },
+                "classmap": [
+                    "Mobile_Detect.php"
+                ]
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -4701,12 +4701,12 @@
             },
             "type": "library",
             "autoload": {
-                "psr-4": {
-                    "DeepCopy\\": "src/DeepCopy/"
-                },
                 "files": [
                     "src/DeepCopy/deep_copy.php"
-                ]
+                ],
+                "psr-4": {
+                    "DeepCopy\\": "src/DeepCopy/"
+                }
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [

@@ -60,7 +60,6 @@ class ActorsController extends AppController
      * @throws \MixerApi\ExceptionRender\OpenApiExceptionSchema
      * @throws \Exception
      */
-    #[OpenApiResponse(statusCode: '201')]
     public function add(CreateInterface $create)
     {
         $this->set('data', $create->save($this));
