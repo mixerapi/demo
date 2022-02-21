@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
+use App\Model\Table\FilmsTable;
 use Cake\ORM\TableRegistry;
 use MixerApi\Crud\Interfaces\ReadInterface;
 use MixerApi\Crud\Interfaces\SearchInterface;
@@ -29,14 +30,14 @@ class FilmsController extends AppController
     /**
      * Films Collection
      *
-     * Returns a collection of films
+     * This example uses mixerapi/crud.
      *
      * @param SearchInterface $search
      * @return \Cake\Http\Response|null|void
      * @throws \Cake\Http\Exception\MethodNotAllowedException
      */
     #[OpenApiPaginator]
-    #[OpenApiSearch(tableClass: '\App\Model\Table\FilmsTable')]
+    #[OpenApiSearch(tableClass: FilmsTable::class)]
     public function index(SearchInterface $search)
     {
         $this->set('data', $search->search($this));
@@ -45,7 +46,7 @@ class FilmsController extends AppController
     /**
      * Film Resource
      *
-     * Returns a film
+     * This example uses mixerapi/crud.
      *
      * @param ReadInterface $read
      * @return \Cake\Http\Response|null|void

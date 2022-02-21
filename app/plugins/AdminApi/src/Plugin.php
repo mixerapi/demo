@@ -3,22 +3,20 @@ declare(strict_types=1);
 
 namespace AdminApi;
 
-use Authentication\AuthenticationService;
-use Authentication\AuthenticationServiceInterface;
-use Authentication\AuthenticationServiceProviderInterface;
 use Authentication\Middleware\AuthenticationMiddleware;
+use AuthenticationApi\HsKey;
+use AuthenticationApi\Service\JwksService;
 use Cake\Core\BasePlugin;
 use Cake\Core\PluginApplicationInterface;
 use Cake\Http\MiddlewareQueue;
 use Cake\Routing\RouteBuilder;
 use MixerApi\Rest\Lib\AutoRouter;
 use MixerApi\Rest\Lib\Route\ResourceScanner;
-use Psr\Http\Message\ServerRequestInterface;
 
 /**
  * Plugin for AdminApi
  */
-class Plugin extends BasePlugin implements AuthenticationServiceProviderInterface
+class Plugin extends BasePlugin
 {
     /**
      * Load all the plugin configuration and bootstrap logic.
@@ -32,8 +30,6 @@ class Plugin extends BasePlugin implements AuthenticationServiceProviderInterfac
     public function bootstrap(PluginApplicationInterface $app): void
     {
         parent::bootstrap($app);
-
-        $app->addPlugin('Authentication');
     }
 
     /**
@@ -74,29 +70,6 @@ class Plugin extends BasePlugin implements AuthenticationServiceProviderInterfac
      */
     public function middleware(MiddlewareQueue $middlewareQueue): MiddlewareQueue
     {
-        $middlewareQueue->add(new AuthenticationMiddleware($this));
-
         return $middlewareQueue;
-    }
-
-    /**
-     * Returns a service provider instance.
-     *
-     * @param \Psr\Http\Message\ServerRequestInterface $request Request
-     * @return \Authentication\AuthenticationServiceInterface
-     */
-    public function getAuthenticationService(ServerRequestInterface $request): AuthenticationServiceInterface
-    {
-        $service = new AuthenticationService();
-        $service->loadAuthenticator('Authentication.Token', [
-            'header' => 'API-KEY',
-        ]);
-
-        // Load identifiers
-        $service->loadIdentifier('Authentication.Token',[
-            'resolver' => 'AdminApi\Identifier\Resolver\CustomResolver'
-        ]);
-
-        return $service;
     }
 }

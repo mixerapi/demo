@@ -3,6 +3,8 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
+use App\Model\Table\ActorsTable;
+use App\Model\Table\FilmActorsTable;
 use MixerApi\Crud\Interfaces\{SearchInterface, ReadInterface};
 use SwaggerBake\Lib\Attribute\OpenApiPaginator;
 use SwaggerBake\Lib\Attribute\OpenApiResponse;
@@ -27,14 +29,14 @@ class ActorsController extends AppController
     /**
      * Actors Collection
      *
-     * Returns a collection of actors
+     * This example uses mixerapi/crud.
      *
      * @param SearchInterface $search
      * @return \Cake\Http\Response|null|void
      * @throws \Cake\Http\Exception\MethodNotAllowedException
      */
     #[OpenApiPaginator]
-    #[OpenApiSearch(tableClass: '\App\Model\Table\ActorsTable')]
+    #[OpenApiSearch(tableClass: ActorsTable::class)]
     public function index(SearchInterface $search)
     {
         $this->set('data', $this->paginate($search->query($this)));
@@ -43,7 +45,7 @@ class ActorsController extends AppController
     /**
      * Actor Resource
      *
-     * Returns an actor
+     * This example uses mixerapi/crud.
      *
      * @param ReadInterface $read
      * @return \Cake\Http\Response|null|void
@@ -64,7 +66,7 @@ class ActorsController extends AppController
      * @param string $id Actor Id
      */
     #[OpenApiPaginator(sortEnum: ['Films.title', 'Films.release_year'])]
-    #[OpenApiSearch(tableClass: '\App\Model\Table\FilmActorsTable', collection: 'filmsByActor')]
+    #[OpenApiSearch(tableClass: FilmActorsTable::class, collection: 'filmsByActor')]
     #[OpenApiResponse(schemaType: 'array', associations: ['table' => 'FilmActors','whiteList' => ['Films.Languages']])]
     public function viewFilms(SearchInterface $search, string $id)
     {

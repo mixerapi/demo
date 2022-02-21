@@ -21,11 +21,10 @@ paths:
 
 components:
   securitySchemes:
-    ApiKey:
-      description: Use `123` as the API Key for all PUT/POST/PATCH/DELETE operations.
-      type: apiKey
-      in: header
-      name: API-KEY
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
   schemas:
     Exception:
       type: object

@@ -3,9 +3,9 @@ declare(strict_types=1);
 
 namespace AdminApi\Controller;
 
+use App\Model\Table\ActorsTable;
 use MixerApi\Crud\Interfaces\{CreateInterface, ReadInterface, UpdateInterface, DeleteInterface, SearchInterface};
 use SwaggerBake\Lib\Attribute\OpenApiPaginator;
-use SwaggerBake\Lib\Attribute\OpenApiResponse;
 use SwaggerBake\Lib\Extension\CakeSearch\Attribute\OpenApiSearch;
 
 /**
@@ -27,12 +27,14 @@ class ActorsController extends AppController
     /**
      * Index method
      *
+     * This example uses mixerapi/crud.
+     *
      * @param SearchInterface $search
      * @return \Cake\Http\Response|null|void Renders view
      * @throws \Cake\Http\Exception\MethodNotAllowedException When invalid method
      */
     #[OpenApiPaginator]
-    #[OpenApiSearch(tableClass: '\App\Model\Table\ActorsTable')]
+    #[OpenApiSearch(tableClass: ActorsTable::class)]
     public function index(SearchInterface $search)
     {
         $this->set('data', $search->search($this));
@@ -40,6 +42,8 @@ class ActorsController extends AppController
 
     /**
      * View method
+     *
+     * This example uses mixerapi/crud.
      *
      * @param ReadInterface $read
      * @return \Cake\Http\Response|null|void Renders view
@@ -54,6 +58,8 @@ class ActorsController extends AppController
     /**
      * Add method
      *
+     * This example uses mixerapi/crud.
+     *
      * @param CreateInterface $create
      * @return \Cake\Http\Response|null|void HTTP 200 on successful add
      * @throws \Cake\Http\Exception\MethodNotAllowedException
@@ -67,6 +73,8 @@ class ActorsController extends AppController
 
     /**
      * Edit method
+     *
+     * This example uses mixerapi/crud.
      *
      * @param UpdateInterface $update
      * @return \Cake\Http\Response|null|void HTTP 200 on successful edit

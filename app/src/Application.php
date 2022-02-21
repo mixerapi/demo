@@ -16,6 +16,11 @@ declare(strict_types=1);
  */
 namespace App;
 
+use Authentication\AuthenticationService;
+use Authentication\AuthenticationServiceInterface;
+use Authentication\AuthenticationServiceProviderInterface;
+use Authentication\Middleware\AuthenticationMiddleware;
+use AuthenticationApi\Service\UserAuthenticationService;
 use Cake\Core\Configure;
 use Cake\Core\Exception\MissingPluginException;
 use Cake\Datasource\FactoryLocator;
@@ -37,7 +42,7 @@ use Psr\Http\Server\RequestHandlerInterface;
  * This defines the bootstrapping logic and middleware layers you
  * want to use in your application.
  */
-class Application extends BaseApplication
+class Application extends BaseApplication implements AuthenticationServiceProviderInterface
 {
     /**
      * Load all the application configuration and bootstrap logic.
@@ -57,7 +62,9 @@ class Application extends BaseApplication
             ]
         ]);
         $this->addPlugin('Search');
+        $this->addPlugin('Authentication');
         $this->addPlugin('AdminApi');
+        $this->addPlugin('AuthenticationApi');
 
         // Call parent to load bootstrap from files.
         parent::bootstrap();
@@ -132,7 +139,8 @@ class Application extends BaseApplication
             // Parse various types of encoded request bodies so that they are
             // available as array through $request->getData()
             // https://book.cakephp.org/4/en/controllers/middleware.html#body-parser-middleware
-            ->add(new BodyParserMiddleware());
+            ->add(new BodyParserMiddleware())
+            ->add(new AuthenticationMiddleware($this));
 
             // Cross Site Request Forgery (CSRF) Protection Middleware
             // https://book.cakephp.org/4/en/controllers/middleware.html#cross-site-request-forgery-csrf-middleware
@@ -167,5 +175,10 @@ class Application extends BaseApplication
         $this->addPlugin('CakePreloader');
         $this->addPlugin('Migrations');
         $this->addPlugin('Setup');
+    }
+
+    public function getAuthenticationService(ServerRequestInterface $request): AuthenticationServiceInterface
+    {
+        return (new UserAuthenticationService())->getService(new AuthenticationService());
     }
 }

@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace AdminApi\Controller;
 
+use App\Model\Table\FilmsTable;
 use MixerApi\Crud\Interfaces\{CreateInterface, ReadInterface, UpdateInterface, DeleteInterface, SearchInterface};
 use SwaggerBake\Lib\Attribute\OpenApiPaginator;
 use SwaggerBake\Lib\Extension\CakeSearch\Attribute\OpenApiSearch;
@@ -31,7 +32,7 @@ class FilmsController extends AppController
      * @throws \Cake\Http\Exception\MethodNotAllowedException When invalid method
      */
     #[OpenApiPaginator]
-    #[OpenApiSearch(tableClass: '\App\Model\Table\FilmsTable')]
+    #[OpenApiSearch(tableClass: FilmsTable::class)]
     public function index(SearchInterface $search)
     {
         $this->set('data', $search->search($this));
@@ -39,6 +40,8 @@ class FilmsController extends AppController
 
     /**
      * View method
+     *
+     * This example uses mixerapi/crud.
      *
      * @param ReadInterface $read
      * @param string|null $id Actor id.
@@ -54,6 +57,8 @@ class FilmsController extends AppController
     /**
      * Add method
      *
+     * This example uses mixerapi/crud.
+     *
      * @param CreateInterface $create
      * @return \Cake\Http\Response|null|void HTTP 200 on successful add
      * @throws \Cake\Http\Exception\MethodNotAllowedException
@@ -67,6 +72,8 @@ class FilmsController extends AppController
 
     /**
      * Edit method
+     *
+     * This example uses mixerapi/crud.
      *
      * @param UpdateInterface $update
      * @return \Cake\Http\Response|null|void HTTP 200 on successful edit
@@ -82,6 +89,8 @@ class FilmsController extends AppController
 
     /**
      * Delete method
+     *
+     * This example uses mixerapi/crud.
      *
      * @param DeleteInterface $delete
      * @return \Cake\Http\Response|null|void HTTP 204 on success

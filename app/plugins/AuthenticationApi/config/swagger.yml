@@ -1,0 +1,34 @@
+openapi: "3.0.0"
+info:
+  version: "v0.0.0"
+  title: Authentication API
+  description: |
+
+  license:
+    name: MIT
+
+paths:
+
+
+components:
+  securitySchemes:
+    ApiKey:
+      description: Use `123` as the API Key for all PUT/POST/PATCH/DELETE operations.
+      type: apiKey
+      in: header
+      name: API-KEY
+  schemas:
+    Exception:
+      type: object
+      properties:
+        code:
+          type: integer
+          example: 500
+        url:
+          type: string
+          example: /url/path
+        message:
+          type: string
+          example: Internal Error
+      xml:
+        name: response
