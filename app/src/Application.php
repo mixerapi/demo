@@ -179,6 +179,6 @@ class Application extends BaseApplication implements AuthenticationServiceProvid
 
     public function getAuthenticationService(ServerRequestInterface $request): AuthenticationServiceInterface
     {
-        return (new UserAuthenticationService())->getService(new AuthenticationService());
+        return (new UserAuthenticationService())->getService($request, new AuthenticationService());
     }
 }

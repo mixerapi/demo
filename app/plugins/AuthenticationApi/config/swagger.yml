@@ -11,12 +11,6 @@ paths:
 
 
 components:
-  securitySchemes:
-    ApiKey:
-      description: Use `123` as the API Key for all PUT/POST/PATCH/DELETE operations.
-      type: apiKey
-      in: header
-      name: API-KEY
   schemas:
     Exception:
       type: object
