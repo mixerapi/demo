@@ -10,7 +10,6 @@ use AuthenticationApi\Controller\AuthenticationController;
 use AuthenticationApi\Identity\Resolver\JwtResolver;
 use Cake\Utility\Security;
 use Firebase\JWT\JWT;
-use Psr\Http\Message\ServerRequestInterface;
 
 class UserAuthenticationService
 {
@@ -44,45 +43,31 @@ class UserAuthenticationService
     /**
      * Loads authenticators and identifiers into the AuthenticationService depending on the API.
      *
-     * @param ServerRequestInterface $request
      * @param AuthenticationService $service
      * @return AuthenticationService
      */
-    public function getService(ServerRequestInterface $request, AuthenticationService $service): AuthenticationService
+    public function getService(AuthenticationService $service): AuthenticationService
     {
-        if ($this->isAuthenticationApi($request)) {
-            $service->loadAuthenticator('Authentication.Form', [
-                'fields' => [
-                    IdentifierInterface::CREDENTIAL_USERNAME => 'email',
-                    IdentifierInterface::CREDENTIAL_PASSWORD => 'password',
-                ]
-            ]);
+        $service->loadAuthenticator('Authentication.Form', [
+            'fields' => [
+                IdentifierInterface::CREDENTIAL_USERNAME => 'email',
+                IdentifierInterface::CREDENTIAL_PASSWORD => 'password',
+            ]
+        ]);
 
-            // note: use a real identifier/resolver here instead
-            $service->loadIdentifier('Authentication.Callback', [
-                'callback' => function ($data) {
-                    return (new JwtResolver())->find([]);
-                }
-            ]);
-        } else {
-            $service->loadAuthenticator('Authentication.Jwt', [
-                'secretKey' => Security::hash(Security::getSalt(), 'sha256'),
-                'algorithm' => 'HS256',
-            ]);
-        }
+        // note: use a real identifier/resolver here instead
+        $service->loadIdentifier('Authentication.Callback', [
+            'callback' => function ($data) {
+                return (new JwtResolver())->find([]);
+            }
+        ]);
+
+        // load JWT authenticator
+        $service->loadAuthenticator('Authentication.Jwt', [
+            'secretKey' => Security::hash(Security::getSalt(), 'sha256'),
+            'algorithm' => 'HS256',
+        ]);
 
         return $service;
-    }
-
-    /**
-     * Is this request for the Authentication API?
-     *
-     * @param ServerRequestInterface $request
-     * @return bool
-     */
-    private function isAuthenticationApi(ServerRequestInterface $request): bool
-    {
-        $attributes = $request->getAttributes();
-        return isset($attributes['params']['plugin']) && $attributes['params']['plugin'] == 'AuthenticationApi';
     }
 }

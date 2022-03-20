@@ -3,9 +3,11 @@ declare(strict_types=1);
 
 namespace AdminApi;
 
+use Authentication\AuthenticationService;
 use Authentication\Middleware\AuthenticationMiddleware;
 use AuthenticationApi\HsKey;
 use AuthenticationApi\Service\JwksService;
+use AuthenticationApi\Service\UserAuthenticationService;
 use Cake\Core\BasePlugin;
 use Cake\Core\PluginApplicationInterface;
 use Cake\Http\MiddlewareQueue;
@@ -44,6 +46,10 @@ class Plugin extends BasePlugin
     public function routes(RouteBuilder $routes): void
     {
         $routes->plugin('AdminApi', ['path' => '/admin'], function (RouteBuilder $builder) {
+            $authService = (new UserAuthenticationService())->getService(new AuthenticationService());
+            $authMiddleware = new AuthenticationMiddleware($authService);
+            $builder->registerMiddleware('auth', $authMiddleware);
+            $builder->applyMiddleware('auth');
             $builder->setExtensions(['json','xml']);
             (new AutoRouter($builder, new ResourceScanner('AdminApi\Controller')))->buildResources();
             $builder->connect('/', [
