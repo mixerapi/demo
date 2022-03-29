@@ -9,13 +9,13 @@
         }
     },
     "paths": {
-        "\/authentication\/auth\/user": {
+        "\/authentication\/login": {
             "post": {
-                "operationId": "authenticationapi.authentication:user:post",
+                "operationId": "authenticationapi.login:user:post",
                 "summary": "User Authentication",
                 "description": "Identifies a user via login credentials and returns a JWT (JSON Web Token) as text\/plain.",
                 "tags": [
-                    "Authentication"
+                    "Login"
                 ],
                 "requestBody": {
                     "content": {
@@ -112,7 +112,7 @@
                     }
                 },
                 "paginatorSort": {
-                    "name": "direction",
+                    "name": "sort",
                     "in": "query",
                     "required": false,
                     "schema": {

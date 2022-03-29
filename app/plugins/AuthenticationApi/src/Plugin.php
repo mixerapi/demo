@@ -3,10 +3,13 @@ declare(strict_types=1);
 
 namespace AuthenticationApi;
 
+use Authentication\AuthenticationService;
+use Authentication\Middleware\AuthenticationMiddleware;
 use AuthenticationApi\Service\UserAuthenticationService;
 use Cake\Core\BasePlugin;
 use Cake\Core\ContainerInterface;
 use Cake\Core\PluginApplicationInterface;
+use Cake\Http\Middleware\BodyParserMiddleware;
 use Cake\Http\MiddlewareQueue;
 use Cake\Routing\RouteBuilder;
 use Cake\Console\CommandCollection;
@@ -42,32 +45,38 @@ class Plugin extends BasePlugin
     public function routes(RouteBuilder $routes): void
     {
         $routes->plugin('AuthenticationApi', ['path' => '/authentication'], function (RouteBuilder $builder) {
+            $authService = (new UserAuthenticationService())->getService(new AuthenticationService());
+            $authMiddleware = new AuthenticationMiddleware($authService);
+
+            $builder->registerMiddleware('body', new BodyParserMiddleware());
+            $builder->registerMiddleware('auth', $authMiddleware);
+            $builder->applyMiddleware('body','auth');
+            //$builder->applyMiddleware('auth');
             $builder->setExtensions(['json','xml']);
             $builder->connect('/', [
                 'plugin' => 'AuthenticationApi', 'controller' => 'Swagger', 'action' => 'index'
             ]);
-            $builder->resources('Authentication', [
-                'path' => 'auth',
-                'only' => ['user'],
+            $builder->resources('Login', [
+                'path' => '/login',
+                'only' => ['login'],
                 'map' => [
                     'user' => [
                         'method' => 'post',
-                        'path' => 'user',
-                        'action' => 'user'
+                        'path' => null,
+                        'action' => 'login'
                     ]
                 ]
             ]);
-            $builder->resources('Jwks', [
-                'only' => ['index'],
-            ]);
             $builder->fallbacks();
         });
+
         $routes->connect('/authentication/contexts/*', [
             'plugin' => 'MixerApi/JsonLdView', 'controller' => 'JsonLd', 'action' => 'contexts'
         ]);
         $routes->connect('/authentication/vocab', [
             'plugin' => 'MixerApi/JsonLdView', 'controller' => 'JsonLd', 'action' => 'vocab'
         ]);
+
         parent::routes($routes);
     }
 

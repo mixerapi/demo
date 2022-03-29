@@ -16,11 +16,6 @@ declare(strict_types=1);
  */
 namespace App;
 
-use Authentication\AuthenticationService;
-use Authentication\AuthenticationServiceInterface;
-use Authentication\AuthenticationServiceProviderInterface;
-use Authentication\Middleware\AuthenticationMiddleware;
-use AuthenticationApi\Service\UserAuthenticationService;
 use Cake\Core\Configure;
 use Cake\Core\Exception\MissingPluginException;
 use Cake\Datasource\FactoryLocator;

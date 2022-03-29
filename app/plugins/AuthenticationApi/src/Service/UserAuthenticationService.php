@@ -18,7 +18,7 @@ class UserAuthenticationService
      *
      * @param AuthenticationController $controller
      * @return string
-     * @throws UnauthenticatedException|\Exception
+     * @throws UnauthenticatedException
      */
     public function auth(AuthenticationController $controller): string
     {
@@ -37,22 +37,31 @@ class UserAuthenticationService
             return JWT::encode($payload, Security::hash(Security::getSalt(), 'sha256'), 'HS256');
         }
 
-        throw new UnauthenticatedException();
+        if (count($result->getErrors())) {
+            throw new UnauthenticatedException(implode('. ', $result->getErrors()));
+        }
+        throw new UnauthenticatedException($result->getStatus());
     }
 
     /**
-     * Loads authenticators and identifiers into the AuthenticationService depending on the API.
+     * CakePHP Authenticators and Identifiers.
      *
      * @param AuthenticationService $service
      * @return AuthenticationService
      */
     public function getService(AuthenticationService $service): AuthenticationService
     {
+        $service->loadAuthenticator('Authentication.Jwt', [
+            'secretKey' => Security::hash(Security::getSalt(), 'sha256'),
+            'algorithm' => 'HS256',
+        ]);
+
         $service->loadAuthenticator('Authentication.Form', [
             'fields' => [
                 IdentifierInterface::CREDENTIAL_USERNAME => 'email',
                 IdentifierInterface::CREDENTIAL_PASSWORD => 'password',
-            ]
+            ],
+            'loginUrl' => '/authentication/auth/user'
         ]);
 
         // note: use a real identifier/resolver here instead
@@ -62,7 +71,37 @@ class UserAuthenticationService
             }
         ]);
 
-        // load JWT authenticator
+        return $service;
+    }
+
+    /**
+     * CakePHP Authenticators and Identifiers.
+     *
+     * @param AuthenticationService $service
+     * @return AuthenticationService
+     */
+    public function getLoginService(AuthenticationService $service): AuthenticationService
+    {
+        $service->loadAuthenticator('Authentication.Form', [
+            'fields' => [
+                IdentifierInterface::CREDENTIAL_USERNAME => 'email',
+                IdentifierInterface::CREDENTIAL_PASSWORD => 'password',
+            ],
+            'loginUrl' => '/authentication/login'
+        ]);
+
+        // note: use a real identifier/resolver here instead
+        $service->loadIdentifier('Authentication.Callback', [
+            'callback' => function ($data) {
+                return (new JwtResolver())->find([]);
+            }
+        ]);
+
+        return $service;
+    }
+
+    public function getJwtService(AuthenticationService $service): AuthenticationService
+    {
         $service->loadAuthenticator('Authentication.Jwt', [
             'secretKey' => Security::hash(Security::getSalt(), 'sha256'),
             'algorithm' => 'HS256',

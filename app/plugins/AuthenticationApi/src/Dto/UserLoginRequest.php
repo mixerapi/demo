@@ -1,7 +1,6 @@
 <?php
 namespace AuthenticationApi\Dto;
 
-use Cake\Http\ServerRequest;
 use SwaggerBake\Lib\Attribute\OpenApiSchema;
 use SwaggerBake\Lib\Attribute\OpenApiSchemaProperty;
 
