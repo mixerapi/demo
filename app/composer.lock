@@ -228,6 +228,7 @@
         },
         {
             "name": "cakephp/cakephp",
+<<<<<<< HEAD
             "version": "4.3.8",
             "source": {
                 "type": "git",
@@ -238,6 +239,18 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/cakephp/cakephp/zipball/34aae68e91e6834aa6711c3e435a3f220bf56c0b",
                 "reference": "34aae68e91e6834aa6711c3e435a3f220bf56c0b",
+=======
+            "version": "4.3.7",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/cakephp/cakephp.git",
+                "reference": "f20f6df934dac17ff15b044bf369efdc0356fe37"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/cakephp/cakephp/zipball/f20f6df934dac17ff15b044bf369efdc0356fe37",
+                "reference": "f20f6df934dac17ff15b044bf369efdc0356fe37",
+>>>>>>> composer update
                 "shasum": ""
             },
             "require": {
@@ -328,7 +341,11 @@
                 "issues": "https://github.com/cakephp/cakephp/issues",
                 "source": "https://github.com/cakephp/cakephp"
             },
+<<<<<<< HEAD
             "time": "2022-04-23T01:23:23+00:00"
+=======
+            "time": "2022-03-26T02:09:46+00:00"
+>>>>>>> composer update
         },
         {
             "name": "cakephp/chronos",
@@ -619,6 +636,7 @@
         },
         {
             "name": "cnizzardini/cakephp-swagger-bake",
+<<<<<<< HEAD
             "version": "v2.2.12",
             "source": {
                 "type": "git",
@@ -629,6 +647,18 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/cnizzardini/cakephp-swagger-bake/zipball/24dbc2ce23a33918bcc5afff16732d3b4a6a1da7",
                 "reference": "24dbc2ce23a33918bcc5afff16732d3b4a6a1da7",
+=======
+            "version": "v2.2.10",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/cnizzardini/cakephp-swagger-bake.git",
+                "reference": "9029ac6e45c6252644357a13fa46fb4db1b12e93"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/cnizzardini/cakephp-swagger-bake/zipball/9029ac6e45c6252644357a13fa46fb4db1b12e93",
+                "reference": "9029ac6e45c6252644357a13fa46fb4db1b12e93",
+>>>>>>> composer update
                 "shasum": ""
             },
             "require": {
@@ -680,7 +710,11 @@
                 "issues": "https://github.com/cnizzardini/cakephp-swagger-bake/issues",
                 "source": "https://github.com/cnizzardini/cakephp-swagger-bake"
             },
+<<<<<<< HEAD
             "time": "2022-04-23T12:27:02+00:00"
+=======
+            "time": "2022-04-01T22:27:30+00:00"
+>>>>>>> composer update
         },
         {
             "name": "composer/ca-bundle",
@@ -998,6 +1032,7 @@
         },
         {
             "name": "laminas/laminas-diactoros",
+<<<<<<< HEAD
             "version": "2.9.2",
             "source": {
                 "type": "git",
@@ -1008,6 +1043,18 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/laminas/laminas-diactoros/zipball/07475df6b4bf6277ae8b9cbbc94d0ac6fee5e726",
                 "reference": "07475df6b4bf6277ae8b9cbbc94d0ac6fee5e726",
+=======
+            "version": "2.9.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/laminas/laminas-diactoros.git",
+                "reference": "954e2dcfb1607681be44599faac10fc63bb6925a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/laminas/laminas-diactoros/zipball/954e2dcfb1607681be44599faac10fc63bb6925a",
+                "reference": "954e2dcfb1607681be44599faac10fc63bb6925a",
+>>>>>>> composer update
                 "shasum": ""
             },
             "require": {
@@ -1093,7 +1140,11 @@
                     "type": "community_bridge"
                 }
             ],
+<<<<<<< HEAD
             "time": "2022-04-06T17:37:15+00:00"
+=======
+            "time": "2022-03-29T20:12:16+00:00"
+>>>>>>> composer update
         },
         {
             "name": "laminas/laminas-httphandlerrunner",
@@ -3669,6 +3720,7 @@
         },
         {
             "name": "twig/twig",
+<<<<<<< HEAD
             "version": "v3.3.10",
             "source": {
                 "type": "git",
@@ -3679,6 +3731,18 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/twigphp/Twig/zipball/8442df056c51b706793adf80a9fd363406dd3674",
                 "reference": "8442df056c51b706793adf80a9fd363406dd3674",
+=======
+            "version": "v3.3.9",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/twigphp/Twig.git",
+                "reference": "6ff9b0e440fa66f97f207e181c41340ddfa5683d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/twigphp/Twig/zipball/6ff9b0e440fa66f97f207e181c41340ddfa5683d",
+                "reference": "6ff9b0e440fa66f97f207e181c41340ddfa5683d",
+>>>>>>> composer update
                 "shasum": ""
             },
             "require": {
@@ -3729,7 +3793,11 @@
             ],
             "support": {
                 "issues": "https://github.com/twigphp/Twig/issues",
+<<<<<<< HEAD
                 "source": "https://github.com/twigphp/Twig/tree/v3.3.10"
+=======
+                "source": "https://github.com/twigphp/Twig/tree/v3.3.9"
+>>>>>>> composer update
             },
             "funding": [
                 {
@@ -3741,7 +3809,11 @@
                     "type": "tidelift"
                 }
             ],
+<<<<<<< HEAD
             "time": "2022-04-06T06:47:41+00:00"
+=======
+            "time": "2022-03-25T09:37:52+00:00"
+>>>>>>> composer update
         },
         {
             "name": "webmozart/assert",
@@ -3871,6 +3943,7 @@
         },
         {
             "name": "composer/composer",
+<<<<<<< HEAD
             "version": "2.3.5",
             "source": {
                 "type": "git",
@@ -3881,6 +3954,18 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/composer/composer/zipball/50c47b1f907cfcdb8f072b88164d22b527557ae1",
                 "reference": "50c47b1f907cfcdb8f072b88164d22b527557ae1",
+=======
+            "version": "2.3.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/composer/composer.git",
+                "reference": "b0024890b8650e52d1a29822856b3c95aa393785"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/composer/composer/zipball/b0024890b8650e52d1a29822856b3c95aa393785",
+                "reference": "b0024890b8650e52d1a29822856b3c95aa393785",
+>>>>>>> composer update
                 "shasum": ""
             },
             "require": {
@@ -3956,7 +4041,11 @@
             "support": {
                 "irc": "ircs://irc.libera.chat:6697/composer",
                 "issues": "https://github.com/composer/composer/issues",
+<<<<<<< HEAD
                 "source": "https://github.com/composer/composer/tree/2.3.5"
+=======
+                "source": "https://github.com/composer/composer/tree/2.3.3"
+>>>>>>> composer update
             },
             "funding": [
                 {
@@ -3972,7 +4061,11 @@
                     "type": "tidelift"
                 }
             ],
+<<<<<<< HEAD
             "time": "2022-04-13T14:43:00+00:00"
+=======
+            "time": "2022-04-01T20:15:35+00:00"
+>>>>>>> composer update
         },
         {
             "name": "composer/metadata-minifier",
