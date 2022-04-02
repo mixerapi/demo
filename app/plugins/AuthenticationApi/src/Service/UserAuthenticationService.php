@@ -51,11 +51,6 @@ class UserAuthenticationService
      */
     public function getService(AuthenticationService $service): AuthenticationService
     {
-        $service->loadAuthenticator('Authentication.Jwt', [
-            'secretKey' => Security::hash(Security::getSalt(), 'sha256'),
-            'algorithm' => 'HS256',
-        ]);
-
         $service->loadAuthenticator('Authentication.Form', [
             'fields' => [
                 IdentifierInterface::CREDENTIAL_USERNAME => 'email',
@@ -64,47 +59,16 @@ class UserAuthenticationService
             'loginUrl' => '/auth/login'
         ]);
 
-        // note: use a real identifier/resolver here instead
-        $service->loadIdentifier('Authentication.Callback', [
-            'callback' => function ($data) {
-                return (new JwtResolver())->find([]);
-            }
-        ]);
-
-        return $service;
-    }
-
-    /**
-     * CakePHP Authenticators and Identifiers.
-     *
-     * @param AuthenticationService $service
-     * @return AuthenticationService
-     */
-    public function getLoginService(AuthenticationService $service): AuthenticationService
-    {
-        $service->loadAuthenticator('Authentication.Form', [
-            'fields' => [
-                IdentifierInterface::CREDENTIAL_USERNAME => 'email',
-                IdentifierInterface::CREDENTIAL_PASSWORD => 'password',
-            ],
-            'loginUrl' => '/authentication/login'
-        ]);
-
-        // note: use a real identifier/resolver here instead
-        $service->loadIdentifier('Authentication.Callback', [
-            'callback' => function ($data) {
-                return (new JwtResolver())->find([]);
-            }
-        ]);
-
-        return $service;
-    }
-
-    public function getJwtService(AuthenticationService $service): AuthenticationService
-    {
         $service->loadAuthenticator('Authentication.Jwt', [
             'secretKey' => Security::hash(Security::getSalt(), 'sha256'),
             'algorithm' => 'HS256',
+        ]);
+
+        // note: use a real identifier/resolver here instead
+        $service->loadIdentifier('Authentication.Callback', [
+            'callback' => function ($data) {
+                return (new JwtResolver())->find([]);
+            }
         ]);
 
         return $service;
