@@ -34,7 +34,7 @@ class LoginController extends AppController
     public function login(UserAuthenticationService $service)
     {
         try {
-            return $this->response->withStringBody($service->auth($this));
+            return $this->response->withStringBody($service->auth($this->Authentication));
         } catch (UnauthenticatedException $e) {
             return $this->response->withStringBody($e->getMessage())->withStatus(401);
         }

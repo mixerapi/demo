@@ -44,14 +44,13 @@ class Plugin extends BasePlugin
      */
     public function routes(RouteBuilder $routes): void
     {
-        $routes->plugin('AuthenticationApi', ['path' => '/authentication'], function (RouteBuilder $builder) {
+        $routes->plugin('AuthenticationApi', ['path' => '/auth'], function (RouteBuilder $builder) {
             $authService = (new UserAuthenticationService())->getService(new AuthenticationService());
             $authMiddleware = new AuthenticationMiddleware($authService);
 
             $builder->registerMiddleware('body', new BodyParserMiddleware());
             $builder->registerMiddleware('auth', $authMiddleware);
             $builder->applyMiddleware('body','auth');
-            //$builder->applyMiddleware('auth');
             $builder->setExtensions(['json','xml']);
             $builder->connect('/', [
                 'plugin' => 'AuthenticationApi', 'controller' => 'Swagger', 'action' => 'index'
@@ -60,7 +59,7 @@ class Plugin extends BasePlugin
                 'path' => '/login',
                 'only' => ['login'],
                 'map' => [
-                    'user' => [
+                    'login' => [
                         'method' => 'post',
                         'path' => null,
                         'action' => 'login'
@@ -70,10 +69,10 @@ class Plugin extends BasePlugin
             $builder->fallbacks();
         });
 
-        $routes->connect('/authentication/contexts/*', [
+        $routes->connect('/auth/contexts/*', [
             'plugin' => 'MixerApi/JsonLdView', 'controller' => 'JsonLd', 'action' => 'contexts'
         ]);
-        $routes->connect('/authentication/vocab', [
+        $routes->connect('/auth/vocab', [
             'plugin' => 'MixerApi/JsonLdView', 'controller' => 'JsonLd', 'action' => 'vocab'
         ]);
 

@@ -5,8 +5,8 @@ namespace AuthenticationApi\Service;
 
 use Authentication\AuthenticationService;
 use Authentication\Authenticator\UnauthenticatedException;
+use Authentication\Controller\Component\AuthenticationComponent;
 use Authentication\Identifier\IdentifierInterface;
-use AuthenticationApi\Controller\AuthenticationController;
 use AuthenticationApi\Identity\Resolver\JwtResolver;
 use Cake\Utility\Security;
 use Firebase\JWT\JWT;
@@ -16,13 +16,13 @@ class UserAuthenticationService
     /**
      * Returns a JWT on success or throws UnauthenticatedException.
      *
-     * @param AuthenticationController $controller
+     * @param AuthenticationComponent $authComponent
      * @return string
      * @throws UnauthenticatedException
      */
-    public function auth(AuthenticationController $controller): string
+    public function auth(AuthenticationComponent $authComponent): string
     {
-        $result = $controller->Authentication->getResult();
+        $result = $authComponent->getResult();
 
         if ($result->isValid()) {
             $user = $result->getData();
@@ -61,7 +61,7 @@ class UserAuthenticationService
                 IdentifierInterface::CREDENTIAL_USERNAME => 'email',
                 IdentifierInterface::CREDENTIAL_PASSWORD => 'password',
             ],
-            'loginUrl' => '/authentication/auth/user'
+            'loginUrl' => '/auth/login'
         ]);
 
         // note: use a real identifier/resolver here instead

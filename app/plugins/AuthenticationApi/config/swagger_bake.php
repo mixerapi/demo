@@ -46,7 +46,7 @@ use Cake\Core\Configure;
  */
 return [
     'SwaggerBake' => [
-        'prefix' => '/authentication',
+        'prefix' => '/auth',
         'yml' => '/plugins/AuthenticationApi/config/swagger.yml',
         'json' => '/plugins/AuthenticationApi/webroot/swagger.json',
         'webPath' => '/authentication_api/swagger.json',
