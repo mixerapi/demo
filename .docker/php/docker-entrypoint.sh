@@ -28,6 +28,10 @@ if [ "$1" = 'php-fpm' ] || [ "$1" = 'php' ] || [ "$1" = 'bin/cakephp' ]; then
         sed -i '/export SECURITY_SALT/c\export SECURITY_SALT="'$salt'"' config/.env
 
         touch .gitkeep
+
+        # For AuthenticationApi generate private and public keys
+        openssl genrsa -out plugins/AuthenticationApi/config/jwt.key 1024
+        openssl rsa -in plugins/AuthenticationApi/config/jwt.key -outform PEM -pubout -out plugins/AuthenticationApi/config/jwt.pem
     fi
 
     echo "ENV: $APP_ENV"

@@ -7,3 +7,5 @@
 /vendor/
 /.idea/
 /webroot/swagger.json
+/config/jwt.key
+/config/jwt.pem
