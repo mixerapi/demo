@@ -24,7 +24,12 @@ class LoginController extends AppController
     /**
      * User Authentication
      *
-     * Identifies a user via login credentials and returns a JWT (JSON Web Token) as text/plain.
+     * Identifies a user via login credentials and returns a JWT (JSON Web Token) as text/plain. If you've
+     * run `bin/cake migrations seed` you should be able to log on using:
+     *
+     * username: test@example.com
+     *
+     * password: password
      *
      * @return \Cake\Http\Response|null|void
      * @throws \Authentication\Authenticator\UnauthenticatedException

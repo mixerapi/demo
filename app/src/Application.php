@@ -40,9 +40,7 @@ use Psr\Http\Server\RequestHandlerInterface;
 class Application extends BaseApplication
 {
     /**
-     * Load all the application configuration and bootstrap logic.
-     *
-     * @return void
+     * @inheritDoc
      */
     public function bootstrap(): void
     {
@@ -88,10 +86,7 @@ class Application extends BaseApplication
     }
 
     /**
-     * Setup the middleware queue your application will use.
-     *
-     * @param \Cake\Http\MiddlewareQueue $middlewareQueue The middleware queue to setup.
-     * @return \Cake\Http\MiddlewareQueue The updated middleware queue.
+     * @inheritDoc
      */
     public function middleware(MiddlewareQueue $middlewareQueue): MiddlewareQueue
     {

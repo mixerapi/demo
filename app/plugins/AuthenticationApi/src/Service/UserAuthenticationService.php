@@ -7,7 +7,6 @@ use Authentication\AuthenticationService;
 use Authentication\Authenticator\UnauthenticatedException;
 use Authentication\Controller\Component\AuthenticationComponent;
 use Authentication\Identifier\IdentifierInterface;
-use AuthenticationApi\Identity\Resolver\JwtResolver;
 use Cake\Utility\Security;
 use Firebase\JWT\JWT;
 
@@ -56,7 +55,7 @@ class UserAuthenticationService
                 IdentifierInterface::CREDENTIAL_USERNAME => 'email',
                 IdentifierInterface::CREDENTIAL_PASSWORD => 'password',
             ],
-            'loginUrl' => '/auth/login'
+            'loginUrl' => '/admin/auth/login'
         ]);
 
         $service->loadAuthenticator('Authentication.Jwt', [
@@ -64,12 +63,27 @@ class UserAuthenticationService
             'algorithm' => 'HS256',
         ]);
 
-        // note: use a real identifier/resolver here instead
-        $service->loadIdentifier('Authentication.Callback', [
-            'callback' => function ($data) {
-                return (new JwtResolver())->find([]);
-            }
+        $service->loadIdentifier('Authentication.Password', [
+            'fields' => [
+                IdentifierInterface::CREDENTIAL_USERNAME => 'email',
+                IdentifierInterface::CREDENTIAL_PASSWORD => 'password',
+            ],
+            'resolver' => [
+                'className' => 'Authentication.Orm',
+                'userModel' => 'Users',
+            ],
+            'passwordHasher' => [
+                'className' => 'Authentication.Fallback',
+                'hashers' => [
+                    'Authentication.Default',
+                    [
+                        'className' => 'Authentication.Legacy',
+                        'hashType' => 'md5',
+                    ],
+                ],
+            ],
         ]);
+
 
         return $service;
     }

@@ -20,13 +20,7 @@ use Cake\Console\CommandCollection;
 class Plugin extends BasePlugin
 {
     /**
-     * Load all the plugin configuration and bootstrap logic.
-     *
-     * The host application is provided as an argument. This allows you to load
-     * additional plugin dependencies, or attach events.
-     *
-     * @param \Cake\Core\PluginApplicationInterface $app The host application
-     * @return void
+     * @inheritDoc
      */
     public function bootstrap(PluginApplicationInterface $app): void
     {
@@ -34,17 +28,11 @@ class Plugin extends BasePlugin
     }
 
     /**
-     * Add routes for the plugin.
-     *
-     * If your plugin has many routes and you would like to isolate them into a separate file,
-     * you can create `$plugin/config/routes.php` and delete this method.
-     *
-     * @param \Cake\Routing\RouteBuilder $routes The route builder to update.
-     * @return void
+     * @inheritDoc
      */
     public function routes(RouteBuilder $routes): void
     {
-        $routes->plugin('AuthenticationApi', ['path' => '/auth'], function (RouteBuilder $builder) {
+        $routes->plugin('AuthenticationApi', ['path' => '/admin/auth'], function (RouteBuilder $builder) {
             $authService = (new UserAuthenticationService())->getService(new AuthenticationService());
             $authMiddleware = new AuthenticationMiddleware($authService);
 
@@ -69,10 +57,10 @@ class Plugin extends BasePlugin
             $builder->fallbacks();
         });
 
-        $routes->connect('/auth/contexts/*', [
+        $routes->connect('/admin/auth/contexts/*', [
             'plugin' => 'MixerApi/JsonLdView', 'controller' => 'JsonLd', 'action' => 'contexts'
         ]);
-        $routes->connect('/auth/vocab', [
+        $routes->connect('/admin/auth/vocab', [
             'plugin' => 'MixerApi/JsonLdView', 'controller' => 'JsonLd', 'action' => 'vocab'
         ]);
 
@@ -80,10 +68,7 @@ class Plugin extends BasePlugin
     }
 
     /**
-     * Add middleware for the plugin.
-     *
-     * @param \Cake\Http\MiddlewareQueue $middleware The middleware queue to update.
-     * @return \Cake\Http\MiddlewareQueue
+     * @inheritDoc
      */
     public function middleware(MiddlewareQueue $middlewareQueue): MiddlewareQueue
     {
@@ -91,10 +76,7 @@ class Plugin extends BasePlugin
     }
 
     /**
-     * Add commands for the plugin.
-     *
-     * @param \Cake\Console\CommandCollection $commands The command collection to update.
-     * @return \Cake\Console\CommandCollection
+     * @inheritDoc
      */
     public function console(CommandCollection $commands) : CommandCollection
     {
@@ -105,6 +87,9 @@ class Plugin extends BasePlugin
         return $commands;
     }
 
+    /**
+     * @inheritDoc
+     */
     public function services(ContainerInterface $container): void
     {
         $container->add(UserAuthenticationService::class);
