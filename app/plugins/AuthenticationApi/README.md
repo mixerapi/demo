@@ -4,6 +4,7 @@ This is an example of a JWT-based authentication. Keys should've been generated 
 `.docker/php/docker-entrypoint.sh` script. If not you can login into the container and generate them:
 
 ```console
+make php.sh
 openssl genrsa -out plugins/AuthenticationApi/config/jwt.key 1024
 openssl rsa -in plugins/AuthenticationApi/config/jwt.key -outform PEM -pubout -out plugins/AuthenticationApi/config/jwt.pem
 ```
