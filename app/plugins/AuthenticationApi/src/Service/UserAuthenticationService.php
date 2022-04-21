@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace AuthenticationApi\Service;
 
+use App\Model\Entity\User;
 use Authentication\AuthenticationService;
 use Authentication\Authenticator\UnauthenticatedException;
 use Authentication\Controller\Component\AuthenticationComponent;
@@ -24,6 +25,7 @@ class UserAuthenticationService
         $result = $authComponent->getResult();
 
         if ($result->isValid()) {
+            /** @var User $user */
             $user = $result->getData();
             $payload = [
                 'iss' => 'mixerapi',
