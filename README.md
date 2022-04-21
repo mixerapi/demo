@@ -69,3 +69,5 @@ Browse to the URL given by the `server` console command.
 For Docker see this [README](https://github.com/mixerapi/app).
 
 For information on the demo application code see [app/README.md](./app/README.md)
+
+See the [AuthenticationApi](app/plugins/AuthenticationApi/README.md) for details on the JWT auth demo.
