@@ -32,7 +32,7 @@ class Plugin extends BasePlugin
     public function routes(RouteBuilder $routes): void
     {
         $routes->plugin('AdminApi', ['path' => '/admin'], function (RouteBuilder $builder) {
-            $authService = (new UserAuthenticationService())->getService(new AuthenticationService());
+            $authService = (new UserAuthenticationService)->getService(new AuthenticationService());
             $authMiddleware = new AuthenticationMiddleware($authService);
             $builder->registerMiddleware('auth', $authMiddleware);
             $builder->applyMiddleware('auth');
