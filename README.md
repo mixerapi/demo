@@ -15,6 +15,9 @@ A [mixerapi/mixerapi](https://github.com/mixerapi/mixerapi) demo application. Th
 
 Checkout the live demo: [https://demo.mixerapi.com](https://demo.mixerapi.com)
 
+- [Installation](#Installation)
+- [Usage](#Usage)
+
 ## Installation
 
 You can run this demo via Docker and/or a local LAMP stack. Fork/clone this repository to get started.
