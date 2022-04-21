@@ -14,6 +14,11 @@ use Firebase\JWT\JWT;
 class UserAuthenticationService
 {
     /**
+     * @var int JWT expiration time
+     */
+    public const EXPIRES = 60 * 60 * 24;
+
+    /**
      * Returns a JWT on success or throws UnauthenticatedException.
      *
      * @param AuthenticationComponent $authComponent
@@ -30,7 +35,7 @@ class UserAuthenticationService
             $payload = [
                 'iss' => 'mixerapi',
                 'sub' => $user->id,
-                'exp' => time() + 60 * 60 * 24,
+                'exp' => time() + self::EXPIRES,
                 'user' => [
                     'email' => $user->email
                 ]
@@ -85,7 +90,6 @@ class UserAuthenticationService
                 ],
             ],
         ]);
-
 
         return $service;
     }
