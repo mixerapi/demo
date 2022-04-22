@@ -5,7 +5,8 @@ namespace AdminApi;
 
 use Authentication\AuthenticationService;
 use Authentication\Middleware\AuthenticationMiddleware;
-use AuthenticationApi\Service\UserAuthenticationService;
+use AuthenticationApi\Service\JwkSetAuthService;
+use AuthenticationApi\Service\JwtAuthService;
 use Cake\Core\BasePlugin;
 use Cake\Core\PluginApplicationInterface;
 use Cake\Http\MiddlewareQueue;
@@ -32,7 +33,12 @@ class Plugin extends BasePlugin
     public function routes(RouteBuilder $routes): void
     {
         $routes->plugin('AdminApi', ['path' => '/admin'], function (RouteBuilder $builder) {
-            $authService = (new UserAuthenticationService)->getService(new AuthenticationService());
+            /*
+             * Enable one of JWT Auth or JWK Set Auth:
+             */
+            $authService = (new JwkSetAuthService)->getService(new AuthenticationService());
+            //$authService = (new JwtAuthService)->getService(new AuthenticationService());
+
             $authMiddleware = new AuthenticationMiddleware($authService);
             $builder->registerMiddleware('auth', $authMiddleware);
             $builder->applyMiddleware('auth');

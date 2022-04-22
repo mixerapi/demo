@@ -5,7 +5,10 @@ namespace AuthenticationApi;
 
 use Authentication\AuthenticationService;
 use Authentication\Middleware\AuthenticationMiddleware;
-use AuthenticationApi\Service\UserAuthenticationService;
+use AuthenticationApi\Service\JwkSetService;
+use AuthenticationApi\Service\JwkSetAuthService;
+use AuthenticationApi\Service\JwtAuthInterface;
+use AuthenticationApi\Service\JwtAuthService;
 use Cake\Core\BasePlugin;
 use Cake\Core\ContainerInterface;
 use Cake\Core\PluginApplicationInterface;
@@ -33,7 +36,12 @@ class Plugin extends BasePlugin
     public function routes(RouteBuilder $routes): void
     {
         $routes->plugin('AuthenticationApi', ['path' => '/admin/auth'], function (RouteBuilder $builder) {
-            $authService = (new UserAuthenticationService)->getService(new AuthenticationService());
+            /*
+             * Enable one of JWT Auth or JWK Set Auth:
+             */
+            $authService = (new JwkSetAuthService)->getService(new AuthenticationService());
+            //$authService = (new JwtAuthService)->getService(new AuthenticationService());
+
             $authMiddleware = new AuthenticationMiddleware($authService);
 
             $builder->registerMiddleware('body', new BodyParserMiddleware());
@@ -53,6 +61,10 @@ class Plugin extends BasePlugin
                         'action' => 'login'
                     ]
                 ]
+            ]);
+            $builder->resources('Jwks', [
+                'path' => '/keys',
+                'only' => ['index'],
             ]);
             $builder->fallbacks();
         });
@@ -92,6 +104,11 @@ class Plugin extends BasePlugin
      */
     public function services(ContainerInterface $container): void
     {
-        $container->add(UserAuthenticationService::class);
+        /*
+         * Enable one of JWT Auth or JWK Set Auth:
+         */
+        $container->add(JwtAuthInterface::class, JwkSetAuthService::class);
+        //$container->add(JwtAuthInterface::class, JwtAuthService::class);
+        $container->add(JwkSetService::class);
     }
 }

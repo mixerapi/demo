@@ -5,7 +5,7 @@ namespace AuthenticationApi\Controller;
 use Authentication\Authenticator\UnauthenticatedException;
 use Authentication\Controller\Component\AuthenticationComponent;
 use AuthenticationApi\Dto\UserLoginRequest;
-use AuthenticationApi\Service\UserAuthenticationService;
+use AuthenticationApi\Service\JwtAuthInterface;
 use Cake\Event\EventInterface;
 use SwaggerBake\Lib\Attribute\OpenApiDto;
 use SwaggerBake\Lib\Attribute\OpenApiResponse;
@@ -36,10 +36,10 @@ class LoginController extends AppController
      */
     #[OpenApiDto(class: UserLoginRequest::class)]
     #[OpenApiResponse(mimeTypes: ['text/plain'])]
-    public function login(UserAuthenticationService $service)
+    public function login(JwtAuthInterface $jwtAuth)
     {
         try {
-            return $this->response->withStringBody($service->auth($this->Authentication));
+            return $this->response->withStringBody($jwtAuth->auth($this->Authentication));
         } catch (UnauthenticatedException $e) {
             return $this->response->withStringBody($e->getMessage())->withStatus(401);
         }

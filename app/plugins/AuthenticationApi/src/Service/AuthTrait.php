@@ -1,5 +1,4 @@
 <?php
-declare(strict_types=1);
 
 namespace AuthenticationApi\Service;
 
@@ -8,39 +7,31 @@ use Authentication\AuthenticationService;
 use Authentication\Authenticator\UnauthenticatedException;
 use Authentication\Controller\Component\AuthenticationComponent;
 use Authentication\Identifier\IdentifierInterface;
-use Cake\Utility\Security;
-use Firebase\JWT\JWT;
 
-class UserAuthenticationService
+trait AuthTrait
 {
     /**
-     * @var int JWT expiration time
-     */
-    public const EXPIRES = 60 * 60 * 24;
-
-    /**
-     * Returns a JWT on success or throws UnauthenticatedException.
+     * Returns a payload suitable for JWT encoding.
      *
      * @param AuthenticationComponent $authComponent
-     * @return string
-     * @throws UnauthenticatedException
+     * @param int|null $expiration
+     * @return array
      */
-    public function auth(AuthenticationComponent $authComponent): string
+    private static function authenticate(AuthenticationComponent $authComponent, ?int $expiration = null): array
     {
         $result = $authComponent->getResult();
 
         if ($result->isValid()) {
             /** @var User $user */
             $user = $result->getData();
-            $payload = [
+            return [
                 'iss' => 'mixerapi',
                 'sub' => $user->id,
-                'exp' => time() + self::EXPIRES,
+                'exp' => $expiration ?? time() + 60 * 60 *24,
                 'user' => [
                     'email' => $user->email
                 ]
             ];
-            return JWT::encode($payload, Security::hash(Security::getSalt(), 'sha256'), 'HS256');
         }
 
         if (count($result->getErrors())) {
@@ -50,12 +41,12 @@ class UserAuthenticationService
     }
 
     /**
-     * CakePHP Authenticators and Identifiers.
+     * Loads Authentication.Form
      *
      * @param AuthenticationService $service
      * @return AuthenticationService
      */
-    public function getService(AuthenticationService $service): AuthenticationService
+    private static function loadFormAuth(AuthenticationService $service): AuthenticationService
     {
         $service->loadAuthenticator('Authentication.Form', [
             'fields' => [
@@ -65,11 +56,17 @@ class UserAuthenticationService
             'loginUrl' => '/admin/auth/login'
         ]);
 
-        $service->loadAuthenticator('Authentication.Jwt', [
-            'secretKey' => Security::hash(Security::getSalt(), 'sha256'),
-            'algorithm' => 'HS256',
-        ]);
+        return $service;
+    }
 
+    /**
+     * Loads Authentication.Password
+     *
+     * @param AuthenticationService $service
+     * @return AuthenticationService
+     */
+    private static function loadPasswordIdentifier(AuthenticationService $service): AuthenticationService
+    {
         $service->loadIdentifier('Authentication.Password', [
             'fields' => [
                 IdentifierInterface::CREDENTIAL_USERNAME => 'email',

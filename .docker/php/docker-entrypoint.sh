@@ -29,9 +29,17 @@ if [ "$1" = 'php-fpm' ] || [ "$1" = 'php' ] || [ "$1" = 'bin/cakephp' ]; then
 
         touch .gitkeep
 
-        # For AuthenticationApi generate private and public keys
+        # For AuthenticationApi JWT Auth generate private and public keys:
         openssl genrsa -out plugins/AuthenticationApi/config/jwt.key 1024
         openssl rsa -in plugins/AuthenticationApi/config/jwt.key -outform PEM -pubout -out plugins/AuthenticationApi/config/jwt.pem
+
+        # For JWK Set Auth:
+        openssl genrsa -out private.pem 4096
+        openssl rsa -in private.pem -out public.pem -pubout
+        openssl req -key private.pem -new -x509 -days 3650 -subj "/C=US/ST=DC/O=MixerApi/OU=Demo/CN=demo.mixerapi.com" -out cert.pem
+        openssl pkcs12 -export -inkey private.pem -in cert.pem -out keys.pfx -name "my alias"
+        keytool -v -list -keystore keys.pfx -storetype PKCS12 -storepass
+        keytool -list -keystore keys.pfx
     fi
 
     echo "ENV: $APP_ENV"

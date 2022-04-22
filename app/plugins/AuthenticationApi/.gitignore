@@ -9,3 +9,6 @@
 /webroot/swagger.json
 /config/jwt.key
 /config/jwt.pem
+/config/keys.pfx
+/config/private.pem
+/config/public.pem
