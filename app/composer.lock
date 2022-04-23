@@ -228,16 +228,16 @@
         },
         {
             "name": "cakephp/cakephp",
-            "version": "4.3.7",
+            "version": "4.3.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/cakephp/cakephp.git",
-                "reference": "f20f6df934dac17ff15b044bf369efdc0356fe37"
+                "reference": "34aae68e91e6834aa6711c3e435a3f220bf56c0b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/cakephp/cakephp/zipball/f20f6df934dac17ff15b044bf369efdc0356fe37",
-                "reference": "f20f6df934dac17ff15b044bf369efdc0356fe37",
+                "url": "https://api.github.com/repos/cakephp/cakephp/zipball/34aae68e91e6834aa6711c3e435a3f220bf56c0b",
+                "reference": "34aae68e91e6834aa6711c3e435a3f220bf56c0b",
                 "shasum": ""
             },
             "require": {
@@ -328,7 +328,7 @@
                 "issues": "https://github.com/cakephp/cakephp/issues",
                 "source": "https://github.com/cakephp/cakephp"
             },
-            "time": "2022-03-26T02:09:46+00:00"
+            "time": "2022-04-23T01:23:23+00:00"
         },
         {
             "name": "cakephp/chronos",
@@ -619,16 +619,16 @@
         },
         {
             "name": "cnizzardini/cakephp-swagger-bake",
-            "version": "v2.2.11",
+            "version": "v2.2.12",
             "source": {
                 "type": "git",
                 "url": "https://github.com/cnizzardini/cakephp-swagger-bake.git",
-                "reference": "6e7cff4ca368ef77a3b2296ddb4f3813b6bd14d9"
+                "reference": "24dbc2ce23a33918bcc5afff16732d3b4a6a1da7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/cnizzardini/cakephp-swagger-bake/zipball/6e7cff4ca368ef77a3b2296ddb4f3813b6bd14d9",
-                "reference": "6e7cff4ca368ef77a3b2296ddb4f3813b6bd14d9",
+                "url": "https://api.github.com/repos/cnizzardini/cakephp-swagger-bake/zipball/24dbc2ce23a33918bcc5afff16732d3b4a6a1da7",
+                "reference": "24dbc2ce23a33918bcc5afff16732d3b4a6a1da7",
                 "shasum": ""
             },
             "require": {
@@ -680,7 +680,7 @@
                 "issues": "https://github.com/cnizzardini/cakephp-swagger-bake/issues",
                 "source": "https://github.com/cnizzardini/cakephp-swagger-bake"
             },
-            "time": "2022-04-03T16:10:07+00:00"
+            "time": "2022-04-23T12:27:02+00:00"
         },
         {
             "name": "composer/ca-bundle",
