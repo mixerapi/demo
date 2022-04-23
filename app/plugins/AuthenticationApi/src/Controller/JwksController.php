@@ -25,7 +25,7 @@ class JwksController extends AppController
     #[OpenApiResponse(schemaType: 'array', schema: JwkSetResponse::class)]
     public function index(JwkSetService $service)
     {
-        $this->set('data', $service->keyset());
+        $this->set('data', $service->keyset()['keys']);
         $this->viewBuilder()->setOption('serialize', 'data');
     }
 }

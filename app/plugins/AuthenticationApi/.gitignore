@@ -12,3 +12,4 @@
 /config/keys.pfx
 /config/private.pem
 /config/public.pem
+/config/cert.pem
