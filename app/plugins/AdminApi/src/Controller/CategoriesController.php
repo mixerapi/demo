@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace AdminApi\Controller;
 
+use App\Model\Table\CategoriesTable;
 use MixerApi\Crud\Interfaces\{CreateInterface, ReadInterface, UpdateInterface, DeleteInterface, SearchInterface};
 use SwaggerBake\Lib\Attribute\OpenApiPaginator;
 use SwaggerBake\Lib\Extension\CakeSearch\Attribute\OpenApiSearch;
@@ -32,7 +33,7 @@ class CategoriesController extends AppController
      * @throws \Cake\Http\Exception\MethodNotAllowedException When invalid method
      */
     #[OpenApiPaginator]
-    #[OpenApiSearch(tableClass: '\App\Model\Table\CategoriesTable')]
+    #[OpenApiSearch(tableClass: CategoriesTable::class)]
     public function index(SearchInterface $search)
     {
         $this->set('categories', $search->search($this));
@@ -55,6 +56,8 @@ class CategoriesController extends AppController
     /**
      * Add method
      *
+     * This example uses mixerapi/crud.
+     *
      * @param CreateInterface $create
      * @return \Cake\Http\Response|null|void HTTP 200 on successful add
      * @throws \Cake\Http\Exception\MethodNotAllowedException
@@ -68,6 +71,8 @@ class CategoriesController extends AppController
 
     /**
      * Edit method
+     *
+     * This example uses mixerapi/crud.
      *
      * @param UpdateInterface $update
      * @return \Cake\Http\Response|null|void HTTP 200 on successful edit
@@ -83,6 +88,8 @@ class CategoriesController extends AppController
 
     /**
      * Delete method
+     *
+     * This example uses mixerapi/crud.
      *
      * @param DeleteInterface $delete
      * @return \Cake\Http\Response|null|void HTTP 204 on success

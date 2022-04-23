@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace AdminApi\Controller;
 
+use App\Model\Table\LanguagesTable;
 use MixerApi\Crud\Interfaces\{CreateInterface, ReadInterface, UpdateInterface, DeleteInterface, SearchInterface};
 use SwaggerBake\Lib\Attribute\OpenApiPaginator;
 use SwaggerBake\Lib\Extension\CakeSearch\Attribute\OpenApiSearch;
@@ -27,12 +28,14 @@ class LanguagesController extends AppController
     /**
      * Index method
      *
+     * This example uses mixerapi/crud.
+     *
      * @param SearchInterface $search
      * @return \Cake\Http\Response|null|void Renders view
      * @throws \Cake\Http\Exception\MethodNotAllowedException When invalid method
      */
     #[OpenApiPaginator]
-    #[OpenApiSearch(tableClass: '\App\Model\Table\LanguagesTable')]
+    #[OpenApiSearch(tableClass: LanguagesTable::class)]
     public function index(SearchInterface $search)
     {
         $this->set('data', $search->search($this));
@@ -40,6 +43,8 @@ class LanguagesController extends AppController
 
     /**
      * View method
+     *
+     * This example uses mixerapi/crud.
      *
      * @param ReadInterface $read
      * @param string|null $id Actor id.
@@ -55,6 +60,8 @@ class LanguagesController extends AppController
     /**
      * Add method
      *
+     * This example uses mixerapi/crud.
+     *
      * @param CreateInterface $create
      * @return \Cake\Http\Response|null|void HTTP 200 on successful add
      * @throws \Cake\Http\Exception\MethodNotAllowedException
@@ -68,6 +75,8 @@ class LanguagesController extends AppController
 
     /**
      * Edit method
+     *
+     * This example uses mixerapi/crud.
      *
      * @param UpdateInterface $update
      * @return \Cake\Http\Response|null|void HTTP 200 on successful edit
@@ -83,6 +92,8 @@ class LanguagesController extends AppController
 
     /**
      * Delete method
+     *
+     * This example uses mixerapi/crud.
      *
      * @param DeleteInterface $delete
      * @return \Cake\Http\Response|null|void HTTP 204 on success

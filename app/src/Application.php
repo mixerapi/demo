@@ -40,9 +40,7 @@ use Psr\Http\Server\RequestHandlerInterface;
 class Application extends BaseApplication
 {
     /**
-     * Load all the application configuration and bootstrap logic.
-     *
-     * @return void
+     * @inheritDoc
      */
     public function bootstrap(): void
     {
@@ -57,7 +55,9 @@ class Application extends BaseApplication
             ]
         ]);
         $this->addPlugin('Search');
+        $this->addPlugin('Authentication');
         $this->addPlugin('AdminApi');
+        $this->addPlugin('AuthenticationApi');
 
         // Call parent to load bootstrap from files.
         parent::bootstrap();
@@ -67,7 +67,7 @@ class Application extends BaseApplication
         } else {
             FactoryLocator::add(
                 'Table',
-                (new TableLocator())->allowFallbackClass(false)
+                (new TableLocator)->allowFallbackClass(false)
             );
         }
 
@@ -86,10 +86,7 @@ class Application extends BaseApplication
     }
 
     /**
-     * Setup the middleware queue your application will use.
-     *
-     * @param \Cake\Http\MiddlewareQueue $middlewareQueue The middleware queue to setup.
-     * @return \Cake\Http\MiddlewareQueue The updated middleware queue.
+     * @inheritDoc
      */
     public function middleware(MiddlewareQueue $middlewareQueue): MiddlewareQueue
     {

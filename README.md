@@ -15,6 +15,9 @@ A [mixerapi/mixerapi](https://github.com/mixerapi/mixerapi) demo application. Th
 
 Checkout the live demo: [https://demo.mixerapi.com](https://demo.mixerapi.com)
 
+- [Installation](#Installation)
+- [Usage](#Usage)
+
 ## Installation
 
 You can run this demo via Docker and/or a local LAMP stack. Fork/clone this repository to get started.
@@ -69,3 +72,5 @@ Browse to the URL given by the `server` console command.
 For Docker see this [README](https://github.com/mixerapi/app).
 
 For information on the demo application code see [app/README.md](./app/README.md)
+
+See the [AuthenticationApi](app/plugins/AuthenticationApi/README.md) for details on the JWT auth demo.

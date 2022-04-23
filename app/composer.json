@@ -6,12 +6,15 @@
     "license": "MIT",
     "require": {
         "php": "^8.0",
+        "ext-openssl": "*",
         "cakephp/authentication": "^2.6",
         "cakephp/cakephp": "^4.2",
         "cakephp/migrations": "^3.0",
         "cakephp/plugin-installer": "^1.3",
         "cnizzardini/cakephp-preloader": "^0.1.3",
+        "cnizzardini/cakephp-swagger-bake": "^2.0",
         "dereuromark/cakephp-setup": "^2.1",
+        "firebase/php-jwt": "^5.5",
         "friendsofcake/search": "^6.2",
         "mixerapi/crud": "^1.0",
         "mixerapi/mixerapi": "^1.0",
@@ -34,14 +37,16 @@
         "psr-4": {
             "App\\": "src/",
             "AdminApi\\": "plugins/AdminApi/src/",
-            "MixerApi\\Crud\\": "plugins/crud/src/"
+            "MixerApi\\Crud\\": "plugins/crud/src/",
+            "AuthenticationApi\\": "plugins/AuthenticationApi/src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
             "App\\Test\\": "tests/",
             "Cake\\Test\\": "vendor/cakephp/cakephp/tests/",
-            "AdminApi\\Test\\": "plugins/AdminApi/tests/"
+            "AdminApi\\Test\\": "plugins/AdminApi/tests/",
+            "AuthenticationApi\\Test\\": "plugins/AuthenticationApi/tests/"
         }
     },
     "scripts": {

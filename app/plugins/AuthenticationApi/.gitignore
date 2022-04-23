@@ -1,0 +1,15 @@
+/composer.lock
+/composer.phar
+/phpunit.xml
+/.phpunit.result.cache
+/phpunit.phar
+/config/Migrations/schema-dump-default.lock
+/vendor/
+/.idea/
+/webroot/swagger.json
+/config/jwt.key
+/config/jwt.pem
+/config/keys.pfx
+/config/private.pem
+/config/public.pem
+/config/cert.pem

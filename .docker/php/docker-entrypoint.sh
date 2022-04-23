@@ -37,12 +37,29 @@ if [ "$1" = 'php-fpm' ] || [ "$1" = 'php' ] || [ "$1" = 'bin/cakephp' ]; then
 
     mkdir -p logs tmp
 
+    # Set ACLs for Linux users
     echo "HOST OS: $HOST_OS"
     if [[ $HOST_OS == *"Linux"* ]]; then
         echo "Setting ACLs..."
         setfacl -R -m u:www-data:rwX -m u:"$(whoami)":rwX logs
         setfacl -R -m u:www-data:rwX -m u:"$(whoami)":rwX tmp
         setfacl -R -m g:nginx:rwX /srv/app
+    fi
+
+    # For AuthenticationApi JWT Auth generate private and public keys:
+    if [ ! -f plugins/AuthenticationApi/config/jwt.key ]; then
+        echo "Generating Keys for JWT auth..."
+        openssl genrsa -out plugins/AuthenticationApi/config/jwt.key 1024
+        openssl rsa -in plugins/AuthenticationApi/config/jwt.key -outform PEM -pubout -out plugins/AuthenticationApi/config/jwt.pem
+    fi
+
+    # For JWK Set Auth:
+    if [ ! -f plugins/AuthenticationApi/config/private.pem ]; then
+        echo "Generating Keys for JWKS auth..."
+        openssl genrsa -out plugins/AuthenticationApi/config/private.pem 4096
+        openssl rsa -in plugins/AuthenticationApi/config/private.pem -out plugins/AuthenticationApi/config/public.pem -pubout
+        openssl req -key plugins/AuthenticationApi/config/private.pem -new -x509 -days 3650 -subj "/C=US/ST=DC/O=MixerApi/OU=Demo/CN=demo.mixerapi.com" -out plugins/AuthenticationApi/config/cert.pem
+        openssl pkcs12 -export -inkey plugins/AuthenticationApi/config/private.pem -in plugins/AuthenticationApi/config/cert.pem -out plugins/AuthenticationApi/config/keys.pfx -name "my alias" -password pass:
     fi
 
     echo "setting ownership..."
