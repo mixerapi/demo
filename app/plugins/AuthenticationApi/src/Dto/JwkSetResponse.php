@@ -9,8 +9,8 @@ use SwaggerBake\Lib\Attribute\OpenApiSchemaProperty;
 #[OpenApiSchemaProperty(name: 'use', example: 'sig')]
 #[OpenApiSchemaProperty(name: 'alg', example: 'RS256')]
 #[OpenApiSchemaProperty(name: 'kid')]
-#[OpenApiSchemaProperty(name: 'n')]
 #[OpenApiSchemaProperty(name: 'e')]
+#[OpenApiSchemaProperty(name: 'n')]
 class JwkSetResponse
 {
 
