@@ -34,7 +34,7 @@ $container->add(JwtAuthInterface::class, JwkAuthService::class);
 - Change the authenticator that gets loaded in AdminApi and AuthenticationApi:
 
 ```php
-# plugins/AuthenticationApi/Plugin.php and # plugins/AdminApi/Plugin.php
+# plugins/AuthenticationApi/Plugin.php and plugins/AdminApi/Plugin.php
 $authService = (new JwtAuthService)->getService(new AuthenticationService());
 ```
 
