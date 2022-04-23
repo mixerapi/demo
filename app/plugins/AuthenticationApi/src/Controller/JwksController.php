@@ -16,7 +16,9 @@ class JwksController extends AppController
     }
 
     /**
-     * Returns a JWK Set.
+     * JWKS
+     *
+     * Returns a JSON Web Key Set.
      *
      * @param JwkSetService $service
      * @return void
