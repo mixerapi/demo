@@ -10,16 +10,14 @@ JSON Web Token. The demo defaults to JWKS. Please do further reading on which is
 ## JWKS
 
 JWKS publishes public keys to an endpoint that other services can use to validate the JWT. Keys are available at
-`/admin/auth/keys`.A JWK Set should've been generated as part of the `.docker/php/docker-entrypoint.sh` script. If not
+`/admin/auth/keys`. A JWK Set should've been generated as part of the `.docker/php/docker-entrypoint.sh` script. If not
 you can exec into the container (`make php.sh`) and generate them in the `plugins/AuthenticationApi/config/` directory:
 
 ```console
-openssl genrsa -out private.pem 4096
-openssl rsa -in private.pem -out public.pem -pubout
-openssl req -key private.pem -new -x509 -days 3650 -subj "/C=US/ST=DC/O=MixerApi/OU=Demo/CN=demo.mixerapi.com" -out cert.pem
-openssl pkcs12 -export -inkey private.pem -in cert.pem -out keys.pfx -name "my alias"
-keytool -v -list -keystore keys.pfx -storetype PKCS12 -storepass
-keytool -list -keystore keys.pfx
+openssl genrsa -out plugins/AuthenticationApi/config/private.pem 4096
+openssl rsa -in plugins/AuthenticationApi/config/private.pem -out plugins/AuthenticationApi/config/public.pem -pubout
+openssl req -key plugins/AuthenticationApi/config/private.pem -new -x509 -days 3650 -subj "/C=US/ST=DC/O=MixerApi/OU=Demo/CN=demo.mixerapi.com" -out plugins/AuthenticationApi/config/cert.pem
+openssl pkcs12 -export -inkey plugins/AuthenticationApi/config/private.pem -in plugins/AuthenticationApi/config/cert.pem -out plugins/AuthenticationApi/config/keys.pfx -name "my alias" -password pass:
 ```
 
 ## JWT
