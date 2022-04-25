@@ -30,6 +30,15 @@ Bring up stack:
 make init
 ```
 
+Next, generate schema and seed data:
+
+```console
+make php.sh
+bin/cake migrations migrate
+bin/cake migrations seed
+```
+
+That's it! Now browse to [http://localhost:8080](http://localhost:8080).
 
 #### For Mac Users
 
@@ -42,16 +51,6 @@ brew install gnu-sed
 ```
 
 Then update `sed` to `gsed` in the Makefile.
-
-Next, generate schema and seed data:
-
-```console
-make php.sh
-bin/cake migrations migrate
-bin/cake migrations seed
-```
-
-That's it! Now browse to [http://localhost:8080](http://localhost:8080).
 
 ### Local
 
