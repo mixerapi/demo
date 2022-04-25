@@ -10,8 +10,7 @@ JSON Web Token. The demo defaults to JWKS. Please do further reading on which is
 ## JWKS
 
 JWKS publishes public keys to an endpoint that other services can use to validate the JWT. Keys are available at
-`/admin/auth/keys`. A JWK Set should've been generated as part of the `.docker/php/docker-entrypoint.sh` script. If not
-you can exec into the container (`make php.sh`) and generate them in the `plugins/AuthenticationApi/config/` directory:
+`/admin/auth/keys`. Exec into the container (`make php.sh`) and generate them in the `plugins/AuthenticationApi/config/` directory:
 
 ```console
 openssl genrsa -out plugins/AuthenticationApi/config/private.pem 4096
@@ -38,8 +37,7 @@ $container->add(JwtAuthInterface::class, JwkAuthService::class);
 $authService = (new JwtAuthService)->getService(new AuthenticationService());
 ```
 
-Keys should've been generated as part of the `.docker/php/docker-entrypoint.sh` script. If not you can exec into the
-container (`make php.sh`) and generate them in the `plugins/AuthenticationApi/config/` directory:
+Exec into thecontainer (`make php.sh`) and generate keys in the `plugins/AuthenticationApi/config/` directory:
 
 ```console
 openssl genrsa -out plugins/AuthenticationApi/config/jwt.key 1024
