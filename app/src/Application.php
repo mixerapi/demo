@@ -21,6 +21,7 @@ use Authentication\AuthenticationServiceInterface;
 use Authentication\AuthenticationServiceProviderInterface;
 use Authentication\Identifier\IdentifierInterface;
 use Authentication\Middleware\AuthenticationMiddleware;
+use Cake\Cache\Cache;
 use Cake\Core\Configure;
 use Cake\Core\ContainerInterface;
 use Cake\Core\Exception\MissingPluginException;
@@ -204,8 +205,14 @@ class Application extends BaseApplication implements AuthenticationServiceProvid
                 'algorithm' => $config->getAlg(),
             ]);
         } else if (str_starts_with(haystack: $config->getAlg(), needle: 'RS')) {
+            $jsonKeySet = Cache::remember('jwkset', function() {
+                return json_encode((new JwkSet)->getKeySet());
+            });
+            /*
+             * Caching is optional, you may also set the jwks key to the return value of (new JwkSet)->getKeySet()
+             */
             $service->loadAuthenticator('Authentication.Jwt', [
-                'jwks' => (new JwkSet)->getKeySet(),
+                'jwks' => json_decode($jsonKeySet, true),
                 'algorithm' => $config->getAlg(),
             ]);
         }
