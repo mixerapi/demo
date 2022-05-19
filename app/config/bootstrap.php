@@ -163,6 +163,8 @@ Mailer::setConfig(Configure::consume('Email'));
 Log::setConfig(Configure::consume('Log'));
 Security::setSalt(Configure::consume('Security.salt'));
 
+Configure::load('mixerapi_jwtauth');
+
 /*
  * Setup detectors for mobile and tablet.
  */

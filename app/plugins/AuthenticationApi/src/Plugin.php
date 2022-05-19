@@ -3,19 +3,8 @@ declare(strict_types=1);
 
 namespace AuthenticationApi;
 
-use Authentication\AuthenticationService;
-use Authentication\Middleware\AuthenticationMiddleware;
-use AuthenticationApi\Service\JwkSetService;
-use AuthenticationApi\Service\JwkSetAuthService;
-use AuthenticationApi\Service\JwtAuthInterface;
-use AuthenticationApi\Service\JwtAuthService;
 use Cake\Core\BasePlugin;
-use Cake\Core\ContainerInterface;
-use Cake\Core\PluginApplicationInterface;
-use Cake\Http\Middleware\BodyParserMiddleware;
-use Cake\Http\MiddlewareQueue;
 use Cake\Routing\RouteBuilder;
-use Cake\Console\CommandCollection;
 
 /**
  * Plugin for AuthenticationApi
@@ -23,12 +12,39 @@ use Cake\Console\CommandCollection;
 class Plugin extends BasePlugin
 {
     /**
-     * @inheritDoc
+     * Plugin name.
+     *
+     * @var string
      */
-    public function bootstrap(PluginApplicationInterface $app): void
-    {
-        parent::bootstrap($app);
-    }
+    protected $name = 'AuthenticationApi';
+
+    /**
+     * Do bootstrapping or not
+     *
+     * @var bool
+     */
+    protected $bootstrapEnabled = false;
+
+    /**
+     * Console middleware
+     *
+     * @var bool
+     */
+    protected $consoleEnabled = false;
+
+    /**
+     * Enable middleware
+     *
+     * @var bool
+     */
+    protected $middlewareEnabled = false;
+
+    /**
+     * Register container services
+     *
+     * @var bool
+     */
+    protected $servicesEnabled = false;
 
     /**
      * @inheritDoc
@@ -36,17 +52,6 @@ class Plugin extends BasePlugin
     public function routes(RouteBuilder $routes): void
     {
         $routes->plugin('AuthenticationApi', ['path' => '/admin/auth'], function (RouteBuilder $builder) {
-            /*
-             * Enable one of JWT Auth or JWK Set Auth:
-             */
-            $authService = (new JwkSetAuthService)->getService(new AuthenticationService());
-            //$authService = (new JwtAuthService)->getService(new AuthenticationService());
-
-            $authMiddleware = new AuthenticationMiddleware($authService);
-
-            $builder->registerMiddleware('body', new BodyParserMiddleware());
-            $builder->registerMiddleware('auth', $authMiddleware);
-            $builder->applyMiddleware('body','auth');
             $builder->setExtensions(['json','xml']);
             $builder->connect('/', [
                 'plugin' => 'AuthenticationApi', 'controller' => 'Swagger', 'action' => 'index'
@@ -77,38 +82,5 @@ class Plugin extends BasePlugin
         ]);
 
         parent::routes($routes);
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function middleware(MiddlewareQueue $middlewareQueue): MiddlewareQueue
-    {
-        return $middlewareQueue;
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function console(CommandCollection $commands) : CommandCollection
-    {
-        // Add your commands here
-
-        $commands = parent::console($commands);
-
-        return $commands;
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function services(ContainerInterface $container): void
-    {
-        /*
-         * Enable one of JWT Auth or JWK Set Auth:
-         */
-        $container->add(JwtAuthInterface::class, JwkSetAuthService::class);
-        //$container->add(JwtAuthInterface::class, JwtAuthService::class);
-        $container->add(JwkSetService::class);
     }
 }

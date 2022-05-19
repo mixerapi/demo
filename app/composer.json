@@ -16,8 +16,9 @@
         "dereuromark/cakephp-setup": "^2.1",
         "firebase/php-jwt": "^5.5",
         "friendsofcake/search": "^6.2",
-        "mixerapi/crud": "^1.0",
-        "mixerapi/mixerapi": "^1.0",
+        "mixerapi/crud": "^1.1",
+        "mixerapi/jwt-auth": "^1.1",
+        "mixerapi/mixerapi": "^1.1",
         "mobiledetect/mobiledetectlib": "^2.8"
     },
     "require-dev": {
@@ -37,7 +38,6 @@
         "psr-4": {
             "App\\": "src/",
             "AdminApi\\": "plugins/AdminApi/src/",
-            "MixerApi\\Crud\\": "plugins/crud/src/",
             "AuthenticationApi\\": "plugins/AuthenticationApi/src/"
         }
     },

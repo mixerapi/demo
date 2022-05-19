@@ -7,9 +7,4 @@
 /vendor/
 /.idea/
 /webroot/swagger.json
-/config/jwt.key
-/config/jwt.pem
-/config/keys.pfx
-/config/private.pem
-/config/public.pem
-/config/cert.pem
+/config/keys/*
