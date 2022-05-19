@@ -1,6 +1,7 @@
 # AuthenticationApi
 
-The AuthenticationApi uses [MixerApi/JwtAuth](https://github.com/mixerapi/jwt-auth).
+The AuthenticationApi uses [MixerApi/JwtAuth](https://github.com/mixerapi/jwt-auth). See `src/Application.php` for
+loading [CakePHP authenticators and identifiers](https://book.cakephp.org/authentication/2/en/index.html).
 
 ## Getting a token
 

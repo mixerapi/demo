@@ -72,4 +72,6 @@ For Docker see this [README](https://github.com/mixerapi/app).
 
 For information on the demo application code see [app/README.md](./app/README.md)
 
-See the [AuthenticationApi](app/plugins/AuthenticationApi/README.md) for details on the JWT auth demo.
+See the [AuthenticationApi](app/plugins/AuthenticationApi/README.md) for details on the JWT auth demo. The
+AuthenticationApi uses [MixerApi/JwtAuth](https://github.com/mixerapi/jwt-auth). See `src/Application.php` for
+loading [CakePHP authenticators and identifiers](https://book.cakephp.org/authentication/2/en/index.html).
