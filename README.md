@@ -54,13 +54,35 @@ Then update `sed` to `gsed` in the Makefile.
 
 ### Local
 
-Configure your database settings in `app/config/.env` and run:
+Copy default configs:
 
 ```console
 cd app
+cp config/.env.example config/.env
+cp config/app_local.example.php config/app_local.php
+cp ../.assets/bootstrap.php config/bootstrap.php
+```
+
+Configure your database settings in `app/config/.env` and run:
+
+```console
 composer install
 bin/cake migrations migrate
 bin/cake migrations seed
+```
+
+Generate keys for authentication examples:
+
+```console
+mkdir -p plugins/AuthenticationApi/config/keys/1
+openssl genrsa -out plugins/AuthenticationApi/config/keys/1/private.pem 2048
+openssl rsa -in plugins/AuthenticationApi/config/keys/1/private.pem -outform PEM -pubout -out plugins/AuthenticationApi/config/keys/1/public.pem
+openssl rand -base64 32 > plugins/AuthenticationApi/config/keys/hmac_secret.txt
+```
+
+Bring on local server:
+
+```console
 bin/cake server
 ```
 

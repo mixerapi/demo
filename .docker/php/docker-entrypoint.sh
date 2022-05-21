@@ -8,16 +8,8 @@ fi
 
 if [ "$1" = 'php-fpm' ] || [ "$1" = 'php' ] || [ "$1" = 'bin/cakephp' ]; then
 
-    # The first time volumes are mounted, the project needs to be recreated
-    if [ ! -f composer.json ]; then
-
-        if [ -f .gitkeep ]; then
-            rm .gitkeep # create project fails if directory is not empty
-        fi
-
-        COMPOSER_MEMORY_LIMIT=-1
-        composer create-project --prefer-dist --no-interaction cakephp/app:~4.2 .
-        rm -rf .github
+    # Set env file and bootstrap
+    if [ ! -f config/.env ]; then
         cp config/.env.example config/.env
         cp config/app_local.example.php config/app_local.php
         cp ../.assets/bootstrap.php config/bootstrap.php
@@ -26,8 +18,6 @@ if [ "$1" = 'php-fpm' ] || [ "$1" = 'php' ] || [ "$1" = 'bin/cakephp' ]; then
 
         salt=$(openssl rand -base64 32)
         sed -i '/export SECURITY_SALT/c\export SECURITY_SALT="'$salt'"' config/.env
-
-        touch .gitkeep
     fi
 
     echo "ENV: $APP_ENV"
