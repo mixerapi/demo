@@ -77,6 +77,7 @@ if (!env('APP_NAME') && file_exists(CONFIG . '.env')) {
 try {
     Configure::config('default', new PhpConfig());
     Configure::load('app', 'default', false);
+    Configure::load('mixerapi_jwtauth');
 } catch (\Exception $e) {
     exit($e->getMessage() . "\n");
 }
@@ -162,8 +163,6 @@ TransportFactory::setConfig(Configure::consume('EmailTransport'));
 Mailer::setConfig(Configure::consume('Email'));
 Log::setConfig(Configure::consume('Log'));
 Security::setSalt(Configure::consume('Security.salt'));
-
-Configure::load('mixerapi_jwtauth');
 
 /*
  * Setup detectors for mobile and tablet.
