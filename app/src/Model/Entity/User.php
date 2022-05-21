@@ -4,6 +4,9 @@ declare(strict_types=1);
 namespace App\Model\Entity;
 
 use Cake\ORM\Entity;
+use MixerApi\JwtAuth\Jwt\Jwt;
+use MixerApi\JwtAuth\Jwt\JwtEntityInterface;
+use MixerApi\JwtAuth\Jwt\JwtInterface;
 
 /**
  * User Entity
@@ -14,7 +17,7 @@ use Cake\ORM\Entity;
  * @property \Cake\I18n\FrozenTime $created
  * @property \Cake\I18n\FrozenTime $modified
  */
-class User extends Entity
+class User extends Entity implements JwtEntityInterface
 {
     /**
      * Fields that can be mass assigned using newEntity() or patchEntity().
@@ -40,4 +43,25 @@ class User extends Entity
     protected $_hidden = [
         'password',
     ];
+
+    /**
+     * @inheritDoc
+     */
+    public function getJwt(): JwtInterface
+    {
+        return new Jwt(
+            exp: time() + 60 * 60 * 24,
+            sub: $this->get('id'),
+            iss: 'demo.mixerapi.com',
+            aud: null,
+            nbf: null,
+            iat: null,
+            jti: \Cake\Utility\Text::uuid(),
+            claims: [
+                'user' => [
+                    'email' => $this->get('email')
+                ]
+            ]
+        );
+    }
 }

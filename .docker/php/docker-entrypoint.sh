@@ -8,26 +8,16 @@ fi
 
 if [ "$1" = 'php-fpm' ] || [ "$1" = 'php' ] || [ "$1" = 'bin/cakephp' ]; then
 
-    # The first time volumes are mounted, the project needs to be recreated
-    if [ ! -f composer.json ]; then
-
-        if [ -f .gitkeep ]; then
-            rm .gitkeep # create project fails if directory is not empty
-        fi
-
-        COMPOSER_MEMORY_LIMIT=-1
-        composer create-project --prefer-dist --no-interaction cakephp/app:~4.2 .
-        rm -rf .github
+    # Set env file and bootstrap
+    if [ ! -f config/.env ]; then
         cp config/.env.example config/.env
         cp config/app_local.example.php config/app_local.php
         cp ../.assets/bootstrap.php config/bootstrap.php
 
         sed -i '/export APP_NAME/c\export APP_NAME="cakephp"' config/.env
 
-        salt=$(cat /dev/urandom | LC_CTYPE=C tr -dc 'a-zA-Z0-9' | fold -w 32 | head -n 1)
+        salt=$(openssl rand -base64 32)
         sed -i '/export SECURITY_SALT/c\export SECURITY_SALT="'$salt'"' config/.env
-
-        touch .gitkeep
     fi
 
     echo "ENV: $APP_ENV"
@@ -46,20 +36,14 @@ if [ "$1" = 'php-fpm' ] || [ "$1" = 'php' ] || [ "$1" = 'bin/cakephp' ]; then
         setfacl -R -m g:nginx:rwX /srv/app
     fi
 
-    # For AuthenticationApi JWT Auth generate private and public keys:
-    if [ ! -f plugins/AuthenticationApi/config/jwt.key ]; then
-        echo "Generating Keys for JWT auth..."
-        openssl genrsa -out plugins/AuthenticationApi/config/jwt.key 1024
-        openssl rsa -in plugins/AuthenticationApi/config/jwt.key -outform PEM -pubout -out plugins/AuthenticationApi/config/jwt.pem
-    fi
-
-    # For JWK Set Auth:
-    if [ ! -f plugins/AuthenticationApi/config/private.pem ]; then
-        echo "Generating Keys for JWKS auth..."
-        openssl genrsa -out plugins/AuthenticationApi/config/private.pem 4096
-        openssl rsa -in plugins/AuthenticationApi/config/private.pem -out plugins/AuthenticationApi/config/public.pem -pubout
-        openssl req -key plugins/AuthenticationApi/config/private.pem -new -x509 -days 3650 -subj "/C=US/ST=DC/O=MixerApi/OU=Demo/CN=demo.mixerapi.com" -out plugins/AuthenticationApi/config/cert.pem
-        openssl pkcs12 -export -inkey plugins/AuthenticationApi/config/private.pem -in plugins/AuthenticationApi/config/cert.pem -out plugins/AuthenticationApi/config/keys.pfx -name "my alias" -password pass:
+    # For JWT RSA keypair and HMAC secret:
+    if [ ! -f plugins/AuthenticationApi/config/keys/1/private.key ]; then
+        echo "Generating RSA key pairs..."
+        mkdir -p plugins/AuthenticationApi/config/keys/1
+        openssl genrsa -out plugins/AuthenticationApi/config/keys/1/private.pem 2048
+        openssl rsa -in plugins/AuthenticationApi/config/keys/1/private.pem -outform PEM -pubout -out plugins/AuthenticationApi/config/keys/1/public.pem
+        echo "Generating HMAc secret..."
+        openssl rand -base64 32 > plugins/AuthenticationApi/config/keys/hmac_secret.txt
     fi
 
     echo "setting ownership..."

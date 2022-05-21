@@ -3,8 +3,8 @@
 namespace AuthenticationApi\Controller;
 
 use AuthenticationApi\Dto\JwkSetResponse;
-use AuthenticationApi\Service\JwkSetService;
 use Cake\Event\EventInterface;
+use MixerApi\JwtAuth\Jwk\JwkSetInterface;
 use SwaggerBake\Lib\Attribute\OpenApiResponse;
 
 class JwksController extends AppController
@@ -20,14 +20,14 @@ class JwksController extends AppController
      *
      * Returns a JSON Web Key Set.
      *
-     * @param JwkSetService $service
+     * @param JwkSetInterface $jwkSet
      * @return void
      * @throws \Cake\Http\Exception\InternalErrorException
      */
     #[OpenApiResponse(schemaType: 'array', schema: JwkSetResponse::class)]
-    public function index(JwkSetService $service)
+    public function index(JwkSetInterface $jwkSet)
     {
-        $this->set('data', $service->keyset()['keys']);
+        $this->set('data', $jwkSet->getKeySet()['keys']);
         $this->viewBuilder()->setOption('serialize', 'data');
     }
 }

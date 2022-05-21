@@ -54,13 +54,35 @@ Then update `sed` to `gsed` in the Makefile.
 
 ### Local
 
-Configure your database settings in `app/config/.env` and run:
+Copy default configs:
 
 ```console
 cd app
+cp config/.env.example config/.env
+cp config/app_local.example.php config/app_local.php
+cp ../.assets/bootstrap.php config/bootstrap.php
+```
+
+Configure your database settings in `app/config/.env` and run:
+
+```console
 composer install
 bin/cake migrations migrate
 bin/cake migrations seed
+```
+
+Generate keys for authentication examples:
+
+```console
+mkdir -p plugins/AuthenticationApi/config/keys/1
+openssl genrsa -out plugins/AuthenticationApi/config/keys/1/private.pem 2048
+openssl rsa -in plugins/AuthenticationApi/config/keys/1/private.pem -outform PEM -pubout -out plugins/AuthenticationApi/config/keys/1/public.pem
+openssl rand -base64 32 > plugins/AuthenticationApi/config/keys/hmac_secret.txt
+```
+
+Bring on local server:
+
+```console
 bin/cake server
 ```
 
@@ -72,4 +94,6 @@ For Docker see this [README](https://github.com/mixerapi/app).
 
 For information on the demo application code see [app/README.md](./app/README.md)
 
-See the [AuthenticationApi](app/plugins/AuthenticationApi/README.md) for details on the JWT auth demo.
+See the [AuthenticationApi](app/plugins/AuthenticationApi/README.md) for details on the JWT auth demo. The
+AuthenticationApi uses [MixerApi/JwtAuth](https://github.com/mixerapi/jwt-auth). See `src/Application.php` for
+loading [CakePHP authenticators and identifiers](https://book.cakephp.org/authentication/2/en/index.html).
