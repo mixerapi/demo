@@ -179,7 +179,7 @@ return [
      */
     'Error' => [
         'errorLevel' => E_ALL,
-        'exceptionRenderer' => Cake\Error\ExceptionRenderer::class,
+        'exceptionRenderer' => MixerApiExceptionRenderer::class,
         'skipLog' => [],
         'log' => true,
         'trace' => true,
