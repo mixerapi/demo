@@ -21,6 +21,7 @@ use Authentication\AuthenticationServiceInterface;
 use Authentication\AuthenticationServiceProviderInterface;
 use Authentication\Identifier\IdentifierInterface;
 use Authentication\Middleware\AuthenticationMiddleware;
+use AuthenticationApi\JwtAuthService;
 use Cake\Cache\Cache;
 use Cake\Core\Configure;
 use Cake\Core\ContainerInterface;
@@ -47,7 +48,7 @@ use Psr\Http\Server\RequestHandlerInterface;
  * This defines the bootstrapping logic and middleware layers you
  * want to use in your application.
  */
-class Application extends BaseApplication implements AuthenticationServiceProviderInterface
+class Application extends BaseApplication
 {
     /**
      * @inheritDoc
@@ -141,11 +142,7 @@ class Application extends BaseApplication implements AuthenticationServiceProvid
             // https://book.cakephp.org/4/en/controllers/middleware.html#body-parser-middleware
             // Other middleware that CakePHP provides.
             ->add(new RoutingMiddleware($this))
-            ->add(new BodyParserMiddleware())
-
-            // Add the AuthenticationMiddleware. It should be
-            // after routing and body parser.
-            ->add(new AuthenticationMiddleware($this));
+            ->add(new BodyParserMiddleware());
 
             // Cross Site Request Forgery (CSRF) Protection Middleware
             // https://book.cakephp.org/4/en/controllers/middleware.html#cross-site-request-forgery-csrf-middleware
@@ -180,65 +177,6 @@ class Application extends BaseApplication implements AuthenticationServiceProvid
         $this->addPlugin('CakePreloader');
         $this->addPlugin('Migrations');
         $this->addPlugin('Setup');
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function getAuthenticationService(ServerRequestInterface $request): AuthenticationServiceInterface
-    {
-        $config = new Configuration;
-        $service = new AuthenticationService();
-        $service->loadAuthenticator('Authentication.Form', [
-            'fields' => [
-                IdentifierInterface::CREDENTIAL_USERNAME => 'email',
-                IdentifierInterface::CREDENTIAL_PASSWORD => 'password',
-            ],
-            'loginUrl' => '/admin/auth/login'
-        ]);
-
-        $service->loadIdentifier('Authentication.JwtSubject');
-
-        if (str_starts_with(haystack: $config->getAlg(), needle: 'HS')) {
-            $service->loadAuthenticator('Authentication.Jwt', [
-                'secretKey' => $config->getSecret(),
-                'algorithm' => $config->getAlg(),
-            ]);
-        } else if (str_starts_with(haystack: $config->getAlg(), needle: 'RS')) {
-            $jsonKeySet = Cache::remember('jwkset', function() {
-                return json_encode((new JwkSet)->getKeySet());
-            });
-            /*
-             * Caching is optional, you may also set the jwks key to the return value of (new JwkSet)->getKeySet()
-             */
-            $service->loadAuthenticator('Authentication.Jwt', [
-                'jwks' => json_decode($jsonKeySet, true),
-                'algorithm' => $config->getAlg(),
-            ]);
-        }
-
-        $service->loadIdentifier('Authentication.Password', [
-            'fields' => [
-                IdentifierInterface::CREDENTIAL_USERNAME => 'email',
-                IdentifierInterface::CREDENTIAL_PASSWORD => 'password',
-            ],
-            'resolver' => [
-                'className' => 'Authentication.Orm',
-                'userModel' => 'Users',
-            ],
-            'passwordHasher' => [
-                'className' => 'Authentication.Fallback',
-                'hashers' => [
-                    'Authentication.Default',
-                    [
-                        'className' => 'Authentication.Legacy',
-                        'hashType' => 'md5',
-                    ],
-                ],
-            ],
-        ]);
-
-        return $service;
     }
 
     /**

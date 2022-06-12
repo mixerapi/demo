@@ -3,15 +3,27 @@ declare(strict_types=1);
 
 namespace AdminApi;
 
+use Authentication\AuthenticationServiceInterface;
+use Authentication\AuthenticationServiceProviderInterface;
+use Authentication\Middleware\AuthenticationMiddleware;
+use AuthenticationApi\JwtAuthService;
 use Cake\Core\BasePlugin;
+use Cake\Core\Configure;
+use Cake\Error\Middleware\ErrorHandlerMiddleware;
+use Cake\Http\Middleware\BodyParserMiddleware;
+use Cake\Http\MiddlewareQueue;
+use Cake\Routing\Middleware\AssetMiddleware;
+use Cake\Routing\Middleware\RoutingMiddleware;
 use Cake\Routing\RouteBuilder;
 use MixerApi\Rest\Lib\AutoRouter;
 use MixerApi\Rest\Lib\Route\ResourceScanner;
+use Psr\Http\Message\ServerRequestInterface;
+use Psr\Http\Server\RequestHandlerInterface;
 
 /**
  * Plugin for AdminApi
  */
-class Plugin extends BasePlugin
+class Plugin extends BasePlugin implements AuthenticationServiceProviderInterface
 {
     /**
      * Plugin name.
@@ -35,18 +47,30 @@ class Plugin extends BasePlugin
     protected $consoleEnabled = false;
 
     /**
-     * Enable middleware
-     *
-     * @var bool
-     */
-    protected $middlewareEnabled = false;
-
-    /**
      * Register container services
      *
      * @var bool
      */
     protected $servicesEnabled = false;
+
+    /**
+     * @inheritDoc
+     */
+    public function middleware(MiddlewareQueue $middlewareQueue): MiddlewareQueue
+    {
+        $middlewareQueue
+            // Add the AuthenticationMiddleware. It should be
+            // after routing and body parser.
+            ->add(new AuthenticationMiddleware($this));
+
+        // Cross Site Request Forgery (CSRF) Protection Middleware
+        // https://book.cakephp.org/4/en/controllers/middleware.html#cross-site-request-forgery-csrf-middleware
+        //->add(new CsrfProtectionMiddleware([
+        //    'httponly' => true,
+        //]));
+
+        return $middlewareQueue;
+    }
 
     /**
      * @inheritDoc
@@ -70,5 +94,14 @@ class Plugin extends BasePlugin
         ]);
 
         parent::routes($routes);
+    }
+
+    /**
+     * @inheritDoc
+     * @throws \MixerApi\JwtAuth\Exception\JwtAuthException
+     */
+    public function getAuthenticationService(ServerRequestInterface $request): AuthenticationServiceInterface
+    {
+        return JwtAuthService::create();
     }
 }
