@@ -1,12 +1,7 @@
 <?php
+declare(strict_types=1);
 
 namespace AuthenticationApi\Test;
-
-use App\Model\Entity\User;
-use Cake\Chronos\Date;
-use Cake\Utility\Text;
-use MixerApi\JwtAuth\Configuration\Configuration;
-use MixerApi\JwtAuth\JwtAuthenticator;
 
 class HttpHelper
 {

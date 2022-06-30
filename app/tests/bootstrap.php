@@ -32,3 +32,14 @@ $migrator->run();
 // does not allow the sessionid to be set after stdout
 // has been written to.
 session_id('cli');
+
+Configure::write('MixerApi.JwtAuth', [
+    'alg' => 'RS256',
+    'keys' => [
+        [
+            'kid' => '1',
+            'public' => file_get_contents(TESTS . 'public.pem'),
+            'private' => file_get_contents(TESTS . 'private.pem'),
+        ]
+    ]
+]);
