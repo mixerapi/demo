@@ -14,11 +14,10 @@ jobs:
         with:
           php-version: 8.0
           extensions: mbstring, intl, sqlite3, mysqli
-      - name: Composer Check
-        run: composer validate
       - name: Test
         run: |
           cd app
+          composer validate
           composer install --prefer-dist --no-interaction --no-progress
           cp config/.env.example config/.env
           cp config/app_local.example.php config/app_local.php
