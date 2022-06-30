@@ -19,12 +19,15 @@ class JwtAuthService
      */
     public static function create(): AuthenticationService
     {
+        $usernameField = 'email';
+        $passwordField = 'password';
+
         $config = new Configuration;
         $service = new AuthenticationService();
         $service->loadAuthenticator('Authentication.Form', [
             'fields' => [
-                IdentifierInterface::CREDENTIAL_USERNAME => 'email',
-                IdentifierInterface::CREDENTIAL_PASSWORD => 'password',
+                IdentifierInterface::CREDENTIAL_USERNAME => $usernameField,
+                IdentifierInterface::CREDENTIAL_PASSWORD => $passwordField,
             ],
             'loginUrl' => '/admin/auth/login'
         ]);
@@ -40,6 +43,7 @@ class JwtAuthService
             $jsonKeySet = Cache::remember('jwkset', function() {
                 return json_encode((new JwkSet)->getKeySet());
             });
+            
             /*
              * Caching is optional, you may also set the jwks key to the return value of (new JwkSet)->getKeySet()
              */
@@ -51,23 +55,9 @@ class JwtAuthService
 
         $service->loadIdentifier('Authentication.Password', [
             'fields' => [
-                IdentifierInterface::CREDENTIAL_USERNAME => 'email',
-                IdentifierInterface::CREDENTIAL_PASSWORD => 'password',
-            ],
-            'resolver' => [
-                'className' => 'Authentication.Orm',
-                'userModel' => 'Users',
-            ],
-            'passwordHasher' => [
-                'className' => 'Authentication.Fallback',
-                'hashers' => [
-                    'Authentication.Default',
-                    [
-                        'className' => 'Authentication.Legacy',
-                        'hashType' => 'md5',
-                    ],
-                ],
-            ],
+                IdentifierInterface::CREDENTIAL_USERNAME => $usernameField,
+                IdentifierInterface::CREDENTIAL_PASSWORD => $passwordField,
+            ]
         ]);
 
         return $service;

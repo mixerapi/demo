@@ -16,13 +16,7 @@ declare(strict_types=1);
  */
 namespace App;
 
-use Authentication\AuthenticationService;
-use Authentication\AuthenticationServiceInterface;
-use Authentication\AuthenticationServiceProviderInterface;
-use Authentication\Identifier\IdentifierInterface;
-use Authentication\Middleware\AuthenticationMiddleware;
 use AuthenticationApi\JwtAuthService;
-use Cake\Cache\Cache;
 use Cake\Core\Configure;
 use Cake\Core\ContainerInterface;
 use Cake\Core\Exception\MissingPluginException;
@@ -36,8 +30,6 @@ use Cake\Routing\Middleware\AssetMiddleware;
 use Cake\Routing\Middleware\RoutingMiddleware;
 use Exception;
 use MixerApi\Core\Event\EventListenerLoader;
-use MixerApi\JwtAuth\Configuration\Configuration;
-use MixerApi\JwtAuth\Jwk\JwkSet;
 use MixerApi\JwtAuth\JwtAuthServiceProvider;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;

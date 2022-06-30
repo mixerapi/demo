@@ -8,17 +8,11 @@ use Authentication\AuthenticationServiceProviderInterface;
 use Authentication\Middleware\AuthenticationMiddleware;
 use AuthenticationApi\JwtAuthService;
 use Cake\Core\BasePlugin;
-use Cake\Core\Configure;
-use Cake\Error\Middleware\ErrorHandlerMiddleware;
-use Cake\Http\Middleware\BodyParserMiddleware;
 use Cake\Http\MiddlewareQueue;
-use Cake\Routing\Middleware\AssetMiddleware;
-use Cake\Routing\Middleware\RoutingMiddleware;
 use Cake\Routing\RouteBuilder;
 use MixerApi\Rest\Lib\AutoRouter;
 use MixerApi\Rest\Lib\Route\ResourceScanner;
 use Psr\Http\Message\ServerRequestInterface;
-use Psr\Http\Server\RequestHandlerInterface;
 
 /**
  * Plugin for AdminApi

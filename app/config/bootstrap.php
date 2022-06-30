@@ -80,6 +80,7 @@ try {
     Configure::config('default', new PhpConfig());
     Configure::load('app', 'default', false);
     Configure::load('mixerapi_jwtauth');
+    Configure::load('swagger_bake');
 } catch (\Exception $e) {
     exit($e->getMessage() . "\n");
 }
