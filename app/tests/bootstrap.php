@@ -11,15 +11,15 @@ use Migrations\TestSuite\Migrator;
  * unit tests in this file.
  */
 require dirname(__DIR__) . '/vendor/autoload.php';
-
 require dirname(__DIR__) . '/config/bootstrap.php';
 
 $_SERVER['PHP_SELF'] = '/';
-
 Configure::write('App.fullBaseUrl', 'http://localhost');
-putenv('DB=sqlite');
-// in tests/bootstrap.php
 
+/*
+ * Use SQLite as database when running tests
+ */
+putenv('DB=sqlite');
 
 /*
  * Run migrations
@@ -28,11 +28,14 @@ putenv('DB=sqlite');
 $migrator = new Migrator();
 $migrator->run();
 
-// Fixate sessionid early on, as php7.2+
-// does not allow the sessionid to be set after stdout
-// has been written to.
+/*
+ * Fixate sessionid early on, as php7.2+ does not allow the sessionid to be set after stdout has been written to.
+ */
 session_id('cli');
 
+/*
+ * MixerApi/JwtAuth config
+ */
 Configure::write('MixerApi.JwtAuth', [
     'alg' => 'RS256',
     'keys' => [
