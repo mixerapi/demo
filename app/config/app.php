@@ -332,7 +332,7 @@ return [
          */
         'test' => [
             'className' => Connection::class,
-            'driver' => Mysql::class,
+            'driver' => Sqlite::class,
             'persistent' => false,
             'timezone' => 'UTC',
             //'encoding' => 'utf8mb4',

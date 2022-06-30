@@ -160,6 +160,10 @@ class Application extends BaseApplication
             // Do not halt if the plugin is missing
         }
 
+        if (Configure::read('debug')) {
+            $this->addPlugin('CakephpFixtureFactories');
+        }
+
         try {
             $this->addPlugin('IdeHelper');
         } catch (Exception $e) {
