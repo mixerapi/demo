@@ -55,7 +55,7 @@ return [
         'requestAccepts' => [
             'application/json',
             //'application/xml',
-            'application/x-www-form-urlencoded',
+            //'application/x-www-form-urlencoded',
         ],
         'responseContentTypes' => [
             'application/json',

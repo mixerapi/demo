@@ -16,7 +16,7 @@ A [mixerapi/mixerapi](https://github.com/mixerapi/mixerapi) demo application. Th
 Checkout the live demo: [https://demo.mixerapi.com](https://demo.mixerapi.com)
 
 - [Installation](#Installation)
-- [Usage](#Usage)
+- [Examples](#Examples)
 
 ## Installation
 
@@ -88,12 +88,10 @@ bin/cake server
 
 Browse to the URL given by the `server` console command.
 
-## Usage
+## Examples
 
-For Docker see this [README](https://github.com/mixerapi/app).
-
-For information on the demo application code see [app/README.md](./app/README.md)
-
-See the [AuthenticationApi](app/plugins/AuthenticationApi/README.md) for details on the JWT auth demo. The
-AuthenticationApi uses [MixerApi/JwtAuth](https://github.com/mixerapi/jwt-auth). See `src/Application.php` for
-loading [CakePHP authenticators and identifiers](https://book.cakephp.org/authentication/2/en/index.html).
+- For Docker see this [README](https://github.com/mixerapi/app).
+- For information on the demo application code see [app/README.md](./app/README.md)
+- For JWT Authentication see [AuthenticationApi](app/plugins/AuthenticationApi/README.md). The
+AuthenticationApi uses [MixerApi/JwtAuth](https://github.com/mixerapi/jwt-auth). See `plugin/AdminApi/src/Application.php`
+for loading [CakePHP authenticators and identifiers](https://book.cakephp.org/authentication/2/en/index.html).

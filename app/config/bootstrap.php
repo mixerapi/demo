@@ -80,6 +80,7 @@ try {
     Configure::config('default', new PhpConfig());
     Configure::load('app', 'default', false);
     Configure::load('mixerapi_jwtauth');
+    Configure::load('swagger_bake');
 } catch (\Exception $e) {
     exit($e->getMessage() . "\n");
 }
@@ -129,8 +130,7 @@ $isCli = PHP_SAPI === 'cli';
 
 /*
  * Include the CLI bootstrap overrides.
- */
-if ($isCli) {
+ */if (PHP_SAPI === 'cli') {
     require __DIR__ . '/bootstrap_cli.php';
 }
 

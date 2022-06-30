@@ -34,8 +34,8 @@ class UnauthenticatedException implements ExceptionRenderInterface
     public function decorate(): ErrorDecorator
     {
         $viewVars = $this->errorDecorator->getViewVars();
-        $viewVars['message'] = 'You must be authenticated. ';
-        $viewVars['message'].= 'Use authentication header `API-KEY` with a value of `123` to authenticate.';
+        //$viewVars['message'] = 'You must be authenticated. ';
+        //$viewVars['message'].= 'Use authentication header `API-KEY` with a value of `123` to authenticate.';
 
         return $this->errorDecorator->setViewVars($viewVars);
     }

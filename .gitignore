@@ -40,3 +40,4 @@ nbproject/*
 /app/webroot/swagger.json
 /app/plugins/AdminApi/webroot/swagger.json
 /app/preload.php
+/app/test_myapp

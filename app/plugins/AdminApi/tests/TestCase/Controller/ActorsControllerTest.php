@@ -3,7 +3,9 @@ declare(strict_types=1);
 
 namespace AdminApi\Test\TestCase\Controller;
 
-use AdminApi\Controller\ActorsController;
+use AuthenticationApi\Test\HttpHelper;
+use AuthenticationApi\Test\JwtHelper;
+use AuthenticationApi\Test\Factory\ActorFactory;
 use Cake\TestSuite\IntegrationTestTrait;
 use Cake\TestSuite\TestCase;
 
@@ -16,64 +18,33 @@ class ActorsControllerTest extends TestCase
 {
     use IntegrationTestTrait;
 
-    /**
-     * Fixtures
-     *
-     * @var array
-     */
-    protected $fixtures = [
-        'plugin.AdminApi.Actors',
-        'plugin.AdminApi.FilmActors',
-        'plugin.AdminApi.Films',
-    ];
+    private const URL = '/admin/actors';
 
-    /**
-     * Test index method
-     *
-     * @return void
-     */
-    public function testIndex(): void
+    public function setUp(): void
     {
-        $this->markTestIncomplete('Not implemented yet.');
+        parent::setUp();
+        $this->configRequest([
+            'headers' => HttpHelper::getJsonHeadersWithJwt()
+        ]);
     }
 
-    /**
-     * Test view method
-     *
-     * @return void
-     */
-    public function testView(): void
+    public function test_index()
     {
-        $this->markTestIncomplete('Not implemented yet.');
+        ActorFactory::make()->persist();
+        ActorFactory::make()->persist();
+        $this->get(self::URL);
+        $this->assertResponseOk();
+
+        $body = json_decode((string)$this->_response->getBody());
+        $this->assertGreaterThan(0, count($body->data));
     }
 
-    /**
-     * Test add method
-     *
-     * @return void
-     */
-    public function testAdd(): void
+    public function test_index_auth_required()
     {
-        $this->markTestIncomplete('Not implemented yet.');
-    }
-
-    /**
-     * Test edit method
-     *
-     * @return void
-     */
-    public function testEdit(): void
-    {
-        $this->markTestIncomplete('Not implemented yet.');
-    }
-
-    /**
-     * Test delete method
-     *
-     * @return void
-     */
-    public function testDelete(): void
-    {
-        $this->markTestIncomplete('Not implemented yet.');
+        $this->configRequest([
+            'headers' => HttpHelper::getJsonHeaders()
+        ]);
+        $this->get(self::URL);
+        $this->assertResponseCode(401);
     }
 }
