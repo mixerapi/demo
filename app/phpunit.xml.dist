@@ -15,7 +15,9 @@
         <testsuite name="app">
             <directory>tests/TestCase/</directory>
         </testsuite>
-        <!-- Add plugin test suites here. -->
+        <testsuite name="plugins">
+            <directory>plugins/*/tests</directory>
+        </testsuite>
     </testsuites>
 
     <!-- Fixture Extension -->
