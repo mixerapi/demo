@@ -5,6 +5,7 @@ namespace AuthenticationApi;
 
 use Cake\Core\BasePlugin;
 use Cake\Routing\RouteBuilder;
+use Muffin\Throttle\Middleware\ThrottleMiddleware;
 
 /**
  * Plugin for AuthenticationApi
@@ -53,9 +54,7 @@ class Plugin extends BasePlugin
     {
         $routes->plugin('AuthenticationApi', ['path' => '/admin/auth'], function (RouteBuilder $builder) {
             $builder->setExtensions(['json','xml']);
-            $builder->connect('/', [
-                'plugin' => 'AuthenticationApi', 'controller' => 'Swagger', 'action' => 'index'
-            ]);
+
             $builder->resources('Login', [
                 'path' => '/login',
                 'only' => ['login'],
@@ -67,6 +66,7 @@ class Plugin extends BasePlugin
                     ]
                 ]
             ]);
+
             $builder->resources('Jwks', [
                 'path' => '/keys',
                 'only' => ['index'],

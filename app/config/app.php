@@ -102,7 +102,12 @@ return [
             'path' => CACHE,
             'url' => env('CACHE_DEFAULT_URL', null),
         ],
-
+        'throttle' => [
+            'className' => FileEngine::class,
+            'path' => CACHE,
+            'url' => env('CACHE_DEFAULT_URL', null),
+            'prefix' => 'throttle_',
+        ],
         /*
          * Configure the cache used for general framework caching.
          * Translation cache files are stored with this configuration.

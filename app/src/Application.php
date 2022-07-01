@@ -16,7 +16,6 @@ declare(strict_types=1);
  */
 namespace App;
 
-use AuthenticationApi\JwtAuthService;
 use Cake\Core\Configure;
 use Cake\Core\ContainerInterface;
 use Cake\Core\Exception\MissingPluginException;
@@ -31,6 +30,7 @@ use Cake\Routing\Middleware\RoutingMiddleware;
 use Exception;
 use MixerApi\Core\Event\EventListenerLoader;
 use MixerApi\JwtAuth\JwtAuthServiceProvider;
+use Muffin\Throttle\Middleware\ThrottleMiddleware;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 
@@ -61,6 +61,7 @@ class Application extends BaseApplication
         $this->addPlugin('Authentication');
         $this->addPlugin('AdminApi');
         $this->addPlugin('AuthenticationApi');
+        $this->addPlugin('Muffin/Throttle');
 
         // Call parent to load bootstrap from files.
         parent::bootstrap();
@@ -134,13 +135,25 @@ class Application extends BaseApplication
             // https://book.cakephp.org/4/en/controllers/middleware.html#body-parser-middleware
             // Other middleware that CakePHP provides.
             ->add(new RoutingMiddleware($this))
-            ->add(new BodyParserMiddleware());
+            ->add(new BodyParserMiddleware())
 
             // Cross Site Request Forgery (CSRF) Protection Middleware
             // https://book.cakephp.org/4/en/controllers/middleware.html#cross-site-request-forgery-csrf-middleware
             //->add(new CsrfProtectionMiddleware([
             //    'httponly' => true,
             //]));
+
+            ->add(new ThrottleMiddleware([
+                'response' => [
+                    'body' => 'Rate limit exceeded',
+                ],
+                'period' => 60, // Time period as number of seconds
+                'limit' => 500, // Number of requests allowed within the above time period
+                // Client identifier
+                'identifier' => function ($request) {
+                    return $request->clientIp();
+                }
+            ]));
 
         return $middlewareQueue;
     }
