@@ -29,7 +29,7 @@ class ActorsControllerTest extends TestCase
         $this->get(self::URL);
         $this->assertResponseOk();
 
-        $body = json_decode((string)$this->_response->getBody());
+        $body = json_decode($this->_getBodyAsString());
         $this->assertCount(2, $body->data);
     }
 
@@ -39,7 +39,7 @@ class ActorsControllerTest extends TestCase
         $this->get(self::URL . '/123');
         $this->assertResponseOk();
 
-        $body = json_decode((string)$this->_response->getBody());
+        $body = json_decode($this->_getBodyAsString());
         $this->assertEquals($record->get('first_name'), $body->first_name);
         $this->assertEquals($record->get('last_name'), $body->last_name);
     }

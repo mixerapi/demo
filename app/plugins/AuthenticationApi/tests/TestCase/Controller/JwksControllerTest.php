@@ -26,7 +26,7 @@ class JwksControllerTest extends TestCase
         $this->get('/admin/auth/keys');
         $this->assertResponseSuccess();
 
-        $data = json_decode((string) $this->_response->getBody());
+        $data = json_decode($this->_getBodyAsString());
         $this->assertCount(1, $data);
 
         $jwk = reset($data);

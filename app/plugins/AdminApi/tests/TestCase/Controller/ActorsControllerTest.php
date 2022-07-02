@@ -35,7 +35,7 @@ class ActorsControllerTest extends TestCase
         $this->get(self::URL);
         $this->assertResponseOk();
 
-        $body = json_decode((string)$this->_response->getBody());
+        $body = json_decode($this->_getBodyAsString());
         $this->assertGreaterThan(0, count($body->data));
     }
 

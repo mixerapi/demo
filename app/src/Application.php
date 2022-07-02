@@ -151,6 +151,10 @@ class Application extends BaseApplication
                 'limit' => 500, // Number of requests allowed within the above time period
                 // Client identifier
                 'identifier' => function ($request) {
+                    if (PHP_SAPI === 'cli') {
+                        return 'cli-' . time();
+                    }
+
                     return $request->clientIp();
                 }
             ]));

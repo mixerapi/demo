@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "93e75ab1d41026f9863e32b552007ddf",
+    "content-hash": "0f33f6ea53ad1a4bb0e7b4991803e7d3",
     "packages": [
         {
             "name": "adbario/php-dot-notation",
@@ -3999,16 +3999,16 @@
         },
         {
             "name": "composer/composer",
-            "version": "2.3.7",
+            "version": "2.3.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/composer/composer.git",
-                "reference": "10cd375cf85dede2ff417ceab517ef9a0dc55407"
+                "reference": "f69e63262dadd02b3b6edade339c7badda2939c2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/composer/composer/zipball/10cd375cf85dede2ff417ceab517ef9a0dc55407",
-                "reference": "10cd375cf85dede2ff417ceab517ef9a0dc55407",
+                "url": "https://api.github.com/repos/composer/composer/zipball/f69e63262dadd02b3b6edade339c7badda2939c2",
+                "reference": "f69e63262dadd02b3b6edade339c7badda2939c2",
                 "shasum": ""
             },
             "require": {
@@ -4089,7 +4089,7 @@
             "support": {
                 "irc": "ircs://irc.libera.chat:6697/composer",
                 "issues": "https://github.com/composer/composer/issues",
-                "source": "https://github.com/composer/composer/tree/2.3.7"
+                "source": "https://github.com/composer/composer/tree/2.3.8"
             },
             "funding": [
                 {
@@ -4105,7 +4105,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2022-06-06T14:43:28+00:00"
+            "time": "2022-07-01T10:10:47+00:00"
         },
         {
             "name": "composer/metadata-minifier",
@@ -7298,16 +7298,16 @@
         },
         {
             "name": "vierge-noire/cakephp-fixture-factories",
-            "version": "v2.6",
+            "version": "v2.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/vierge-noire/cakephp-fixture-factories.git",
-                "reference": "ed575345ad121029d132595939f7eeba2f86de67"
+                "reference": "0ae928553dd3fb06ffe8fa6f771831dbafff8c09"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/vierge-noire/cakephp-fixture-factories/zipball/ed575345ad121029d132595939f7eeba2f86de67",
-                "reference": "ed575345ad121029d132595939f7eeba2f86de67",
+                "url": "https://api.github.com/repos/vierge-noire/cakephp-fixture-factories/zipball/0ae928553dd3fb06ffe8fa6f771831dbafff8c09",
+                "reference": "0ae928553dd3fb06ffe8fa6f771831dbafff8c09",
                 "shasum": ""
             },
             "require": {
@@ -7355,9 +7355,55 @@
             ],
             "support": {
                 "issues": "https://github.com/vierge-noire/cakephp-fixture-factories/issues",
-                "source": "https://github.com/vierge-noire/cakephp-fixture-factories/tree/v2.6"
+                "source": "https://github.com/vierge-noire/cakephp-fixture-factories/tree/v2.7"
             },
-            "time": "2022-05-18T15:38:07+00:00"
+            "time": "2022-07-02T06:46:16+00:00"
+        },
+        {
+            "name": "vierge-noire/cakephp-test-migrator",
+            "version": "v2.5",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/vierge-noire/cakephp-test-migrator.git",
+                "reference": "4fd852809bc60fd716a1620b6ad6f252e8f8f6b1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/vierge-noire/cakephp-test-migrator/zipball/4fd852809bc60fd716a1620b6ad6f252e8f8f6b1",
+                "reference": "4fd852809bc60fd716a1620b6ad6f252e8f8f6b1",
+                "shasum": ""
+            },
+            "require": {
+                "cakephp/cakephp": "^4.0"
+            },
+            "require-dev": {
+                "cakephp/cakephp-codesniffer": "^4.0",
+                "cakephp/migrations": "^3.1",
+                "josegonzalez/dotenv": "dev-master",
+                "phpunit/phpunit": "^8.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "CakephpTestMigrator\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Juan Pablo Ramirez",
+                    "email": "pabloelcolombiano@gmail.com"
+                }
+            ],
+            "description": "Migration helper for the CakePHP Test Suite Light",
+            "support": {
+                "issues": "https://github.com/vierge-noire/cakephp-test-migrator/issues",
+                "source": "https://github.com/vierge-noire/cakephp-test-migrator/tree/v2.5"
+            },
+            "time": "2021-09-19T22:25:57+00:00"
         },
         {
             "name": "vierge-noire/cakephp-test-suite-light",
