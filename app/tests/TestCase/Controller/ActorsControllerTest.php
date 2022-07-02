@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace App\Test\TestCase\Controller;
 
-use AuthenticationApi\Test\Factory\ActorFactory;
+use App\Test\Factory\ActorFactory;
 use AuthenticationApi\Test\HttpHelper;
 use Cake\TestSuite\IntegrationTestTrait;
 use Cake\TestSuite\TestCase;

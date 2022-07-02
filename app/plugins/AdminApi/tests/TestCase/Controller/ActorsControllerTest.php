@@ -3,9 +3,8 @@ declare(strict_types=1);
 
 namespace AdminApi\Test\TestCase\Controller;
 
+use App\Test\Factory\ActorFactory;
 use AuthenticationApi\Test\HttpHelper;
-use AuthenticationApi\Test\JwtHelper;
-use AuthenticationApi\Test\Factory\ActorFactory;
 use Cake\TestSuite\IntegrationTestTrait;
 use Cake\TestSuite\TestCase;
 
@@ -18,7 +17,7 @@ class ActorsControllerTest extends TestCase
 {
     use IntegrationTestTrait;
 
-    private const URL = '/admin/actors';
+    private const URL = '/admin/actors/';
 
     public function setUp(): void
     {
@@ -35,16 +34,42 @@ class ActorsControllerTest extends TestCase
         $this->get(self::URL);
         $this->assertResponseOk();
 
-        $body = json_decode($this->_getBodyAsString());
-        $this->assertGreaterThan(0, count($body->data));
+        $body = json_decode((string)$this->_response->getBody());
+        $this->assertGreaterThan(2, count($body->data));
     }
 
-    public function test_index_auth_required()
+    public function test_index_responds_with_401_when_missing_jwt()
     {
         $this->configRequest([
             'headers' => HttpHelper::getJsonHeaders()
         ]);
         $this->get(self::URL);
         $this->assertResponseCode(401);
+    }
+
+    public function test_view()
+    {
+        $entity = ActorFactory::make()->persist();
+        $this->get(self::URL . $entity->get('id'));
+        $this->assertResponseCode(200);
+    }
+
+    public function test_add()
+    {
+        $this->post(self::URL, json_encode(['first_name' => 'test', 'last_name' => 'test']));
+        $this->assertResponseCode(201);
+
+        $body = json_decode((string)$this->_response->getBody());
+        $this->assertEquals('test', $body->first_name);
+    }
+
+    public function test_edit()
+    {
+        $entity = ActorFactory::make()->persist();
+        $this->patch(self::URL . $entity->get('id'), json_encode(['first_name' => 'updated']));
+        $this->assertResponseCode(200);
+
+        $body = json_decode((string)$this->_response->getBody());
+        $this->assertEquals('updated', $body->first_name);
     }
 }
