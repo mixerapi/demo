@@ -95,3 +95,5 @@ Browse to the URL given by the `server` console command.
 - For JWT Authentication see [AuthenticationApi](app/plugins/AuthenticationApi/README.md). The
 AuthenticationApi uses [MixerApi/JwtAuth](https://github.com/mixerapi/jwt-auth). See `plugin/AdminApi/src/Application.php`
 for loading [CakePHP authenticators and identifiers](https://book.cakephp.org/authentication/2/en/index.html).
+- The demo uses [Muffin/Throttle])(https://github.com/UseMuffin/Throttle). See `src/Application.php` and
+- `src/Event/ThrottleListener.php`.
