@@ -3,11 +3,11 @@ declare(strict_types=1);
 
 namespace AuthenticationApi\Test\TestCase\Controller;
 
+use App\Test\Factory\UserFactory;
 use App\Test\Fixture\UsersFixture;
 use Authentication\PasswordHasher\DefaultPasswordHasher;
-use AuthenticationApi\Test\Factory\UserFactory;
-use Cake\TestSuite\TestCase;
 use Cake\TestSuite\IntegrationTestTrait;
+use Cake\TestSuite\TestCase;
 
 class LoginControllerTest extends TestCase
 {

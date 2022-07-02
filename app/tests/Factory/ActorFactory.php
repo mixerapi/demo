@@ -1,13 +1,12 @@
 <?php
 declare(strict_types=1);
 
-namespace AuthenticationApi\Test\Factory;
+namespace App\Test\Factory;
 
-use Cake\Utility\Text;
 use CakephpFixtureFactories\Factory\BaseFactory;
 use Faker\Generator;
 
-class UserFactory extends BaseFactory
+class ActorFactory extends BaseFactory
 {
     /**
      * Defines the Table Registry used to generate entities with
@@ -15,7 +14,7 @@ class UserFactory extends BaseFactory
      */
     protected function getRootTableRegistryName(): string
     {
-        return "Users"; // PascalCase of the factory's table.
+        return "Actors"; // PascalCase of the factory's table.
     }
 
     /**
@@ -29,8 +28,8 @@ class UserFactory extends BaseFactory
     {
         $this->setDefaultData(function(Generator $faker) {
             return [
-                'id' => Text::uuid(),
-                'created' => $faker->dateTime(),
+                'first_name' => $faker->firstName(),
+                'last_name' => $faker->lastName(),
                 'modified'  => $faker->dateTime(),
             ];
         });
