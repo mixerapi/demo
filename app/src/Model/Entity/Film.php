@@ -54,7 +54,6 @@ class Film extends Entity implements HalResourceInterface, JsonLdDataInterface
         'replacement_cost' => true,
         'rating' => true,
         'special_features' => true,
-        'modified' => true,
         'language' => true,
         'film_actors' => true,
         'film_categories' => true,

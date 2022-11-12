@@ -31,8 +31,6 @@ class User extends Entity implements JwtEntityInterface
     protected $_accessible = [
         'email' => true,
         'password' => true,
-        'created' => true,
-        'modified' => true,
     ];
 
     /**

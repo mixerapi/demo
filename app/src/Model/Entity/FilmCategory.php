@@ -30,7 +30,6 @@ class FilmCategory extends Entity
     protected $_accessible = [
         'film_id' => true,
         'category_id' => true,
-        'modified' => true,
         'film' => true,
         'category' => true,
     ];

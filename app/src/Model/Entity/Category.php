@@ -32,7 +32,6 @@ class Category extends Entity implements HalResourceInterface, JsonLdDataInterfa
      */
     protected $_accessible = [
         'name' => true,
-        'modified' => true,
         'film_categories' => true,
     ];
 
