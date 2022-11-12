@@ -1,7 +1,7 @@
 #
 # container
 # @see https://github.com/cnizzardini/cakephp-docker
-FROM cnizzardini/php-fpm-alpine:8.0-latest AS cakephp_php
+FROM cnizzardini/php-fpm-alpine:8.1-latest AS cakephp_php
 
 ARG ENV=prod
 ARG UID=1000

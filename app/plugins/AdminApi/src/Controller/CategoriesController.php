@@ -6,6 +6,7 @@ namespace AdminApi\Controller;
 use App\Model\Table\CategoriesTable;
 use MixerApi\Crud\Interfaces\{CreateInterface, ReadInterface, UpdateInterface, DeleteInterface, SearchInterface};
 use SwaggerBake\Lib\Attribute\OpenApiPaginator;
+use SwaggerBake\Lib\Attribute\OpenApiSecurity;
 use SwaggerBake\Lib\Extension\CakeSearch\Attribute\OpenApiSearch;
 
 /**
@@ -32,6 +33,7 @@ class CategoriesController extends AppController
      * @return \Cake\Http\Response|null|void Renders view
      * @throws \Cake\Http\Exception\MethodNotAllowedException When invalid method
      */
+    #[OpenApiSecurity(name: 'bearerAuth')]
     #[OpenApiPaginator]
     #[OpenApiSearch(tableClass: CategoriesTable::class)]
     public function index(SearchInterface $search)
@@ -48,6 +50,7 @@ class CategoriesController extends AppController
      * @throws \Cake\Datasource\Exception\RecordNotFoundException Category Not Found
      * @throws \Cake\Http\Exception\MethodNotAllowedException
      */
+    #[OpenApiSecurity(name: 'bearerAuth')]
     public function view(ReadInterface $read)
     {
         $this->set('category', $read->read($this));
@@ -64,6 +67,7 @@ class CategoriesController extends AppController
      * @throws \MixerApi\ExceptionRender\OpenApiExceptionSchema
      * @throws \Exception
      */
+    #[OpenApiSecurity(name: 'bearerAuth')]
     public function add(CreateInterface $create)
     {
         $this->set('category', $create->save($this));
@@ -81,6 +85,7 @@ class CategoriesController extends AppController
      * @throws \MixerApi\ExceptionRender\OpenApiExceptionSchema
      * @throws \Exception
      */
+    #[OpenApiSecurity(name: 'bearerAuth')]
     public function edit(UpdateInterface $update)
     {
         $this->set('category', $update->save($this));
@@ -97,6 +102,7 @@ class CategoriesController extends AppController
      * @throws \Cake\Http\Exception\MethodNotAllowedException
      * @throws \Exception
      */
+    #[OpenApiSecurity(name: 'bearerAuth')]
     public function delete(DeleteInterface $delete)
     {
         return $delete->delete($this)->respond();

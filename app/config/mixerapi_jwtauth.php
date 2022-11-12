@@ -13,7 +13,7 @@ return [
          * - HMAC: HS256 or HS512
          * - RSA: RS256 or RS512
          */
-        'alg' => 'RS256',
+        'alg' => 'RS512',
 
         /*
          * This is only required if you are using HMAC, it can be left empty otherwise. The value must be at least

@@ -6,6 +6,7 @@ namespace AdminApi\Controller;
 use App\Model\Table\ActorsTable;
 use MixerApi\Crud\Interfaces\{CreateInterface, ReadInterface, UpdateInterface, DeleteInterface, SearchInterface};
 use SwaggerBake\Lib\Attribute\OpenApiPaginator;
+use SwaggerBake\Lib\Attribute\OpenApiSecurity;
 use SwaggerBake\Lib\Extension\CakeSearch\Attribute\OpenApiSearch;
 
 /**
@@ -33,6 +34,7 @@ class ActorsController extends AppController
      * @return \Cake\Http\Response|null|void Renders view
      * @throws \Cake\Http\Exception\MethodNotAllowedException When invalid method
      */
+    #[OpenApiSecurity(name: 'bearerAuth')]
     #[OpenApiPaginator]
     #[OpenApiSearch(tableClass: ActorsTable::class)]
     public function index(SearchInterface $search)
@@ -50,6 +52,7 @@ class ActorsController extends AppController
      * @throws \Cake\Datasource\Exception\RecordNotFoundException Actor Not Found
      * @throws \Cake\Http\Exception\MethodNotAllowedException
      */
+    #[OpenApiSecurity(name: 'bearerAuth')]
     public function view(ReadInterface $read)
     {
         $this->set('data', $read->read($this));
@@ -66,6 +69,7 @@ class ActorsController extends AppController
      * @throws \MixerApi\ExceptionRender\OpenApiExceptionSchema
      * @throws \Exception
      */
+    #[OpenApiSecurity(name: 'bearerAuth')]
     public function add(CreateInterface $create)
     {
         $this->set('data', $create->save($this));
@@ -83,6 +87,7 @@ class ActorsController extends AppController
      * @throws \MixerApi\ExceptionRender\OpenApiExceptionSchema
      * @throws \Exception
      */
+    #[OpenApiSecurity(name: 'bearerAuth')]
     public function edit(UpdateInterface $update)
     {
         $this->set('data', $update->save($this));
@@ -97,6 +102,7 @@ class ActorsController extends AppController
      * @throws \Cake\Http\Exception\MethodNotAllowedException
      * @throws \Exception
      */
+    #[OpenApiSecurity(name: 'bearerAuth')]
     public function delete(DeleteInterface $delete)
     {
         return $delete->delete($this)->respond();
