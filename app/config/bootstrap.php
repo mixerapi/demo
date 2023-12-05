@@ -35,8 +35,6 @@ use Cake\Cache\Cache;
 use Cake\Core\Configure;
 use Cake\Core\Configure\Engine\PhpConfig;
 use Cake\Datasource\ConnectionManager;
-use Cake\Error\ConsoleErrorHandler;
-use Cake\Error\ErrorHandler;
 use Cake\Error\ErrorTrap;
 use Cake\Error\ExceptionTrap;
 use Cake\Http\ServerRequest;
@@ -130,7 +128,8 @@ $isCli = PHP_SAPI === 'cli';
 
 /*
  * Include the CLI bootstrap overrides.
- */if (PHP_SAPI === 'cli') {
+ */
+if (PHP_SAPI === 'cli') {
     require __DIR__ . '/bootstrap_cli.php';
 }
 

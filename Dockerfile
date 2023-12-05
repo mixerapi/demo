@@ -1,7 +1,7 @@
 #
 # container
 # @see https://github.com/cnizzardini/cakephp-docker
-FROM cnizzardini/php-fpm-alpine:8.0-latest AS cakephp_php
+FROM cnizzardini/php-fpm-alpine:8.1-latest AS cakephp_php
 
 ARG ENV=prod
 ARG UID=1000
@@ -14,7 +14,7 @@ ENV HOST_OS=$HOST_OS
 #
 RUN if [[ "$ENV" != "prod" ]]; then \
     apk add git \
-    && apk add --no-cache --virtual .php-deps file re2c autoconf make zlib zlib-dev g++ curl \
+    && apk add --update --no-cache --virtual .php-deps file re2c autoconf make zlib zlib-dev g++ curl linux-headers \
     && pecl install xdebug \
     && docker-php-ext-enable xdebug \
     && apk del -f .php-deps \
