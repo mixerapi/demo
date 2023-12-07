@@ -36,9 +36,9 @@ session_id('cli');
 /*
  * MixerApi/JwtAuth config
  */
-Configure::write('MixerApi.JwtAuth', [
+/*Configure::write('MixerApi.JwtAuth', [
     'alg' => 'HS256',
-    'secret' => 'IMPiqE0iTvnbRgGfuq8ok1t0Q1JDwPrLbWsXA95nn5A=',
+    'secret' => file_get_contents(TESTS . 'hmac_secret.txt'),
     'keys' => [
         [
             'kid' => '1',
@@ -46,4 +46,4 @@ Configure::write('MixerApi.JwtAuth', [
             'private' => file_get_contents(TESTS . 'private.pem'),
         ]
     ]
-]);
+]);*/

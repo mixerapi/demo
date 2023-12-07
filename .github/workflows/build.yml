@@ -19,6 +19,12 @@ jobs:
           cd app
           composer validate
           composer install --prefer-dist --no-interaction --no-progress
+
+          mkdir -p plugins/AuthenticationApi/config/keys/1
+          openssl genrsa -out plugins/AuthenticationApi/config/keys/1/private.pem 2048
+          openssl rsa -in plugins/AuthenticationApi/config/keys/1/private.pem -outform PEM -pubout -out plugins/AuthenticationApi/config/keys/1/public.pem
+          openssl rand -base64 24 > plugins/AuthenticationApi/config/keys/hmac_secret.txt
+
           cp config/.env.example config/.env
           cp config/app_local.example.php config/app_local.php
           vendor/bin/phpunit
