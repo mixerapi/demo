@@ -77,7 +77,7 @@ Generate keys for authentication examples:
 mkdir -p plugins/AuthenticationApi/config/keys/1
 openssl genrsa -out plugins/AuthenticationApi/config/keys/1/private.pem 2048
 openssl rsa -in plugins/AuthenticationApi/config/keys/1/private.pem -outform PEM -pubout -out plugins/AuthenticationApi/config/keys/1/public.pem
-openssl rand -base64 32 > plugins/AuthenticationApi/config/keys/hmac_secret.txt
+openssl rand -base64 24 > plugins/AuthenticationApi/config/keys/hmac_secret.txt
 ```
 
 Bring on local server:

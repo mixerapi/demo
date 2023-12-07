@@ -37,7 +37,8 @@ session_id('cli');
  * MixerApi/JwtAuth config
  */
 Configure::write('MixerApi.JwtAuth', [
-    'alg' => 'RS512',
+    'alg' => 'HS256',
+    'secret' => 'IMPiqE0iTvnbRgGfuq8ok1t0Q1JDwPrLbWsXA95nn5A=',
     'keys' => [
         [
             'kid' => '1',

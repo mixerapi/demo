@@ -43,7 +43,7 @@ class JwtAuthService
             $jsonKeySet = Cache::remember('jwkset', function() {
                 return json_encode((new JwkSet)->getKeySet());
             });
-            
+
             /*
              * Caching is optional, you may also set the jwks key to the return value of (new JwkSet)->getKeySet()
              */

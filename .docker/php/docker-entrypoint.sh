@@ -12,7 +12,6 @@ if [ "$1" = 'php-fpm' ] || [ "$1" = 'php' ] || [ "$1" = 'bin/cakephp' ]; then
     if [ ! -f config/.env ]; then
         cp config/.env.example config/.env
         cp config/app_local.example.php config/app_local.php
-        cp ../.assets/bootstrap.php config/bootstrap.php
 
         sed -i '/export APP_NAME/c\export APP_NAME="cakephp"' config/.env
 
@@ -43,7 +42,7 @@ if [ "$1" = 'php-fpm' ] || [ "$1" = 'php' ] || [ "$1" = 'bin/cakephp' ]; then
         openssl genrsa -out plugins/AuthenticationApi/config/keys/1/private.pem 2048
         openssl rsa -in plugins/AuthenticationApi/config/keys/1/private.pem -outform PEM -pubout -out plugins/AuthenticationApi/config/keys/1/public.pem
         echo "Generating HMAc secret..."
-        openssl rand -base64 32 > plugins/AuthenticationApi/config/keys/hmac_secret.txt
+        openssl rand -base64 24 > plugins/AuthenticationApi/config/keys/hmac_secret.txt
     fi
 
     echo "setting ownership..."
@@ -51,6 +50,12 @@ if [ "$1" = 'php-fpm' ] || [ "$1" = 'php' ] || [ "$1" = 'bin/cakephp' ]; then
 
     echo "setting permissions..."
     chmod 774 -R .
+    rm plugins/AdminApi/webroot/swagger.json
+    touch plugins/AdminApi/webroot/swagger.json
+    chmod 777 plugins/AdminApi/webroot/swagger.json
+    rm webroot/swagger.json
+    touch webroot/swagger.json
+    chmod 777 webroot/swagger.json
 
     echo "waiting for fpm..."
 fi
