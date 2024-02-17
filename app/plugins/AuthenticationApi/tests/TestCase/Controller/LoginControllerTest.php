@@ -24,7 +24,7 @@ class LoginControllerTest extends TestCase
     private const LOGIN_URL = '/admin/auth/login';
     private const VALID_EMAIL = 'test@example.com';
     private const VALID_PASSWORD = 'test@example.com';
-    private const KEY_PATH = ROOT . DS . 'plugins' . DS . 'AuthenticationApi' . DS . 'config' . DS . 'keys' . DS . '1' . DS;
+    private const KEY_PATH = ROOT . DS . 'plugins' . DS . 'AuthenticationApi' . DS . 'config' . DS . 'keys' . DS;
 
 
     /**
@@ -43,6 +43,10 @@ class LoginControllerTest extends TestCase
 
     public function test_hmac_login_success(): void
     {
+        if (!file_exists(self::KEY_PATH . 'hmac_secret.txt')) {
+            $this->markTestSkipped('You must generate an hmac_secret.txt in: ' . self::KEY_PATH);
+        }
+
         $hashedPassword = (new DefaultPasswordHasher())->hash(self::VALID_PASSWORD);
         UserFactory::make(['email' => self::VALID_EMAIL, 'password' => $hashedPassword])->persist();
 
@@ -52,7 +56,7 @@ class LoginControllerTest extends TestCase
 
     public function test_rsa_login_success(): void
     {
-        if (!dir(self::KEY_PATH)) {
+        if (!dir(self::KEY_PATH . DS . '1')) {
             $this->markTestSkipped('You must generate keys to run this test. Place keys in: ' . self::KEY_PATH);
         }
 
@@ -61,8 +65,8 @@ class LoginControllerTest extends TestCase
             'keys' => [
                 [
                     'kid' => '1',
-                    'public' => file_get_contents(self::KEY_PATH . 'public.pem'),
-                    'private' => file_get_contents(self::KEY_PATH . 'private.pem'),
+                    'public' => file_get_contents(self::KEY_PATH . DS . '1' . DS . 'public.pem'),
+                    'private' => file_get_contents(self::KEY_PATH . DS . '1' . DS . 'private.pem'),
                 ]
             ]
         ]);
@@ -76,13 +80,17 @@ class LoginControllerTest extends TestCase
 
     public function test_hmac_login_fails_with_invalid_credentials(): void
     {
+        if (!file_exists(self::KEY_PATH . 'hmac_secret.txt')) {
+            $this->markTestSkipped('You must generate an hmac_secret.txt in: ' . self::KEY_PATH);
+        }
+
         $this->post(self::LOGIN_URL, json_encode(['email' => self::VALID_EMAIL, 'password' => 'nope']));
         $this->assertResponseCode(401);
     }
 
     public function test_rsa_login_fails_with_invalid_credentials(): void
     {
-        if (!dir(self::KEY_PATH)) {
+        if (!dir(self::KEY_PATH . DS . '1')) {
             $this->markTestSkipped('You must generate keys to run this test. Place keys in: ' . self::KEY_PATH);
         }
 
@@ -91,8 +99,8 @@ class LoginControllerTest extends TestCase
             'keys' => [
                 [
                     'kid' => '1',
-                    'public' => file_get_contents(self::KEY_PATH . 'public.pem'),
-                    'private' => file_get_contents(self::KEY_PATH . 'private.pem'),
+                    'public' => file_get_contents(self::KEY_PATH . DS . '1' . DS . 'public.pem'),
+                    'private' => file_get_contents(self::KEY_PATH . DS . '1' . DS . 'private.pem'),
                 ]
             ]
         ]);

@@ -47,7 +47,7 @@ session_id('cli');
  */
 Configure::write('MixerApi.JwtAuth', [
     'alg' => 'HS256',
-    'secret' => 'IMPiqE0iTvnbRgGfuq8ok1t0Q1JDwPrLbWsXA95nn5A=',
+    'secret' => file_get_contents(ROOT . DS . 'plugins' . DS . 'AuthenticationApi' . DS . 'config' . DS . 'keys' . DS . 'hmac_secret.txt'),
 ]);
 
 /*
