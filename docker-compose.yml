@@ -10,12 +10,11 @@ services:
     environment:
       PHP_IDE_CONFIG: "serverName=localhost"
     volumes:
+      # for development purposes only:
+      # - ~/dev/mixerapi-dev:/srv/dev
       - ./app:/srv/app
       - ./.docker/php/development:/usr/local/etc/php
       - ~/.ssh/:/home/root/.ssh
-      # for development purposes only:
-      #- ./../mixerapi-dev/:/srv/mixerapi-dev
-      #- ./../../cakephp-swagger-bake/:/srv/cakephp-swagger-bake
     depends_on:
       - db
 

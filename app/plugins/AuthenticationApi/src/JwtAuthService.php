@@ -4,7 +4,7 @@ declare(strict_types=1);
 namespace AuthenticationApi;
 
 use Authentication\AuthenticationService;
-use Authentication\Identifier\IdentifierInterface;
+use Authentication\Identifier\AbstractIdentifier;
 use Cake\Cache\Cache;
 use MixerApi\JwtAuth\Configuration\Configuration;
 use MixerApi\JwtAuth\Jwk\JwkSet;
@@ -26,8 +26,8 @@ class JwtAuthService
         $service = new AuthenticationService();
         $service->loadAuthenticator('Authentication.Form', [
             'fields' => [
-                IdentifierInterface::CREDENTIAL_USERNAME => $usernameField,
-                IdentifierInterface::CREDENTIAL_PASSWORD => $passwordField,
+                AbstractIdentifier::CREDENTIAL_USERNAME => $usernameField,
+                AbstractIdentifier::CREDENTIAL_PASSWORD => $passwordField,
             ],
             'loginUrl' => '/admin/auth/login'
         ]);
@@ -55,8 +55,8 @@ class JwtAuthService
 
         $service->loadIdentifier('Authentication.Password', [
             'fields' => [
-                IdentifierInterface::CREDENTIAL_USERNAME => $usernameField,
-                IdentifierInterface::CREDENTIAL_PASSWORD => $passwordField,
+                AbstractIdentifier::CREDENTIAL_USERNAME => $usernameField,
+                AbstractIdentifier::CREDENTIAL_PASSWORD => $passwordField,
             ]
         ]);
 

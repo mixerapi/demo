@@ -50,7 +50,9 @@ $routes->scope('/', function (RouteBuilder $builder) {
 });
 
 $routes->scope('/public', function (RouteBuilder $builder) {
-    (new AutoRouter($builder))->buildResources();
+    /*
+     * SwaggerBake and JsonLD routes
+     */
     $builder->connect('/', [
         'plugin' => 'SwaggerBake', 'controller' => 'Swagger', 'action' => 'index'
     ]);
@@ -60,6 +62,10 @@ $routes->scope('/public', function (RouteBuilder $builder) {
     $builder->connect('/vocab', [
         'plugin' => 'MixerApi/JsonLdView', 'controller' => 'JsonLd', 'action' => 'vocab'
     ]);
+
+    /*
+     * API Routes
+     */
     $builder->resources('FilmReports', [
         'only' => ['by-rating','by-category'],
         'map' => [
@@ -79,7 +85,7 @@ $routes->scope('/public', function (RouteBuilder $builder) {
             'view-films' => [
                 'method' => 'get',
                 'action' => 'viewFilms',
-                'path' => ':id/films'
+                'path' => '{id}/films'
             ]
         ]
     ]);
@@ -89,7 +95,7 @@ $routes->scope('/public', function (RouteBuilder $builder) {
             'view-actors' => [
                 'method' => 'get',
                 'action' => 'viewActors',
-                'path' => ':id/actors'
+                'path' => '{id}/actors'
             ]
         ]
     ]);

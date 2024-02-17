@@ -16,9 +16,9 @@
         "dereuromark/cakephp-setup": "^3.0",
         "firebase/php-jwt": "^6.2",
         "friendsofcake/search": "^7.0",
-        "mixerapi/crud": "^2.0",
-        "mixerapi/jwt-auth": "^2.0",
-        "mixerapi/mixerapi": "^2.0",
+        "mixerapi/crud": "2.x-dev",
+        "mixerapi/jwt-auth": "2.x-dev",
+        "mixerapi/mixerapi": "2.x-dev",
         "mobiledetect/mobiledetectlib": "^2.8"
     },
     "require-dev": {
@@ -67,5 +67,63 @@
         "allow-plugins": {
             "cakephp/plugin-installer": true
         }
-    }
+    },
+    "repositories": [
+        {
+            "type": "path",
+            "url": "../dev/plugins/bake",
+            "options": {
+                "symlink": false
+            }
+        },
+        {
+            "type": "path",
+            "url": "../dev/plugins/collection-view",
+            "options": {
+                "symlink": false
+            }
+        },
+        {
+            "type": "path",
+            "url": "../dev/plugins/crud",
+            "options": {
+                "symlink": false
+            }
+        },
+        {
+            "type": "path",
+            "url": "../dev/plugins/exception-render",
+            "options": {
+                "symlink": false
+            }
+        },
+        {
+            "type": "path",
+            "url": "../dev/plugins/hal-view",
+            "options": {
+                "symlink": false
+            }
+        },
+        {
+            "type": "path",
+            "url": "../dev/plugins/jwt-auth",
+            "options": {
+                "symlink": false
+            }
+        },
+        {
+            "type": "path",
+            "url": "../dev/plugins/json-ld-view",
+            "options": {
+                "symlink": false
+            }
+        },
+        {
+            "type": "path",
+            "url": "../dev/plugins/mixerapi",
+            "options": {
+                "symlink": false
+            }
+        }
+    ]
 }

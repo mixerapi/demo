@@ -36,7 +36,7 @@ class ActorsController extends AppController
      */
     #[OpenApiSecurity(name: 'bearerAuth')]
     #[OpenApiPaginator]
-    #[OpenApiSearch(tableClass: ActorsTable::class)]
+    #[OpenApiSearch(alias: ActorsTable::class)]
     public function index(SearchInterface $search)
     {
         $this->set('data', $search->search($this));

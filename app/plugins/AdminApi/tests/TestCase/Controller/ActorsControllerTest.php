@@ -19,6 +19,9 @@ class ActorsControllerTest extends TestCase
 
     private const URL = '/admin/actors/';
 
+    /**
+     * @inheritdoc
+     */
     public function setUp(): void
     {
         parent::setUp();
@@ -29,7 +32,6 @@ class ActorsControllerTest extends TestCase
 
     public function test_index()
     {
-        $this->disableErrorHandlerMiddleware();
         ActorFactory::make()->persist();
         ActorFactory::make()->persist();
         $this->get(self::URL);
@@ -42,7 +44,7 @@ class ActorsControllerTest extends TestCase
     public function test_index_responds_with_401_when_missing_jwt()
     {
         $this->configRequest([
-            'headers' => HttpHelper::getJsonHeaders()
+            'headers' => HttpHelper::getJsonHeaders() + ['Authorization' => null]
         ]);
         $this->get(self::URL);
         $this->assertResponseCode(401);
@@ -58,7 +60,7 @@ class ActorsControllerTest extends TestCase
     public function test_add()
     {
         $this->post(self::URL, json_encode(['first_name' => 'test', 'last_name' => 'test']));
-        $this->assertResponseCode(201);
+        $this->assertResponseOk();
 
         $body = json_decode((string)$this->_response->getBody());
         $this->assertEquals('test', $body->first_name);

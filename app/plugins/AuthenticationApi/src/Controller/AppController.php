@@ -11,10 +11,12 @@ use Authentication\Controller\Component\AuthenticationComponent;
  */
 class AppController extends BaseController
 {
+    /**
+     * @inheritdoc
+     */
     public function initialize(): void
     {
         parent::initialize();
-        $this->loadComponent('RequestHandler');
         $this->loadComponent('Authentication.Authentication');
     }
 }
