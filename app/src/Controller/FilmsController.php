@@ -37,7 +37,7 @@ class FilmsController extends AppController
      * @throws \Cake\Http\Exception\MethodNotAllowedException
      */
     #[OpenApiPaginator]
-    #[OpenApiSearch(tableClass: FilmsTable::class)]
+    #[OpenApiSearch(alias: FilmsTable::class)]
     public function index(SearchInterface $search)
     {
         $this->set('data', $search->search($this));

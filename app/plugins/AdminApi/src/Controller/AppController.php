@@ -18,19 +18,11 @@ use Authentication\Controller\Component\AuthenticationComponent;
 class AppController extends BaseController
 {
     /**
-     * Initialization hook method.
-     *
-     * Use this method to add common initialization code like loading components.
-     *
-     * e.g. `$this->loadComponent('FormProtection');`
-     *
-     * @return void
-     * @throws \Exception
+     * @inheritdoc
      */
     public function initialize(): void
     {
         parent::initialize();
-        $this->loadComponent('RequestHandler');
         $this->loadComponent('Authentication.Authentication');
     }
 }

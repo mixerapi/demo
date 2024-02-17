@@ -35,15 +35,9 @@ use MixerApi\JsonLdView\JsonLdSchema;
 class Film extends Entity implements HalResourceInterface, JsonLdDataInterface
 {
     /**
-     * Fields that can be mass assigned using newEntity() or patchEntity().
-     *
-     * Note that when '*' is set to true, this allows all unspecified fields to
-     * be mass assigned. For security purposes, it is advised to set '*' to false
-     * (or remove it), and explicitly make individual fields accessible as needed.
-     *
-     * @var array
+     * @inheritdoc
      */
-    protected $_accessible = [
+    protected array $_accessible = [
         'title' => true,
         'description' => true,
         'release_year' => true,
@@ -61,6 +55,14 @@ class Film extends Entity implements HalResourceInterface, JsonLdDataInterface
         'inventories' => true,
     ];
 
+    /**
+     * @inheritdoc
+     */
+    protected array $_hidden = [
+        '_joinData',
+        '_matchingData'
+    ];
+
     public function _getTitle(?string $v)
     {
         return h($v);
@@ -75,11 +77,6 @@ class Film extends Entity implements HalResourceInterface, JsonLdDataInterface
     {
         return h($v);
     }
-
-    protected $_hidden = [
-        '_joinData',
-        '_matchingData'
-    ];
 
     /**
      * @inheritDoc

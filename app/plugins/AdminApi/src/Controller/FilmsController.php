@@ -34,7 +34,7 @@ class FilmsController extends AppController
      */
     #[OpenApiSecurity(name: 'bearerAuth')]
     #[OpenApiPaginator]
-    #[OpenApiSearch(tableClass: FilmsTable::class)]
+    #[OpenApiSearch(alias: FilmsTable::class)]
     public function index(SearchInterface $search)
     {
         $this->set('data', $search->search($this));

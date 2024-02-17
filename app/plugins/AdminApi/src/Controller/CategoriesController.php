@@ -35,7 +35,7 @@ class CategoriesController extends AppController
      */
     #[OpenApiSecurity(name: 'bearerAuth')]
     #[OpenApiPaginator]
-    #[OpenApiSearch(tableClass: CategoriesTable::class)]
+    #[OpenApiSearch(alias: CategoriesTable::class)]
     public function index(SearchInterface $search)
     {
         $this->set('categories', $search->search($this));

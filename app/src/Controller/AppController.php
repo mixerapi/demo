@@ -4,6 +4,10 @@ declare(strict_types=1);
 namespace App\Controller;
 
 use Cake\Controller\Controller;
+use Cake\View\JsonView;
+use MixerApi\CollectionView\View\JsonCollectionView;
+use MixerApi\HalView\View\HalJsonView;
+use MixerApi\JsonLdView\View\JsonLdView;
 
 /**
  * Application Controller
@@ -16,17 +20,10 @@ use Cake\Controller\Controller;
 class AppController extends Controller
 {
     /**
-     * Initialization hook method.
-     *
-     * Use this method to add common initialization code like loading components.
-     *
-     * e.g. `$this->loadComponent('FormProtection');`
-     *
-     * @return void
+     * @inheritdoc
      */
-    public function initialize(): void
+    public function viewClasses(): array
     {
-        parent::initialize();
-        $this->loadComponent('RequestHandler');
+        return [JsonCollectionView::class, JsonLdView::class, HalJsonView::class, JsonView::class];
     }
 }

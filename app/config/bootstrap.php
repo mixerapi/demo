@@ -20,6 +20,7 @@ declare(strict_types=1);
  */
 require __DIR__ . '/paths.php';
 
+
 /*
  * Bootstrap CakePHP.
  *
@@ -30,6 +31,7 @@ require __DIR__ . '/paths.php';
  * - Setting the default application paths.
  */
 require CORE_PATH . 'config' . DS . 'bootstrap.php';
+require CAKE . 'functions.php';
 
 use Cake\Cache\Cache;
 use Cake\Core\Configure;

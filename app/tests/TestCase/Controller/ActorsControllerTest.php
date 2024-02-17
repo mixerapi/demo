@@ -14,6 +14,9 @@ class ActorsControllerTest extends TestCase
 
     private const URL = '/public/actors';
 
+    /**
+     * @inheritdoc
+     */
     public function setUp(): void
     {
         parent::setUp();

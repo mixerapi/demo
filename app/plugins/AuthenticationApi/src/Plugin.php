@@ -12,39 +12,29 @@ use Cake\Routing\RouteBuilder;
 class Plugin extends BasePlugin
 {
     /**
-     * Plugin name.
-     *
-     * @var string
+     * @inheritdoc
      */
-    protected $name = 'AuthenticationApi';
+    protected ?string $name = 'AuthenticationApi';
 
     /**
-     * Do bootstrapping or not
-     *
-     * @var bool
+     * @inheritdoc
      */
-    protected $bootstrapEnabled = false;
+    protected bool $bootstrapEnabled = false;
 
     /**
-     * Console middleware
-     *
-     * @var bool
+     * @inheritdoc
      */
-    protected $consoleEnabled = false;
+    protected bool $consoleEnabled = false;
 
     /**
-     * Enable middleware
-     *
-     * @var bool
+     * @inheritdoc
      */
-    protected $middlewareEnabled = false;
+    protected bool $middlewareEnabled = false;
 
     /**
-     * Register container services
-     *
-     * @var bool
+     * @inheritdoc
      */
-    protected $servicesEnabled = false;
+    protected bool $servicesEnabled = false;
 
     /**
      * @inheritDoc

@@ -20,32 +20,24 @@ use Psr\Http\Message\ServerRequestInterface;
 class Plugin extends BasePlugin implements AuthenticationServiceProviderInterface
 {
     /**
-     * Plugin name.
-     *
-     * @var string
+     * @inheritdoc
      */
-    protected $name = 'AdminApi';
+    protected ?string $name = 'AdminApi';
 
     /**
-     * Do bootstrapping or not
-     *
-     * @var bool
+     * @inheritdoc
      */
-    protected $bootstrapEnabled = false;
+    protected bool $bootstrapEnabled = false;
 
     /**
-     * Console middleware
-     *
-     * @var bool
+     * @inheritdoc
      */
-    protected $consoleEnabled = false;
+    protected bool $consoleEnabled = false;
 
     /**
-     * Register container services
-     *
-     * @var bool
+     * @inheritdoc
      */
-    protected $servicesEnabled = false;
+    protected bool $servicesEnabled = false;
 
     /**
      * @inheritDoc
@@ -73,11 +65,15 @@ class Plugin extends BasePlugin implements AuthenticationServiceProviderInterfac
     {
         $routes->plugin('AdminApi', ['path' => '/admin'], function (RouteBuilder $builder) {
             $builder->setExtensions(['json','xml']);
-            (new AutoRouter($builder, new ResourceScanner('AdminApi\Controller')))->buildResources();
             $builder->connect('/', [
                 'plugin' => 'AdminApi', 'controller' => 'Swagger', 'action' => 'index'
             ]);
             $builder->fallbacks();
+
+            $builder->resources('Actors');
+            $builder->resources('Categories');
+            $builder->resources('Films');
+            $builder->resources('Languages');
         });
 
         $routes->connect('/admin/contexts/*', [
