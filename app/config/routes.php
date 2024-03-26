@@ -23,7 +23,6 @@
 
 use Cake\Routing\Route\DashedRoute;
 use Cake\Routing\RouteBuilder;
-use MixerApi\Rest\Lib\AutoRouter;
 
 /*
  * The default class to use for all routes
